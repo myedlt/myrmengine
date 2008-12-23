@@ -1,0 +1,11 @@
+﻿<flash_project name="GaiaProject" version="1">
+    <project_file path="./main.fla" filetype="fla" profile="" def_file="true" />
+    <project_file path="./preload.fla" filetype="fla" profile="" />
+    <project_file path="./home.fla" filetype="fla" profile="" />
+    <project_file path="./familytree.fla" filetype="fla" profile="" />
+    <project_file path="./family.fla" filetype="fla" profile="" />
+    <project_file path="./friends.fla" filetype="fla" profile="" />
+    <project_file path="./people.fla" filetype="fla" profile="" />
+    <project_file path="./nav.fla" filetype="fla" profile="" />
+    <project_file path="./index.fla" filetype="fla" profile="" />
+</flash_project>

@@ -1,0 +1,5 @@
+<gaia>
+    <source>src</source>
+    <deploy>deploy</deploy>
+    <domain>http://www.domain.com/</domain>
+</gaia>
