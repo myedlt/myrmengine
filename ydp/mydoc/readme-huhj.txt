@@ -18,6 +18,7 @@ Ant 调试记录:
 	qtiplayer
 	
 Eclipse 开发环境
+	WS:
 ============================================
 minipublisher
 	build.xml
@@ -43,4 +44,5 @@ minipublisher
 				build.properties
 	
 		/trunk
-		
+补充：
+	trunk似乎是ydp的整理公开版，能完全update，branches中似乎有内部svn库代码的链接
