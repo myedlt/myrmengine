@@ -1,0 +1,49 @@
+1¡¢yCat
+	
+ yCat is an open source authoring application. It enables to create professional quality content within a mouse click. This standalone application takes advantage of the Adobe Air technology and runs on a desktop computer without Internet access.
+
+It is equipped with a range of ready-made advanced template options for modules (such as Choice Interaction, Text Interaction, Match Interaction, Text, Image Player) and feedback. A single page or entire lessons may be saved in the XML (Extensible Markup Language) format and played in utPlayer.
+
+yCat also offers the possibility to preview the currently developed e-content at any stage of its production.
+
+The code and documentation of this project are available for free at http://opensource.ydp.eu.
+
+Implementation of the Flash and Adobe Air runtime technology allows yCat editor to work on Windows, Linux and Mac.
+
+Requirements:
+
+    * Adobe Air 1.0
+
+
+The online version of the editor working in a browser window is available at http://opensource.ydp.eu/ctrl.php/project/utEditor/. 
+
+2¡¢utPlayer
+
+ utPlayer is a Flash application that allows to play interactive educational materials and reference publications. You may freely implement it on your web site to play your content online.
+
+The player displays the entire material on the end-user device by combining initialized test modules and formatting texts depending on a selected template. The modules are displayed on the basis of:
+
+    * an XML file with content,
+    * attached style files,
+    * included media files.
+
+A prime example of the content to be played with utPlayer may be provided by yCat or utEditor whose output files remain fully compatible with utPlayer.
+
+Technical requirements:
+
+    * PC or Mac,
+    * Environment compatible with the Flash 9 technology (recommended 9.0.45 or higher),
+    * Web browser: Internet Explorer 7.0 or Mozilla FireFox 2.0.
+
+3¡¢utEditor
+
+ utEditor is a content editor allowing the creation of professional quality content. You may freely implement it on your web site and create high quality educational material online.
+
+It is equipped with a wide range of ready-made advanced template options for modules (such as Choice Interaction, Text Interaction, Match Interaction, Text, Image Player) and feedback. A single page or entire lessons may be saved in the XML (Extensible Markup Language) format and played in utPlayer.
+
+utEditor also offers the possibility to preview the currently developed e-content at any stage of its production.
+
+
+The newest working version of the editor was applied in the yAuthor.com service.
+
+Its offline version running on a desktop computer as a standalone application is available at http://opensource.ydp.eu/ctrl.php/project/yCat/. 
