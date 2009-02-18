@@ -46,3 +46,18 @@ minipublisher
 		/trunk
 补充：
 	trunk似乎是ydp的整理公开版，能完全update，branches中似乎有内部svn库代码的链接
+
+2009/02/17 
+	拷贝一份local.porperties后，ant编译temp下新checkout的editor/trunk目录，编译源码出错
+	拷贝一份local.porperties后，ant编译temp下新checkout的player/trunk目录，成功只是package目录下的${product_version}变量未能有效替换
+	bett2009 编译出错
+
+如何建立编译环境
+	1、安装Flex SDK 3.0
+	2、安装Java环境
+	3、安装Ant
+
+	4、checkout源代码http://svn.ydp.com.pl/oss/projects/minipublisher
+	5、参考local.properties.sample新建local.properties文件
+	   编译目录：[有build.xml和local.properties的目录]=>进入目录执行devCMD;ant即可
+		editor/trunk
