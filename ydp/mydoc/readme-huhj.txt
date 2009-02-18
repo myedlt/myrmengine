@@ -49,15 +49,48 @@ minipublisher
 
 2009/02/17 
 	拷贝一份local.porperties后，ant编译temp下新checkout的editor/trunk目录，编译源码出错
-	拷贝一份local.porperties后，ant编译temp下新checkout的player/trunk目录，成功只是package目录下的${product_version}变量未能有效替换
+	拷贝一份local.porperties后，ant编译temp下新checkout的player/trunk目录，成功
+		只是package目录下的${product_version}变量未能有效替换=》怀疑是用了别的目录下的local.properties
 	bett2009 编译出错
-
+2008/02/06
+	checkout editor		60M
+	checkout player/trunk	12M
+	
 如何建立编译环境
 	1、安装Flex SDK 3.0
 	2、安装Java环境
 	3、安装Ant
 
 	4、checkout源代码http://svn.ydp.com.pl/oss/projects/minipublisher
-	5、参考local.properties.sample新建local.properties文件
+	5、参考local.properties.sample新建local.properties文件，注意各目录下的local.properties格式和内容并不一致
 	   编译目录：[有build.xml和local.properties的目录]=>进入目录执行devCMD;ant即可
 		editor/trunk
+		
+如何编译player/trunk
+	1、参考local.properties.sample新建local.properties文件
+	2、关于build.xml
+		默认任务package，打包含生成的运行程序和源码
+		dist=》运行分发程序
+		prepare.flash.extension=》将mxi文件打包为mxp
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
