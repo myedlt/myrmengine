@@ -1,0 +1,47 @@
+<macromedia-extension
+	 name="Utopia 4 Flash"
+	 version="1.0.2"
+	 type="flashcomponent"
+	 requires-restart="true">
+
+	<author name="YDP SA" />
+
+	<products>
+		<product name="Flash" version="9" primary="true" required="true" />
+	</products>
+
+	<description>
+	<![CDATA[
+	Component for embeding Utopia player in Flash Application
+	]]>
+	</description>
+
+	<ui-access>
+	<![CDATA[
+	Local
+	]]>
+	</ui-access>
+
+	<license-agreement>
+	<![CDATA[
+			For internal use in YDP only.
+	]]>
+	</license-agreement>
+
+	<files>
+		<file source="utopia.lib/bin.lib/utopia4flash.swc" destination="$Flash/Components/Utopia/" />
+		<file source="utopia.lib/src/pl/ydp/p2/flash/Utopia.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/flash/" />
+		<file source="utopia.lib/src/pl/ydp/p2/flash/IUtopiaApplication.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/flash/" />
+		<file source="utopia.lib/src/pl/ydp/p2/flash/UtopiaMediaPlayer.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/flash/" />
+		<file source="utopia.lib/src/pl/ydp/p2/flash/IUtopiaMediaPlayer.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/flash/" />
+		<file source="utopia.lib/src/pl/ydp/p2/flash/base/UtopiaLoaderBase.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/flash/base/" />
+		<file source="utopia.lib/src/pl/ydp/p2/flash/base/IUtopiaAppBase.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/flash/base" />
+		<file source="utopia.lib/src/pl/ydp/p2/media/IMediaRef.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/media/" />
+		<file source="utopia.lib/src/pl/ydp/p2/media/SimpleMediaRef.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/media/" />
+		<file source="utopia.lib/src/pl/ydp/p2/media/IMediaPlayer.as" destination="$Flash/Component Source/ActionScript 3.0/Utopia/pl/ydp/p2/media/" />
+		<file source="utopia.players/bin.local/utopiaFlashPlayer.swf" destination="$Flash/Libraries/" />
+		<file source="utopia.players/bin.local/utopiaMediaPlayer.swf" destination="$Flash/Libraries/" />
+		<file source="utopia.players/jsfl/Install Utopia.jsfl" destination="$Flash/Commands/" />
+	</files>
+
+</macromedia-extension>
