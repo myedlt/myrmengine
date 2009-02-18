@@ -1,0 +1,26 @@
+minipublisher
+	build.xml
+	local.properties
+	/editor
+	/incubator
+	/player
+		/branches
+		/tags
+		/trunk
+			build.xml
+				默认任务package=》dist+prepare.flash.extension
+					打包（运行程序和源码、Adobe扩展）
+				dist=》运行分发程序
+				prepare.flash.extension=》将mxi文件打包为mxp,看来有部分代码是Flash组件;
+					需手动安装这个组件(直接双击mxp安装不成功，提示需Flash Player 9=>因为启动的是旧版的em；手动启动extension manager安装ok)；用于在Flash应用中嵌入utPlayer；
+				avm1.proxy=》？
+				install=》将utPlayer.swf拷贝到安装目录，可用于Web服务器的发布测试
+				install.packages=》拷贝打包文件到安装目录
+				docs=》
+				clean=》
+			defaults.properties
+			flex.xml
+			local.properties
+			utopia4flash.mxi
+	/tools
+		/trunk
