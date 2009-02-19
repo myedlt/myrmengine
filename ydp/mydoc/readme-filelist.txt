@@ -22,5 +22,14 @@ minipublisher
 			flex.xml
 			local.properties
 			utopia4flash.mxi
+			/nexl		=》Flex library project,生成swc供其他flex项目作为lib使用，就像Flex SDK的swc一样
+				build.xml	=>最主要任务生成nexl.swc
+				/bin
+				/jsfl	=>似乎这个swc FlashCS3也能使用
+			/utopia.demo.player	=》Flex project，演示播放器应用
+			/utopia.lib	=》Flex 3 library project，共用组件库
+			/utopia.players	=》Flex project，多个播放器
+			/utopia.test.temp=》Flex project，2.0版程序，需改造
+			/utopia.test.unit	=》Flex project，自动化单元测试，可在Eclipse中执行
 	/tools
 		/trunk
