@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties mainApplicationPath="utopiaPlayer.mxml" version="3">
+<compiler additionalCompilerArguments="-locale en_US -metadata.title &quot;Utopia Player&quot; -default-background-color #FFFFFF -use-network=false -keep-all-type-selectors=true" copyDependentFiles="true" enableModuleDebug="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.0" htmlPlayerVersionCheck="true" outputFolderPath="bin" strict="true" useApolloConfig="false" verifyDigests="true" warn="true">
+<compilerSourcePath/>
+<libraryPath defaultLinkType="3">
+<libraryPathEntry kind="4" path="">
+<modifiedEntries>
+<libraryPathEntry autoExtract="true" kind="3" linkType="3" path="${PROJECT_FRAMEWORKS}/libs/flex.swc" rslUrl="flex.swf" useDefaultLinkType="false"/>
+<libraryPathEntry autoExtract="true" kind="3" linkType="3" path="${PROJECT_FRAMEWORKS}/libs/framework.swc" rslUrl="framework.swf" useDefaultLinkType="false"/>
+</modifiedEntries>
+<excludedEntries>
+<libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation.swc" useDefaultLinkType="false"/>
+</excludedEntries>
+</libraryPathEntry>
+<libraryPathEntry kind="3" linkType="1" path="/utopia.lib.flex3/bin/utopia.lib.flex3.swc" useDefaultLinkType="false"/>
+<libraryPathEntry kind="3" linkType="4" path="/nexl/bin/nexl.swc" useDefaultLinkType="false">
+<crossDomainRsls>
+<crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="nexl.swf"/>
+</crossDomainRsls>
+</libraryPathEntry>
+</libraryPath>
+<sourceAttachmentPath/>
+</compiler>
+<applications>
+<application path="utPlayer.mxml"/>
+<application path="testPlayer.mxml"/>
+<application path="utopiaFlashPlayer.mxml"/>
+<application path="testStatePlayer.mxml"/>
+</applications>
+<modules/>
+<buildCSSFiles/>
+</actionScriptProperties>
