@@ -4,3 +4,7 @@ Flex导入player/trunk
 		=》flex项目环境中引用路径修改utopia.lib=》utopia.lib.flex3
 		=》引用库文件包名修改utopia.lib.swc=》utopia.lib.flex3.swc
 		注：直接修改.actionscritp.properties更快
+
+FlexBuilderWS/trunkPlayer	=> temp/player/trunk
+
+2009/02/20	上述两个均正常加载，无错

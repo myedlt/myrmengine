@@ -26,6 +26,7 @@
 <application path="testPlayer.mxml"/>
 <application path="utopiaFlashPlayer.mxml"/>
 <application path="testStatePlayer.mxml"/>
+<application path="qtiFlexPlayer.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>

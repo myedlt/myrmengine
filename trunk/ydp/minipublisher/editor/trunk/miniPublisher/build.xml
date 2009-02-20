@@ -1,0 +1,160 @@
+<project name="utopia.player" default="all">
+	<dirname property="base.dir" file="${ant.file.utopia.player}" />
+	<property file="build.properties" />
+	<!--
+		Jeżeli wczesniej nie zdefiniowano to używam domyślnego
+		global'a.
+	-->
+	<property name="flex.xml" value="../flex.xml"/>
+	<import file="${flex.xml}"/>
+	
+	<import file="../utopia.edit.lib/export.xml" />
+	<import file="../miniPublisherLib/export.xml" />
+	<import file="../nexl/export.xml" />
+	<import file="../nexlFlex/export.xml" />
+	
+	<property name="src.dir" value="${base.dir}/src" />
+	<property name="src.version.dir" value="${base.dir}/src.version" />
+	<property name="src.mxml.dir" value="${base.dir}/src" />
+	<property name="bin.dir" value="${base.dir}/bin" />
+	<property name="dist.dir" value="${base.dir}/dist" />
+	<property name="package.dir" value="${base.dir}/package" />
+	<property name="build.dir" value="${base.dir}/build" />
+	<property name="build.src.dir" value="${base.dir}/build/src" />
+	<property name="libs.dir" value="${base.dir}/libs" />
+	
+	<property name="product.version" value="undefined" />
+	
+	<property name="sign.tsa" value="http://timestamp.verisign.com/scripts/timstamp.dll" />
+	<!-- property name="sign.keystore" value="${user.home}/.keystore" /-->
+	
+	<target name="time">		
+		<tstamp>
+			<format property="utopia.timestamp" pattern="HH:mm:ss dd-MM-yyyy" />
+		</tstamp>
+	</target>
+	
+	<target name="package" if="sign.storetype">
+		<mkdir dir="${package.dir}" />
+		
+		<java jar="${FLEX_HOME}/lib/adt.jar" fork="true" dir="${base.dir}" failonerror="true">
+			<arg line="-package -storetype ${sign.storetype} -keystore &quot;${sign.keystore}&quot; -storepass &quot;${sign.storepass}&quot; ${package.dir}/yCat.air ${build.src.dir}/AirEditor-app.xml -C ${dist.dir} ." />
+		</java>
+	</target>
+	
+	<target name="prepare.sources" depends="time">
+		<mkdir dir="${build.src.dir}"/>
+		
+		<copy todir="${build.src.dir}" overwrite="true">
+			<fileset dir="${src.version.dir}">
+				<include name="**/*Version.as"/>
+			</fileset>
+			<filterchain>
+				<replacetokens>
+					<token key="MINIPUBLISHER.VERSION" value="${product.version}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+		
+		<copy todir="${build.src.dir}" overwrite="true">
+			<fileset dir="${src.dir}">
+				<include name="AirEditor-app.xml"/>
+			</fileset>
+			<filterchain>
+				<replacetokens>
+					<token key="MINIPUBLISHER.VERSION" value="${product.version}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+	
+	<target name="swf.local" depends="miniPublisherLib.build, utopia.edit.lib.build, nexlFlex.build, prepare.sources, time">
+		<mkdir dir="${bin.dir}"/>
+		<mxmlc 
+				file="${src.mxml.dir}/AirEditor.mxml"
+				output="${bin.dir}/AirEditor.swf"
+	            actionscript-file-encoding="UTF-8"
+	            default-background-color="#ffffff"
+	            locale="en_US">
+            <load-config filename="${FLEX_HOME}/frameworks/air-config.xml"/>
+            <source-path path-element="${build.src.dir}"/>
+            <source-path path-element="${src.dir}"/>
+            
+            <compiler.library-path dir="${utopia.edit.lib.swc.dir}" append="true">
+            	<patternset refid="utopia.edit.lib.libs" />
+            </compiler.library-path>
+            <compiler.library-path dir="${libs.dir}" append="true">
+            	<include name="*.swc" />
+            </compiler.library-path>
+            
+            <compiler.library-path dir="${miniPublisherLib.swc.dir}" append="true">
+            	<include name="*.swc" />
+            </compiler.library-path>
+            <compiler.library-path dir="${nexlFlex.swc.dir}" append="true">
+            	<patternset refid="nexlFlex.libs" />
+            </compiler.library-path>
+            
+            <compiler.external-library-path dir="${nexl.swc.dir}" append="true">
+            	<patternset refid="nexl.libs" />
+            </compiler.external-library-path>
+            <metadata
+            	title="yCat"
+            	description="yCat editor suite"
+            	date="${utopia.timestamp}">
+            </metadata>
+            
+            <runtime-shared-libraries url="nexl.swf" />
+		</mxmlc>
+            
+        <extract-swc swc="${nexl.swc.dir}/nexl.swc" dir="${bin.dir}" name="nexl.swf" />
+	</target>
+	
+	<target name="dist" depends="swf.local">
+		<mkdir dir="${dist.dir}/plugins" />
+		
+		<copy todir="${dist.dir}" >
+			<fileset dir="${bin.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.dir}/tools" >
+			<fileset dir="${base.dir}/tools">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.dir}" >
+			<fileset dir="${base.dir}/icons">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.dir}" file="${base.dir}/../utopia.edit.lib/lib/movie_avm1.swf" />
+	</target>
+	
+	<macrodef name="extract-swc">
+		<attribute name="swc" />
+		<attribute name="dir" />
+		<attribute name="name" />
+		<sequential>
+			<unzip src="@{swc}" dest="@{dir}">
+            	<patternset>
+            		<include name="library.swf" />
+            	</patternset>
+            </unzip>
+            <move file="@{dir}/library.swf" tofile="@{dir}/@{name}" preservelastmodified="true" overwrite="true"/>
+		</sequential>
+	</macrodef>
+	
+	<target name="all" depends="dist, package" />
+	
+	<target name="clean">
+		<delete dir="${bin.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${package.dir}" />
+		<delete dir="${build.dir}" />
+		<delete>
+			<fileset dir=".">
+        		<include name="*.cache" />
+        	</fileset>
+		</delete>
+	</target>
+</project>
