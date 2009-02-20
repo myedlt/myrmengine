@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="pl.ydp.p2.Activator"/>
+<classEntry path="pl.ydp.p2.flash.IUtopiaApplication"/>
+<classEntry path="pl.ydp.p2.flash.IUtopiaMediaPlayer"/>
+<classEntry path="pl.ydp.p2.modules.dictionary.ui.YDictionaryView"/>
+<classEntry path="pl.ydp.p2.modules.test.ui.YTestView"/>
+<classEntry path="pl.ydp.p2.utils.YScrollableContainerEx"/>
+<classEntry path="pl.ydp.utils.DebugUtils"/>
+<classEntry path="pl.ydp.utils.EventExecutionChain2"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

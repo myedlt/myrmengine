@@ -2,6 +2,36 @@ minipublisher
 	build.xml
 	local.properties
 	/editor
+		/branches
+		/tags
+		/trunk
+			/editor.online
+				=>editor
+			/ext_scorm
+				=>lib,ext_scorm
+			/fbEditor.online
+				=>fbEditor.online
+			/miniPublisher
+				=>AirEditor
+				build.xml
+					=>air分发程序需要数字签名；FlexBuilder中export release build可以生成air包
+					=》{FLEX_HOME}/bin/adt -certificate -cn selfsign -ou test -o test -c CN 1024-RSA testcert.pfx hhj123
+			/miniPublisherLib
+				=>lib,miniPublisherLib
+			/nexl
+				=>...
+			/nexlFlex
+				=>lib,nexlFlex
+			/nexlViews
+				=>lib,nexlViews
+			/utopia.edit.lib
+				=>lib,utopia.edit.lib
+			/utopia.lib
+				=>lib,utopia.lib.flex3
+			/utopia_calendar
+				=>lib,utopia_calendar
+			/utopia_puzzle
+				=>lib,utopia_puzzle
 	/incubator
 	/player
 		/branches
