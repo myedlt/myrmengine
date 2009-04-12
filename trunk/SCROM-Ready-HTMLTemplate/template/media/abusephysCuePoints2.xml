@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<FLVCoreCuePoints Version="1">
+
+  <CuePoint>
+    <Time>209088</Time>
+    <Type>event</Type>
+    <Name>Pediatric Setting</Name>
+  </CuePoint>
+
+  <CuePoint>
+    <Time>504324</Time>
+    <Type>event</Type>
+    <Name>AdolescentPatient</Name>
+  </CuePoint>
+
+  <CuePoint>
+    <Time>783928</Time>
+    <Type>event</Type>
+    <Name>GYN Setting</Name>
+  </CuePoint>
+
+  <CuePoint>
+    <Time>1576990</Time>
+    <Type>event</Type>
+    <Name>Primary Care Setting</Name>
+  </CuePoint>
+
+</FLVCoreCuePoints>

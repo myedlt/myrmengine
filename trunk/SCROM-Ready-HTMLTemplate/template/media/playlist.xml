@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+	<trackList>
+<!--red5.mcit.med.umich.edu = 141.214.83.38-->
+<!--red502.mcit.med.umich.edu = 141.214.83.48-->
+		<track>
+			<title>Introduction: 3:31</title>
+			<location>rtmpt://141.214.83.48:80/oflaDemo/abusePhys</location>
+			<identifier>243.abuse.flv</identifier>
+			<type>rtmpt</type>
+			<image>media/introChild.jpg</image>
+			<link rel="captions">media/abuse.xml</link>
+			<meta rel="start">0</meta>
+		 <meta rel="duration">00:03:30</meta>
+		</track>
+
+		<track>
+			<title>Pediatric Setting: 4:44</title>
+				<location>rtmpt://141.214.83.48:80/oflaDemo/abusePhys</location>
+			<identifier>243.abuse.flv</identifier>
+			<image>media/pediatricSetting.jpg</image>
+			<type>rtmpt</type>
+			<link rel="captions">media/abuse.xml</link>
+			<meta rel="start">212</meta>
+			<meta rel="duration">00:04:44</meta>
+	 </track>
+		
+		<track>
+			<title>Adolescent Setting: 3:20</title>
+			<location>rtmpt://141.214.83.48:80/oflaDemo/abusePhys</location>
+			<identifier>243.abuse.flv</identifier>
+			<image>media/adolescentSetting.jpg</image>
+				<type>rtmpt</type>
+				<link rel="captions">media/abuse.xml</link>
+			<meta rel="start">506</meta>
+		 <meta rel="duration">00:03:20</meta>
+			 
+		</track>
+		
+		<track>
+			<title>GYN Setting: 4:22 </title>
+			<location>rtmpt://141.214.83.48:80/oflaDemo/abusePhys</location>
+			<identifier>243.abuse.flv</identifier>
+			<image>media/gynSetting.jpg</image>
+				<type>rtmpt</type>
+				<link rel="captions">media/abuse.xml</link>
+			<meta rel="start">787</meta>
+			<meta rel="duration">00:04:39</meta>
+			 
+		</track>
+		
+		<track>
+			<title>Primary Care Setting: 4:22</title>
+			<location>rtmpt://141.214.83.48:80/oflaDemo/abusePhys</location>
+			<identifier>243.abuse.flv</identifier>
+			<image>media/primaryCare.jpg</image>
+				<type>rtmpt</type>
+				<link rel="captions">media/abuse.xml</link>
+			<meta rel="start">947</meta>
+			<meta rel="duration">00:04:22</meta>
+			 
+		</track>
+		<track>
+			<title>Special Considerations 6:03</title>
+			<location>rtmpt://141.214.83.48:80/oflaDemo/abusePhys</location>
+			<identifier>243.abuse.flv</identifier>
+			<image>media/specialCons.jpg</image>
+				<type>rtmpt</type>
+				<link rel="captions">media/abuse.xml</link>
+			<meta rel="start">1213</meta>
+			<meta rel="duration">00:06:03</meta>
+			 
+		</track>
+          <track>
+			<title>Institutional Change: 3:20</title>
+			<location>rtmpt://141.214.83.48:80/oflaDemo/abusePhys</location>
+			<identifier>243.abuse.flv</identifier>
+			<image>media/institutionalChange.jpg</image>
+				<type>rtmpt</type>
+				<link rel="captions">media/abuse.xml</link>
+			<meta rel="start">1578</meta>
+			<meta rel="duration">00:03:20</meta>
+			 
+		</track>
+
+	</trackList>
+</playlist>

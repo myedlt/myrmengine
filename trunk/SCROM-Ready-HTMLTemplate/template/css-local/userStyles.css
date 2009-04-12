@@ -1,0 +1,70 @@
+/*use this style sheet to override any of the styles with your own versions of them, and to add any module-specific styles you want to use*/
+.chapterTitle {
+   margin-bottom:6px;
+   margin-top:-12px;
+   margin-left:-24px;
+   font: bold 18px "Lucida Grande", LucidaGrande, Lucida, Helvetica, Arial, sans-serif;
+   color:#666666;
+  display:block; 
+}
+#pageTitle {
+	font: bold 16px "Lucida Grande", LucidaGrande, Lucida, Helvetica, Arial, sans-serif;
+	text-align: left;
+	color:#1E77D3;
+	width:auto;
+	padding:12px 6px 0px 36px;
+	display:block;
+}
+.navlevel3 {
+padding-left:12px;
+}
+#content, #content p, #content td {
+ 
+ /* font: normal 15px "Lucida Grande", LucidaGrande, Lucida, Helvetica, Arial, sans-serif;*/
+ }
+li {
+	margin-bottom: 1em;
+}
+
+.red2 {
+	font-weight: bold;
+	color: #8b0000;
+}
+.redlarge {
+	font-weight: bold;
+	font-size: 16px;
+	color: #c03;
+}
+
+
+.blue {
+	color: Blue;
+}
+
+.blue_bold {
+	color: blue;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+/*Banner Style for ESN */
+#banner{
+display:block;
+	width:700px;
+	height:123px;
+	background-image:url(../media/header.jpg);
+	background-repeat:no-repeat;
+	background-position:left;
+	padding-top:10px;
+	 margin-left:12px;
+}
+
+#bnrTitle{
+position:relative;
+left:390px;
+top:20px;
+width:290px;
+	font:bold 18px Geneva, Arial, Helvetica, sans-serif;
+	color:#FFFFFF;
+
+}
