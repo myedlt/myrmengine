@@ -1,0 +1,49 @@
+<!--/*v 1.5 12-10-2007*/-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="cache-control" content="no-store, no-cache, must-revalidate" />
+<title></title> <!--this is inserted from entry on pageArray.js-->
+<SCRIPT language="JavaScript" >
+         var justOpened = 1;
+ 	     var zVrsn; 
+		 var cookieVrsn;//value of cookie - what happens if cookie has not been set yet
+</SCRIPT>
+<SCRIPT language="JavaScript" src="js/cookie.js" type="text/javascript"></SCRIPT>
+<SCRIPT language="JavaScript" src="js/querystring.js" type="text/javascript"></SCRIPT>
+<SCRIPT language="JavaScript" src="js/moduleVersion.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="js/SCORMGeneric.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="js/SCORMObjectiveLogic.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="js/framewrap.js" type="text/javascript"></SCRIPT>
+<SCRIPT type="text/javascript">SCOInitialize();SCOSetStatusIncomplete();</script>
+<script type="text/javascript">
+  function SCOSaveData(){// this function will be called when this SCO is unloaded
+  if(APIOK()){
+  SCOCommit();
+  SCOSetValue("cmi.core.exit", "" );//needed to finalize quiz score?
+ 
+ }
+}
+
+</script> 
+
+ <script type="text/javascript">
+  setFrameSrc();
+ </script>
+
+
+</head>
+<!--Comment out the line below if this module has embedded quizzes, and uncomment the next line-->
+<frameset rows="100%,*" border="0" bordercolor="#000066" onunload="SCOFinish()" onbeforeunload="SCOFinish()" >
+<!--use the following line if this module has embedded quizzes:
+                <frameset rows="100%,*%" id="moduleFrameset">-->
+<!--use the following line if you want the module to complete only after all pages have been looked at (do not use if you have embedded quizzes):
+                <frameset rows="100%,*%" onunload="completeIfLastPage()" onbeforeunload="completeIfLastPage()" id="moduleFrameset">-->
+ <frame name="myStage" id="myStage" src="page01.htm"/> 
+ <frame name="data" id="data" src="includes/dummypage.htm" /> 
+ </frameset> 
+
+<noframes>This module requires frames to function correctly. If you are unable to use frames, please contact us at mlearninginfo@umich.edu for an alternative.</noframes>
+
+
+</html>

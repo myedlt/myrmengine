@@ -1,0 +1,74 @@
+<!--/*v 1.6 9-7-2007*/-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Untitled Document</title>
+<script language="JavaScript" type="text/javascript" src="../js/MM_scripts.js"></script>
+ 
+</head>
+
+<body  onload="MM_preloadImages('../images/modeIndicator/mode_03.jpg', 
+'../images/images/header/LearningModuleLogosmaller.png',
+'../images/header/Hdr_leftCorner.jpg',
+'../images/footer/footer_LeftEdge.jpg',
+'../images/header/Hdr_middle.jpg',
+'../images/footer/footer_Middle.jpg',
+'../images/header/over/Next_btn.jpg',
+'../images/header/up/Next_btn.jpg', 
+'../images/header/over/Prev_btn.jpg',
+'../images/header/up/Prev_btn.jpg',
+'../images/footer/over/footer_Next_btn.jpg',
+'../images/footer/up/footer_Next_btn.jpg',
+'../images/footer/over/footer_Prev_btn.jpg',
+'../images/footer/up/footer_Next_btn.jpg',
+'../images/help.jpg')"> 
+<!--the setFrameLocation script sets the myStage frame to whatever the first item is in the PageArray. Putting it here makes sure it loads only after the frame is loaded, and only once, since dummypage.htm doesn't reload very often-->
+<p><a href="javascript:(function(){var x,d,i,v,st; x=open(); d=x.document; d.open(); function hE(s){s=s.replace(/&amp;/g,%22&amp;%22);s=s.replace(/&gt;/g,%22&gt;%22);s=s.replace(/&lt;/g,%22&lt;%22);return s;} d.write(%22&lt;style&gt;td{vertical-align:top; white-space:pre; } table,td,th { border: 1px solid #ccc; } div.er { color:red }&lt;/style&gt;&lt;table border=1&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Variable&lt;/th&gt;&lt;th&gt;Type&lt;/th&gt;&lt;th&gt;Value as string&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;%22); for (i in window) { if (!(i in x) ) { v=window[i]; d.write(%22&lt;tr&gt;&lt;td&gt;%22 + hE(i) + %22&lt;/td&gt;&lt;td&gt;%22 + hE(typeof(window[i])) + %22&lt;/td&gt;&lt;td&gt;%22); if (v===null) d.write(%22null%22); else if (v===undefined) d.write(%22undefined%22); else try{st=v.toString(); if (st.length)d.write(hE(v.toString())); else d.write(%22%C2%A0%22)}catch(er){d.write(%22&lt;div class=er&gt;%22+hE(er.toString())+%22&lt;/div&gt;%22)}; d.write(%22&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;%22); } } d.write(%22&lt;/table&gt;%22); d.close(); })();">Click to see variables</a></p>
+<p style="color:black;"  >
+<div id="output"></div>
+<script language="JavaScript" type="text/javascript" src="../js-local/pageArray.js"></script>
+<SCRIPT language="JavaScript" type="text/javascript" src="../js/toggleOpen.js" ></SCRIPT>
+ 
+<script language="JavaScript"> var PageArray;  </script>
+<SCRIPT language="JavaScript" src="../js/arrayVersion.js" type="text/javascript"></SCRIPT> 
+<script>  
+
+
+
+ function determineParents(){ //determines what is a parent and what branch item is in
+	 var branch;
+	 for(var i=0; i< PageArray.length; i++) { 
+	  if (!branch){ branch=0;}		
+         var p = PageArray[i];
+		 var j = (i+1);
+		 var k = (i-1);
+		 p.branch=branch; 
+		 var nextItem = PageArray[j];
+		 var prevItem = PageArray[k];
+		 var level =   p.level;
+	     var chapter =  p.chapter;
+		 var isParent = p.isParent;
+	     if (nextItem){  //is this a parent item? if there is a next item...
+		       if (nextItem.chapter==chapter && nextItem.level>level){  p.branch=i;branch=i;  p.isParent='parent'; }	 //if next item in same chapter but greater level, this is a parent. set value of branch to i	
+	           else {p.isParent='notParent'; 
+			          if (prevItem&&level<prevItem.level){p.branch=i;branch=i;} //branches don't revert to the parent branch when level increases so this is needed
+			   }//else
+		     }//if(nextItem)...
+         else{p.isParent='notParent'; break;}
+     } //for(var...
+ } //function
+</script>
+
+<script language="javascript" type="text/javascript" src="../js/quizFunctions.js"></script>
+  
+  
+<script language="javascript">
+function writeDocTitle(){  parent.document.title=docTitle; } 	 
+determineParents();
+if (parent.APIOK()){ setupQuizzes();} 
+writeDocTitle();
+</script>
+
+</body>
+</html>

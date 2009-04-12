@@ -1,0 +1,601 @@
+# #############################################################################
+# this template shows only the appropriate button depending on pass/fail
+# This template does not show a header and is only for use with quizzes that are embedded in a SCORM learning module. It must
+# be used in conjunction with EMBED.pip
+# An example of an entry in the learning module page array that connects to a quiz using this template is:
+#{buttonTitle:'Quiz 1', title:'', 
+# url:'quizWrap.htm?call=embed&session=7434585427442375&href=http://ummcqmark01.mcit.med.umich.edu/q/session.dll', 
+#chapter:1,level:2, quiz:'7434585427442375' },
+
+# SCORM compatible template 
+# 9-25-07
+# 
+# #############################################################################
+#note - you cannot use heights and widths spec'd as percents (80%)  - it thinks they are server variables
+
+# the functionality for sending the score back thru PerceptionSCO.htm onClick of the home button 
+# comes from PerceptionSCO.htm itself in the "HOME=" definition
+
+# #########document settings##########
+[DOCUMENT]
+# #########settings##########
+# must include this when using with docent so that perception pages don't pop out of docent's aicc_frameset, needed to record interaction data.
+TARGET=TARGET="_self"
+
+#minimal attempt at defeating printing and view source.
+DISABLE_RIGHT_CLICK=1
+
+# go to where you started the assessment from
+LINK_HOME_TEXT=Close quiz and record my score!
+
+# turn off inclusion of SBAPI.js 
+SB_EXCLUDE_API=1
+
+# running (cumulative) score for assessment
+SHOW_RUNNING_SCORE=0
+
+# score at end of assessment
+TOTAL_SCORE_TEXT=<SPAN STYLE="color:red;" class="finalScore">%SESSION.SCOREBAND%:</span> Your Total Score: 
+
+# use graphics for submit, reset and quit buttons
+# set to 0 so it will use text above instead of "HOME"
+USE_GRAPHIC_BUTTONS=1
+
+#turn off secure browser api - not sure if we need this anymore. 
+SB_EXCLUDE_API=1
+# ###########################################
+# html syntax for submit button on a form
+SUBMIT=
+_IF %USE_GRAPHIC_BUTTONS% = 1
+<INPUT TYPE=IMAGE SRC="%QMP_SUBMIT_GRAPHIC%" border=0 NAME="%SUBMIT_TEXT%" TITLE="%SUBMIT_TEXT%" CLASS="navbtn">
+_ELSE
+<INPUT TYPE=SUBMIT VALUE="%SUBMIT_TEXT%" CLASS="navbtn">
+
+# ########################## new variable created for redefining a reminder notice within the quiz
+ASSESSMENT_REMINDER = <div id="reminder" class="reminder">
+<h1>REMINDER:</h1>
+<span class="reminderBody">You must complete the associated learning module to fulfill the requirements. You may launch the learning module from your learning plan.</span></div>
+
+
+
+# ############BUTTON GRAPHICS##############################
+# graphics used for buttons (if USE_GRAPHIC_BUTTONS=1 )
+QMP_SUBMIT_GRAPHIC=%SERVER.GRAPHICS%btn_ScoreMyQuiz.jpg
+QMP_RESET_GRAPHIC=%SERVER.GRAPHICS%system/qmp_reset.gif
+QMP_QUIT_GRAPHIC=%SERVER.GRAPHICS%system/qmp_quit.gif
+QMP_CONTINUE_GRAPHIC=%SERVER.GRAPHICS%btn_continue.jpg
+QMP_ENTER_GRAPHIC=%SERVER.GRAPHICS%system/qmp_enter.gif
+QMP_HOME_GRAPHIC=%SERVER.GRAPHICS%home_button.jpg
+QMP_RETRY_GRAPHIC=%SERVER.GRAPHICS%system/qmp_retry.gif
+QMP_GOBACK_GRAPHIC=%SERVER.GRAPHICS%system/qmp_back.gif
+
+# ##########graphics used for layout - also used by login.format############
+QMP_TOP_GRAPHIC=%SERVER.GRAPHICS%java/gifs/MLearningLogoSmallBlueBG.gif
+# main logo graphic, with size settings
+QMP_LOGO_GRAPHIC=<!--%SERVER.GRAPHICS%java/gifs/MLearningLogoSmallBlueBG.gif-->
+QMP_LOGO_WIDTH=64
+QMP_LOGO_HEIGHT=96
+QMP_BACK_GRAPHIC=%SERVER.GRAPHICS%system/back.gif
+QMP_SPACE_GRAPHIC=%SERVER.GRAPHICS%system/spacer.gif
+
+# ################MISC. SETTINGS###########################
+# show assessment title
+SHOW_TITLE=0
+SHOW_NUMBER=0
+SHOW_NUMBER_OF=0
+
+# #################font settings - shutting them ALL OFF and using CSS styles instead###
+# font face for text (will be ignored if blank)
+TEXTFACE=
+TEXTCOLOR=
+# text size (in points)
+TEXTSIZE=
+# feedback font formatting
+FEEDBACKFONTFACE=
+ FACE=
+# font face for feedback
+FEEDBACKFACE=
+# feedback text color
+FEEDBACKCOLOR=
+# feedback text size
+FEEDBACKSIZE=
+
+# score font formatting
+SCOREFONT=
+# font face for score
+SCOREFACE=
+# score text color
+SCORECOLOR=
+# score text size
+SCORESIZE=
+
+
+
+TOTAL_SCORE_TEXT=<SPAN STYLE="color:red;" class="finalScore">%SESSION.SCOREBAND%:</span> Your Total Score:
+
+# ###### Question START and End definitions: this part of the Question definitions must remain in [DOCUMENT] section to be seen############
+
+# ####Multiple Choice Question Structure #############
+START_mc=<!--START_mc--><tr><td valign="top" class="mc">
+END_mc=</td></tr> <!--END_mc-->
+START_QUESTION_mc=<!--START_QUESTION_mc--><table class="mcquestion">
+END_QUESTION_mc=</table> <!--END_QUESTION_mc-->
+
+
+# ####Multiple Response Question Structure #############
+START_mr=<!--START_mr--><tr><td valign="top" class="mr">
+END_mr=</td></tr><!--END_mr-->
+END_QUESTION_mr=</table>
+START_QUESTION_mr=<!--START_QUESTION_mr--><table class="mrquestion">
+END_QUESTION_mr=</table> <!--END_QUESTION_mr-->
+
+ 
+
+# ################ HTML HEADER ###########################
+#the first line sets up a stylesheet for printing that prints nothing
+HTML_HEADER=
+<!--open HTML_HEADER-->
+<STYLE media="print">BODY {display:none}</STYLE>
+
+<link href="%SERVER.GRAPHICS%mLearningMandatories.css" rel="stylesheet" type="text/css">
+<!--close HTML_HEADER-->
+ 
+
+# ################# SCORE HEADERS #################################
+# format for the header information for each page
+# score for each block
+START_BLOCK_SCORE=<!--begin BLOCK_SCORE-->
+END_BLOCK_SCORE=<br><!--end BLOCK_SCORE-->
+
+# running (cumulative) score for assessment
+START_RUNNING_SCORE=<!--begin running_score-->
+END_RUNNING_SCORE=<br>
+<b>Please Click "Continue" to see your FINAL score, and record your score in MLearning</b>
+<br><!--end running score-->
+# final score for assessment
+START_FINAL_SCORE=<!--begin final_score--><div class="finalScore">
+END_FINAL_SCORE=</div><!--end final_score-->
+
+# final score shown at end of assessment
+FINAL_SCORE=
+%SCOREFONT%
+%TOTAL_SCORE_TEXT% %SESSION.SCORE% %SCORE_OUT_OF_TEXT% %SESSION.MAX%, %SESSION.PERCENT%%% 
+
+# status at end of assessment
+START_FINAL_STATUS=<!--begin final status-->
+END_FINAL_STATUS=<br><!--end final_status-->
+
+# topic scoring on final page
+START_ASSESSMENT_OUTCOME=<!--start_assessment_outcome--><div class="assessmentOutcome " id="quizOutcome">
+# end of assessment outcome block - this has an ol to provide numbered questions on feedback/score page
+END_ASSESSMENT_OUTCOME=</div><!--END_ASSESSMENT_OUTCOME--><ol>
+
+# start and end definitions for the whole topic scoring (all topics)
+END_TOPIC_SCORING=
+</table>
+</td></tr>
+</table>
+<hr>
+<!--END_TOPIC_SCORING-->
+# #################################################
+
+
+# ############### "TOP" DEFINITION - overall structure for entire document############################
+# placed at the top of all documents
+# includes html tags to start document
+TOP=
+<HTML>
+<HEAD>
+<TITLE>%SESSION.TITLE%</TITLE>
+<!--open HTML_HEADER-->
+<STYLE media="print">BODY {display:none}</STYLE>
+<link href="%SERVER.GRAPHICS%mLearningMandatories.css" rel="stylesheet" type="text/css">
+<!--close HTML_HEADER-->
+%SCRIPTS%
+
+<script language="JavaScript" type="text/JavaScript" src="%SERVER.GRAPHICS%js/MM_scripts.js"></script>
+</HEAD>
+
+<BODY  %LINK% %DO_BODY% topmargin="0" onLoad="MM_preloadImages('%SERVER.GRAPHICS%no_btn_f2.jpg','%SERVER.GRAPHICS%no_btn.jpg', '%SERVER.GRAPHICS%yes_btn_f2.jpg','%SERVER.GRAPHICS%yes_btn.jpg')">
+%HEADER%<!--header-->
+
+
+# #################################################
+
+
+
+# ############### HEADER (visible header at top of all documents)############################
+# text placed at head of all documents
+# header has been removed because this is an embedded quiz.
+HEADER=<!--header--><br>
+	  
+
+# add text or images to start or end of page headers
+# main question document
+OPEN_DOCUMENT_HEADER=<!--open_document_header-->
+CLOSE_DOCUMENT_HEADER=<!--close_document_header-->
+# #################################################
+
+
+ 
+# ################# FEEDBACK HEADER #########################
+FEEDBACK_HEADER=
+%OPEN_FEEDBACK_HEADER%
+%SHOW_BLOCK_TITLE_DEF%
+%SHOW_RUNNING_SCORE_DEF%
+%SHOW_BLOCK_SCORE_DEF%
+%CLOSE_FEEDBACK_HEADER%
+# #################################################
+
+# ###############QUESTION DOCUMENT DEFINITION##################################
+# main format definition for question documentss
+DOCUMENT=
+_IF %USE_QXQ% = 1
+%qxqDOCUMENT%
+_ELSE
+<!--begindocument-->
+<HTML>
+<HEAD>
+<TITLE>%SESSION.TITLE%</TITLE>
+<!--open HTML_HEADER-->
+<STYLE media="print">BODY {display:none}</STYLE> 
+<link href="%SERVER.GRAPHICS%mLearningMandatories.css" rel="stylesheet" type="text/css">
+<!--close HTML_HEADER-->
+%SCRIPTS%
+<script language="JavaScript" type="text/JavaScript" src="%SERVER.GRAPHICS%js/MM_scripts.js"></script>
+</HEAD>
+<BODY  %LINK% %DO_BODY% topmargin="0" nLoad="MM_preloadImages('btn_quizPass.jpg','btn_quizPass_glo.jpg','%SERVER.GRAPHICS%btn_ScoreMyQuiz.jpg','%SERVER.GRAPHICS%btn_quizFail_glo.jpg', '%SERVER.GRAPHICS%btn_quizFail.jpg','%SERVER.GRAPHICS%btn_ScoreMyQuiz_glo.jpg')">
+%HEADER%
+
+<FORM NAME="QUESTION" METHOD="POST" ACTION="%SESSION.URL%" AUTOCOMPLETE="off" %DO_SUBMIT% TARGET="_self">
+%SAYG_DEF%
+%SESSION.TIMED%
+%DOCUMENT_HEADER%
+<!--start_document--><div id="content">
+%NO_CLICK%
+%SESSION.CONTENT%
+
+%SUBMIT% %SHOW_RESET_DEF%  %SHOW_QUIT_DEF% %SAYG_BUTTON_DEF%
+
+</div></FORM>
+<!--end_document-->
+%TAIL%
+#  ################################################### 
+# #####################ASSESSMENT INTRODUCTION##########################################
+# assessment introduction
+SHOW_INTRO_DEF=
+_IF %SHOW_INTRO% = 1
+ <div class="Intro">%SESSION.INTRO%</div>
+# assessment introduction formatting
+START_INTRO=<div class="Intro">
+END_INTRO=</div>
+
+# #################################################
+
+# #################START, END DOCUMENT################################
+# after the header
+START_DOCUMENT=<!--start_document--><div id="content">
+# before end of document
+END_DOCUMENT=</div></FORM>
+<!--end_document-->
+# #################################################
+
+# ##########################################
+# header definitions
+
+# show some information about the block
+DOCUMENT_HEADER=
+%OPEN_DOCUMENT_HEADER%
+%SHOW_TITLE_DEF%
+%SHOW_BLOCK_TITLE_DEF%
+%SHOW_INTRO_DEF%
+%CLOSE_DOCUMENT_HEADER%
+# #########################
+
+# #################COMMENT DEFINITIONS################################
+# before question comment
+START_COMMENT=<tr><td><!--start_comment-->
+# after question comment
+END_COMMENT=</td><td colspan="4"><!--end_comment-->
+# before the label to a question comment
+START_COMMENTLABEL=<!--start_commentlabel-->
+# after the label to a question comment
+
+
+# ###################FINAL PAGE (END)########################
+# final page - can include feedback saved using END_FEEDBACK definition
+END=
+_IF %USE_QXQ% = 1
+%qxqEND%
+_ELSE
+<HTML>
+<HEAD>
+<TITLE>%SESSION.TITLE%</TITLE>
+<!--open HTML_HEADER-->
+<STYLE media="print">BODY {display:none}</STYLE>
+<link href="%SERVER.GRAPHICS%mLearningMandatories.css" rel="stylesheet" type="text/css">
+<!--close HTML_HEADER-->
+%SCRIPTS%
+<script language="JavaScript" type="text/JavaScript" src="%SERVER.GRAPHICS%js/MM_scripts.js"></script>
+<script language="JavaScript" type="text/JavaScript">
+function chooseScoreAction(){
+ if(%SESSION.SCOREBAND% == PASSED){
+    form['END'].submit();alert('I hit End');
+  }else{ form['framecloser'].submit();alert('I hit framecloser');  }
+}
+</script>
+</HEAD>
+<BODY  %LINK% %DO_BODY% topmargin="0" onLoad="MM_preloadImages('%SERVER.GRAPHICS%yes_btn_f2.jpg','%SERVER.GRAPHICS%yes_btn.jpg','no_btn.jpg','no_btn_f2.jpg')" >
+%HEADER%<!--header-->
+<!--BEGIN END_HEADER-->
+%OPEN_END_HEADER%
+%SHOW_END_TITLE_DEF%
+%SHOW_FINAL_STATUS_DEF%
+%SESSION.FINAL_SCORE%
+<div id="reminder" class="reminder">
+<h1>REMINDER</h1>
+If you have completed the associated learning module, you have fulfilled the requirements. </div>
+%LINK_PIP%
+%CLOSE_END_HEADER%
+<!--end END_HEADER-->
+<!--start_document--><div id="content">
+%NO_CLICK%
+%OUTCOME_DEF%
+%SESSION.FEEDBACK%
+# %LINK_PIP% #removing this second one because it is confusing
+<!--<div style="height:600px;"></div>
+#%SESSION.NEXT%
+</div>-->
+</FORM>
+<!--end_document-->
+%TAIL%
+# ###########################################
+
+
+# ######################Explanation of buttons###########################
+
+#Note: the home button is turned ON in SCORM.pip in the pip folder on the server.
+# when perceptionSCO.hmt navigates to the quiz, it includes in the URL a string that 
+# tells the quiz that hitting the home button should send the part of the 
+# perceptionSCO's current URL after the ? 
+# the variable %SESSION.NEXT% returns 
+# %LINK_SESSION% if the assessment is branching to another assessment
+# %LINK_URL% if the assessment is branching to an external URL
+# %LINK_HOME% if the assessment doesn't branch
+# ###########################################
+# Note: all these form actions must be targeted to "_parent" when the module is embedded.
+# #################HOME BUTTON ON FINAL PAGE##########################
+# home button of final page
+HOME_BUTTON=
+_IF %SESSION.SCOREBAND% != PASSED
+<!--begin HOME_BUTTON-->
+<div align="left" id="homeBTN" class="%SESSION.SCOREBAND%>
+<INPUT TYPE=IMAGE SRC="%SERVER.GRAPHICS%btn_quizPass" width="378" height="83" border="0" NAME="recordScore" TITLE="Close quiz and record my score!" %DO_HOME_BUTTON%  onmouseover="this.src='%SERVER.GRAPHICS%btn_quizPass_glo.jpg'" onmouseout="this.src='%SERVER.GRAPHICS%btn_quizPass.jpg'" id="%SESSION.SCOREBAND%">
+<!--end HOME_BUTTON-->
+_ELSE
+<!--begin HOME_BUTTON-->
+<form action="http://mlearning.med.umich.edu/elearning/frameCloser.htm" name="framecloser" target="_parent">
+<INPUT TYPE=IMAGE SRC="%SERVER.GRAPHICS%btn_quizFail.jpg" VALUE="Submit"  %DO_HOME_BUTTON% onmouseover="this.src='%SERVER.GRAPHICS%btn_quizFail_glo.jpg'" onmouseout="this.src='%SERVER.GRAPHICS%btn_quizFail.jpg'" ALT="Close Quiz without recording score">
+</form>
+<!--end HOME_BUTTON-->
+# ###########################################
+
+# ###################LINK_HOME########################
+LINK_HOME=
+_IF %USE_QXQ% = 1
+<FORM NAME="END" METHOD="%LINK_METHOD%" ACTION="%HOME%" TARGET="_parent">%QXQ_HOME_BUTTON%</FORM>
+_ELSE
+<FORM NAME="END" METHOD="%LINK_METHOD%" ACTION="%HOME%" TARGET="_parent">
+%HOME_BUTTON%
+</FORM>
+# ###########################################
+
+# ###################PIP HOME BUTTON (table containing red and green buttons)########################
+PIP_HOME_BUTTON=
+<!--begin PIP_HOME_BUTTON-->
+<div id="outcomeContainer"><div id="Passed" class="%SESSION.SCOREBAND%" align="left">
+<A HREF="%SESSION.LINK%" TARGET="_parent" %DO_LINK_HREF%>
+<IMG SRC="%SERVER.GRAPHICS%btn_quizPass.jpg" width="378" height="83" border="0" ALT="Record my score in MLearning!" onmouseover="this.src='%SERVER.GRAPHICS%btn_quizPass_glo.jpg'" onmouseout="this.src='%SERVER.GRAPHICS%btn_quizPass.jpg'" TITLE="%HOME_TOOLTIP%" ></a><!--end PIP_HOME_BUTTON-->
+</div>
+
+<div  id="Failed" class="%SESSION.SCOREBAND%">
+<form action="http://mlearning.med.umich.edu/elearning/frameCloser.htm" style="text-align:left">
+<INPUT type=hidden name="justClose" value="1">
+<INPUT type=image name="submit2" src="%SERVER.GRAPHICS%btn_quizFail.jpg" ALT="Close Quiz without recording score" width="264" height="34" border="0"  onmouseover="this.src='%SERVER.GRAPHICS%btn_quizFail_glo.jpg'" onmouseout="this.src='%SERVER.GRAPHICS%btn_quizFail.jpg'" TITLE="Close Quiz without recording score">
+</form>
+</div>
+</div>
+
+<!--end PIP_HOME_BUTTON-->
+# ###########################################
+
+# ################LINK PIP###########################
+# html syntax for returning URL defined by PIP - must be one line with no ' characters
+LINK_PIP=
+_IF %USE_QXQ% = 1
+<FORM NAME="END"></FORM>
+<A HREF="%SESSION.LINK%" TARGET="_parent" %DO_LINK_HREF% class="pipHome">%QXQ_PIP_HOME_BUTTON%</A>
+
+_ELSE
+<FORM NAME="END"></FORM>
+%PIP_HOME_BUTTON%
+# ###########################################
+
+
+# #################FEEDBACK PAGE (after each block)##########################
+# feedback to questions BEFORE the end of the assessment
+FEEDBACK=
+_IF %USE_QXQ% = 1
+%qxqFEEDBACK%
+_ELSE
+
+<HTML>
+<HEAD>
+<TITLE>%SESSION.TITLE%</TITLE>
+
+<!--open HTML_HEADER-->
+<STYLE media="print">BODY {display:none}</STYLE>
+
+<link href="%SERVER.GRAPHICS%mLearningMandatories.css" rel="stylesheet" type="text/css">
+
+
+<!--close HTML_HEADER-->
+%SCRIPTS%
+
+
+<script language="JavaScript" type="text/JavaScript" src="%SERVER.GRAPHICS%js/MM_scripts.js"></script>
+</HEAD>
+
+<BODY  %LINK% %DO_BODY% topmargin="0" nLoad="MM_preloadImages('%SERVER.GRAPHICS%no_btn_f2.jpg','%SERVER.GRAPHICS%no_btn.jpg', '%SERVER.GRAPHICS%yes_btn_f2.jpg','%SERVER.GRAPHICS%yes_btn.jpg')">
+%HEADER%<!--header-->
+
+<FORM NAME="FEEDBACK" METHOD="POST" ACTION="%SESSION.URL%" AUTOCOMPLETE="off" %DO_FEEDBACK_SUBMIT% TARGET="_self">
+%SESSION.TIMED%
+
+%OPEN_FEEDBACK_HEADER%
+%SHOW_BLOCK_TITLE_DEF%
+%SHOW_RUNNING_SCORE_DEF%
+%SHOW_BLOCK_SCORE_DEF%
+%CLOSE_FEEDBACK_HEADER%
+%CONTINUE%<!--this adds a continue button to the top of the feedback page!-->
+<!--start_document--><div id="content">
+%NO_CLICK%
+%SESSION.FEEDBACK%
+%SEPARATOR%
+%CONTINUE%<BR>
+</FORM><!--from "FEEDBACK=" definition-->
+</div></FORM>
+<!--end_document-->
+%TAIL%
+# ###########################################
+# #################END FEEDBACK##########################
+# feedback to questions to be saved for presentation at the end of the assessment
+END_FEEDBACK=
+_IF %USE_QXQ% = 1
+%qxqEND_FEEDBACK%
+_ELSE
+<FORM NAME="END" AUTOCOMPLETE="off" %DO_END_SUBMIT% TARGET="_self">
+%END_FEEDBACK_HEADER%
+%SESSION.FEEDBACK%
+</FORM><!--from "END_FEEDBACK=" definition-->
+%SEPARATOR%
+START_TOPIC_FEEDBACK=<!--start_topic_feedback--><TD class="topicFeedback">
+END_TOPIC_FEEDBACK=</TD><!--end_topic_feedback-->
+# ###########################################
+# #################FEEDBACK ITEM##########################
+# separator placed after each feedback item
+START_FEEDBACK_ITEM=<!--START_FEEDBACK_ITEM--><div class="feedbackItem">
+END_FEEDBACK_ITEM=<br></div><!--END_FEEDBACK_ITEM-->
+
+
+# ###########################################
+# define how questions are formatted
+[QUESTION]
+# ###########################################
+
+QUESTION=
+_IF %USE_QXQ% = 1
+
+<DIV ID="Q_%QUESTION.ID%" CLASS="question">
+%QUESTION_HEADER%
+%START_QUESTION%
+%QUESTION.CONTENT%
+%QUESTION_TIME%
+%END_QUESTION%
+%SEPARATOR%
+</DIV>
+%QXQ_SAYG_ANSWERED%
+<SCRIPT>
+	oTemp = new Question(window, "Q_%QUESTION.ID%", %QUESTION.NUMBER%, iIndex, 'Q', false, %QUESTION.SCORE%, %QUESTION.MAX%, answered);
+	aElements[iIndex] = oTemp;
+	aQuestions[%QUESTION.NUMBER%] = oTemp;
+	iIndex++;
+</SCRIPT>
+_ELSE
+
+%QUESTION_HEADER%
+%START_QUESTION%
+%QUESTION.CONTENT%<BR>
+%END_QUESTION%
+%SEPARATOR%
+
+
+EXPLANATION=
+_IF %USE_QXQ% = 1
+
+<DIV ID="Q_%QUESTION.ID%" CLASS="question">
+%START_EXPLANATION%
+%QUESTION.CONTENT%
+%END_EXPLANATION%
+%SEPARATOR%
+</DIV>
+<SCRIPT>
+	oTemp = new Question(window, "Q_%QUESTION.ID%", %QUESTION.NUMBER%, iIndex, 'E', false, 0, 0, false);
+	aElements[iIndex] = oTemp;
+	iIndex++;
+</SCRIPT>
+_ELSE
+%START_EXPLANATION%
+%QUESTION.CONTENT%<BR>
+%END_EXPLANATION%
+%SEPARATOR%
+
+
+# ###########################################
+# define how feedback to questions is formatted
+
+[FEEDBACK]
+# ###########################################
+
+# as per the QUESTION definition in [QUESTION]
+# but with added feedback
+# format for each feedback item
+FEEDBACK_ITEM=%START_FEEDBACK_ITEM% %OUTCOME.CONTENT% %END_FEEDBACK_ITEM%
+# ###################################
+
+# question feedback document
+OPEN_FEEDBACK_HEADER=<!--OPEN_FEEDBACK_HEADER--><div class="feedbackHeader">
+CLOSE_FEEDBACK_HEADER=<!--CLOSE_FEEDBACK_HEADER--></div>
+
+# after question header
+START_QUESTION=<!--START_QUESTION-->
+# after end of question
+END_QUESTION=<!--END_QUESTION-->
+
+# before explanation 
+START_EXPLANATION=<!--START_EXPLANATION-->
+#after explanation
+END_EXPLANATION=<!--END_EXPLANATION-->
+
+# before question feedback
+START_QUESTION_FEEDBACK=<!--START_QUESTION_FEEDBACK-->%START_QUESTION%
+# after question feedback
+END_QUESTION_FEEDBACK=%END_QUESTION%<!--END_QUESTION_FEEDBACK-->
+
+# before question comment
+START_COMMENT=<br>
+# after question comment
+END_COMMENT=<br>
+
+
+# ###########################################
+# define how question choices are formatted
+
+[CHOICE]
+# ###########################################
+MC=<tr><td valign="top" class="mcchoice"> <input TYPE=RADIO NAME="%QUESTION.ID%" VALUE="%CHOICE.ID%" %DO_MC% %CHOICE.CHECKED%> </td><td> %CHOICE.CONTENT% </td></tr>
+MR=<tr><td valign="top"><input TYPE=CHECKBOX NAME="%QUESTION.ID%" VALUE="%CHOICE.ID%" %DO_MR% %CHOICE.CHECKED%> </td><td> %CHOICE.CONTENT% </td></tr>
+
+
+SEL=
+%START_sel%
+<TD>
+%CHOICE.CONTENT%
+</TD><TD>
+<INPUT TYPE=HIDDEN NAME="%QUESTION.ID%" VALUE="%CHOICE.ID%">
+<SELECT NAME="%CHOICE.ID%" %DO_SEL%  onmousewheel="return false;">
+<OPTION VALUE=""></OPTION> # empty option
+%CHOICE.OPTION%
+</SELECT>
+</TD>
+%END_sel%

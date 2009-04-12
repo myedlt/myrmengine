@@ -1,0 +1,20 @@
+; embed.pip
+; Question Mark Perception PIP configuration file
+; experimental file for embedding quizzes in modules
+; 
+; Version 4.2
+
+
+[Settings]
+UseHome=yes
+TopicPercent=no
+; NotifyWindow=yes
+; CloseHome=yes
+
+
+[Output]
+Score=%SESSION.SCORE%
+Max=%SESSION.MAX%
+
+
+   
