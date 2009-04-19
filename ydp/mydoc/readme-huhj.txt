@@ -73,7 +73,8 @@ minipublisher
 		dist=》运行分发程序
 		prepare.flash.extension=》将mxi文件打包为mxp
 		
-		
+2009/3/5
+			
 		
 		
 		
