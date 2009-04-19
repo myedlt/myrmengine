@@ -1,0 +1,3 @@
+1、本项目发布到XAMPP
+
+2、考入amfphp和player、editor的swf文件

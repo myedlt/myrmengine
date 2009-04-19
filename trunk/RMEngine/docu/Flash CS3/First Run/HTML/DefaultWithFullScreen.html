@@ -1,0 +1,57 @@
+$TTFlash Only - Allow Full Screen
+$DXDefaultWithFullScreenDetection.html
+$DS
+Display Adobe Flash Movies in HTML files updated for Active Content with Full Screen support. NOTE: Publishing this template also creates AC_RunActiveContent.js in your HTML output folder which must be uploaded with the HTML.
+$DF
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+$CS
+<title>$TI</title>
+<script language="javascript">AC_FL_RunContent = 0;</script>
+<script src="AC_RunActiveContent.js" language="javascript"></script>
+</head>
+<body bgcolor="$BG">
+<!--url's used in the movie-->
+$MU
+<!--text used in the movie-->
+$MT
+<!-- saved from url=(0013)about:internet -->
+<script language="javascript">
+	if (AC_FL_RunContent == 0) {
+		alert("This page requires AC_RunActiveContent.js.");
+	} else {
+		AC_FL_RunContent(
+			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=$FV,$JR,$NR,0',
+			'width', '$WI',
+			'height', '$HE',
+			'src', '$TI',
+			'quality', '$QU',
+			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+			'align', '$HA',
+			'play', '$PL',
+			'loop', '$LO',
+			'scale', '$SC',
+			'wmode', '$WM',
+			'devicefont', '$DE',
+			'id', '$TI',
+			'bgcolor', '$BG',
+			'name', '$TI',
+			'menu', '$ME',
+			'allowFullScreen', 'true',
+			'allowScriptAccess','sameDomain',
+			'movie', '$MO',
+			'salign', '$SA'
+			); //end AC code
+	}
+</script>
+<noscript>
+	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=$FV,$JR,$NR,0" width="$WI" height="$HE" id="$TI" align="$HA">
+	<param name="allowScriptAccess" value="sameDomain" />
+	<param name="allowFullScreen" value="true" />
+	$PO
+	<embed $PEwidth="$WI" height="$HE" name="$TI" align="$HA" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+	</object>
+</noscript>
+</body>
+</html>

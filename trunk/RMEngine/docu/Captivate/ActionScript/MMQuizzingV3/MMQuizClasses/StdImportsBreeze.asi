@@ -1,0 +1,36 @@
+//****************************************************************************
+//Copyright © 2005-2006. Adobe Macromedia Software LLC. All rights reserved.
+//The following Code is subject to all restrictions 
+//contained in the End User License Agreement accompanying
+//this product.
+//****************************************************************************
+
+/*
+	This file is a bottleneck for allowing us to change the "base" classes used
+	for UI, etc in the Quiz classes between the "standard" mx components and
+	custom ones (as in Serrano).
+	
+	You should import ONLY individual classes, and never use a wildcard (e.g., mx.controls.*).
+	
+	You should import ONLY the classes you actually need. 
+	If no one references mx.controls.Button, don't import it.
+*/
+import Poolpah.Controls.ButtonAccImpl;
+import Poolpah.Controls.CheckBoxAccImpl;
+import Poolpah.Controls.RadioButtonAccImpl;
+import Poolpah.Controls.ComboBoxAccImpl;
+import Poolpah.Controls.Button;					// uses std halo skins @todo first-frame is wonky
+import Poolpah.Controls.CheckBox;				// uses std halo skins
+import Poolpah.Controls.ComboBox;
+import Poolpah.Controls.Label;
+import Poolpah.Controls.Loader;
+import Poolpah.Controls.RadioButton;				// uses std halo skins
+import Poolpah.Controls.RadioButtonGroup;
+import Poolpah.Controls.TextArea;
+import Poolpah.Controls.TextInput;
+import Poolpah.Controls.UIComponent;
+import Poolpah.Controls.UIObject;
+import Poolpah.Controls.DepthManager;
+import Poolpah.Controls.PopUpManager;
+import Poolpah.Controls.FocusManager;
+

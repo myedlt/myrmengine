@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Flash CS3 Schema definition for FLVCore Cue Points XML
+version 1.0
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- schema validation for FLVCore Cue Points -->
+  <xs:element name="FLVCoreCuePoints">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="CuePoint" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Time" type="nonNegativeInteger" />
+              <xs:element name="Type" type="eventNavString" />
+              <xs:element name="Name" type="nonEmptyString" />
+              <xs:element name="Parameters" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Parameter" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name" type="nonEmptyString" />
+                          <xs:element name="Value" type="nonEmptyString" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Version" type="xs:integer" default="1" />
+    </xs:complexType>
+  </xs:element>
+
+  <!-- restricted, simple type definition for event/navigation string -->
+  <xs:simpleType name="eventNavString">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="event" />
+      <xs:enumeration value="navigation" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- restricted, simple type definition for non-negative integer -->
+  <xs:simpleType name="nonNegativeInteger">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- restricted, simple type definition for non-empty string -->
+  <xs:simpleType name="nonEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

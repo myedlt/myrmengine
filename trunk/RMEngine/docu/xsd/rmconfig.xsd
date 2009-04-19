@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--W3C Schema 由 XMLSpy v2006 U 创建 (http://www.altova.com)-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="config">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="mainviews"/>
+				<xs:element ref="players"/>
+				<xs:element ref="editors"/>
+				<xs:element ref="skins"/>
+			</xs:sequence>
+			<xs:attribute name="description" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="rmplayer/rmeditor共用配置文件"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="editor">
+		<xs:complexType>
+			<xs:attribute name="name" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="XMLEditor"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="url" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="plugin/editor/XMLEditor.swf"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="editors">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="editor"/>
+			</xs:sequence>
+			<xs:attribute name="description" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="编辑器列表,用于player配置中editorurl的参考"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="mainviews">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="view" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="default" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="flex"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="description" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="rmplayer用于选择皮肤"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="player">
+		<xs:complexType>
+			<xs:attribute name="name" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="FLVPlayer"/>
+						<xs:enumeration value="ImagePlayer"/>
+						<xs:enumeration value="QTIPlayer"/>
+						<xs:enumeration value="SWFPlayer"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="url" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="plugin/player/FLVPlayer.swf"/>
+						<xs:enumeration value="plugin/player/ImagePlayer.swf"/>
+						<xs:enumeration value="plugin/player/QTIPlayer.swf"/>
+						<xs:enumeration value="plugin/player/SWFPlayer.swf"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="editorurl" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="plugin/editor/XMLEditor.swf"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="players">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="player" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="description" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="rmplayer用于加载播放器,rmeditor用于加载编辑器"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="skin">
+		<xs:complexType>
+			<xs:attribute name="name" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="osx"/>
+						<xs:enumeration value="yfflexskin"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="id" type="xs:string" use="required"/>
+			<xs:attribute name="url" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="skins">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="skin" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="description" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="用于皮肤选择css的参考"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="view">
+		<xs:complexType>
+			<xs:attribute name="id" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="flex"/>
+						<xs:enumeration value="pbank"/>
+						<xs:enumeration value="picc"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="flash"/>
+						<xs:enumeration value="flex"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="url" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="plugin/skin/MainFlex.swf"/>
+						<xs:enumeration value="plugin/skin/PBank.swf"/>
+						<xs:enumeration value="plugin/skin/PICC.swf"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="skin" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

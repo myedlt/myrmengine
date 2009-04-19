@@ -1,0 +1,124 @@
+<skin version="2" name="Girl" author="kavin" url="http://www.qvod.com" email="kavin@qvod.com" transparent_color="#ff00ff" image="" path="Girl" adjustcolor="#EEF3FA" inbackcolor="#FFABDA" width="800" height="523">
+	<pwindow id="pwindow" rect="1" image="">
+		<subview id="top_left" offsetx="0" offsety="0" zorder="1" image="topleft.bmp" alpha_channel="topleft_mask.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1"/>
+		<subview id="top_right" offsetx="0" offsety="0" zorder="1" image="topright.bmp" alpha_channel="topright_mask.bmp" horizontal="right" vertical="top" stretchx="-1" stretchy="-1"/>
+		<subview id="top" offsetx="6" offsety="0" zorder="1" image="top.bmp" alpha_channel="top_mask.bmp" horizontal="left" vertical="top" stretchx="4" stretchy="-1" bmpfill="bmpcopy"/>
+		<subview id="bottom_left" offsetx="0" offsety="0" zorder="1" image="bottomleft.bmp" alpha_channel="bottomleft_mask.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1"/>
+		<subview id="bottom_right" offsetx="0" offsety="0" zorder="1" image="bottomright.bmp" alpha_channel="bottomright_mask.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1"/>				
+		<subview id="bottom" offsetx="4" offsety="0" zorder="1" image="bottom.bmp" alpha_channel="bottomt_mask.bmp" horizontal="left" vertical="bottom" stretchx="4" stretchy="-1" bmpfill="bmpcopy"/>
+
+		<subview id="caption" offsetx="6" offsety="4" zorder="1" image="caption.bmp" alpha_channel="caption_mask.bmp" horizontal="left" vertical="top" stretchx="3" stretchy="-1"/>
+		<subview id="left1" offsetx="0" offsety="3" zorder="1" image="lefttop.bmp" alpha_channel="left_mask.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1"/>
+		<subview id="bleft1" offsetx="0" offsety="4" zorder="1" image="leftbottom.bmp" alpha_channel="left_mask.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1"/>
+		<subview id="left" offsetx="0" offsety="36" zorder="1" image="left.bmp" alpha_channel="left_mask.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="86" bmpfill="bmpcopy"/>
+		<subview id="right1" offsetx="0" offsety="4" zorder="1" image="righttop.bmp" alpha_channel="right_mask.bmp" horizontal="right" vertical="top" stretchx="-1" stretchy="-1"/>
+		<subview id="bright1" offsetx="0" offsety="4" zorder="1" image="rightbottom.bmp" alpha_channel="left_mask.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1"/>
+		<subview id="right" offsetx="0" offsety="36" zorder="1" image="right.bmp" alpha_channel="right_mask.bmp" horizontal="right" vertical="top" stretchx="-1" stretchy="86" bmpfill="bmpcopy"/>
+		<subview id="icon" offsetx="12" offsety="9" zorder="2" image="icon.bmp" alpha_channel="icon_mask.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1"/>
+		<button id="close" offsetx="4" offsety="1" zorder="1" image="close.bmp" alpha_channel="close_mask.bmp" horizontal="right" vertical="top" stretchx="-1" stretchy="-1" cursor="hand"/>
+		<button id="max" offsetx="34" offsety="1" zorder="1" image="max.bmp" alpha_channel="max_mask.bmp" horizontal="right" vertical="top" stretchx="-1" stretchy="-1" cursor="hand" state2image="reold.bmp"/>
+		<button id="min" offsetx="65" offsety="1" zorder="1" image="min.bmp" alpha_channel="min_mask.bmp" horizontal="right" vertical="top" stretchx="-1" stretchy="-1" cursor="hand"/>
+		<button id="mtkbutton" offsetx="149" offsety="3" zorder="5" image="mtk.bmp" alpha_channel="mtk_mask.bmp" horizontal="right" vertical="top" stretchx="-1" stretchy="-1" cursor="hand" state2image="nowplay.bmp" text="true" textleft="55" texttop="12" textcolor="#FF0075"/>
+		<mainmenu id="mainmenu" offsetx="80" offsety="10" zorder="4" image="menu.bmp" alpha_channel="menu_mask.bmp" horizontal="left" vertical="top" stretchx="150" stretchy="-1" textcolor="#FF5AA6" inbackcolor="#FFD2EC" incolor="#FFFFFF"/>
+		<info id="info" offsetx="6" offsety="62" zorder="1" image="info.bmp" alpha_channel="info_mask.bmp" horizontal="left" vertical="bottom" stretchx="400" stretchy="-1" fullnoshow="1">
+			<text id="state" horizontal="left" offsetx="10" width="160" textcolor="#FFFFFF" font="SimSun" font_size="12"/>
+			<text id="filename" horizontal="left" offsetx="2" width="100" textcolor="#ffffff" font="SimSun" font_size="12"/>
+			<text id="time" horizontal="right" offsetx="10" width="130" textcolor="#FFFFFF" font="SimSun" font_size="12"/>
+		</info>
+		<playlist id="playlist" offsetx="6" offsety="36" horizontal="right" vertical="top" stretchx="-1" stretchy="62" width="252" inbackcolor="#FF4299">
+			<tab id="tabid" offsetx="0" offsety="0" horizontal="left" vertical="top" image="tab.bmp" alpha_channel="tab_mask.bmp" stretchx="0" stretchy="-1" tableft="tabs_left.bmp" tabright="tabs_right.bmp" tabmid="tabs_mid.bmp" textcolor="#FFB3D6" cursor="hand">
+			</tab>
+			<listwindow offsetx="1" offsety="23" horizontal="left" vertical="top" stretchx="0" stretchy="23" scroll_back="scroll_back.bmp" scroll_down="scroll_down.bmp" scroll_limit="scroll_limit.bmp" scroll_up="scroll_up.bmp" scroll_back_h="scroll_back_h.bmp" scroll_left="scroll_left.bmp" scroll_limit_h="scroll_limit_h.bmp" scroll_right="scroll_right.bmp">
+				<listcolor id="border" color="#0B0B0B"/>
+				<listcolor id="odd" color="#FFCBE9"/>
+				<listcolor id="even" color="#FFCBE9"/>
+				<listcolor id="selodd" color="#D1BCC8"/>
+				<listcolor id="seleven" color="#D1BCC8"/>
+				<listcolor id="text" color="#8D8D8D"/>
+				<listcolor id="seltext" color="#FB0676"/>
+				<listcolor id="grid" color="#FFCBE9"/>
+				<listcolor id="playingtext" color="#E0E0E0"/>
+				<listcolor id="listback" color="#FFCBE9"/>
+			</listwindow>
+			<listtool id="listtool" offsetx="0" offsety="0" horizontal="left" vertical="bottom" image="tab1.bmp" alpha_channel="tab_mask.bmp" stretchx="0" stretchy="-1" tool="playlist_toolbar.bmp" textcolor="#ffffff" cursor="hand">
+			</listtool>
+		</playlist>
+	</pwindow>
+	<mediacenter id="mediacenter" offsetx="6" offsety="36" horizontal="left" vertical="top" stretchx="6" stretchy="85" bgcolor="#FFABDA" treetop="21" treeleft="164" treeimage="mediatree.bmp">
+		<pwindow id="pwindow" rect="1" image="">
+				<subview id="top" offsetx="0" offsety="0" zorder="1" image="mediaback.bmp" alpha_channel="top_mask.bmp" horizontal="left" vertical="top" stretchx="0" stretchy="-1"/>	
+			<button id="mediafiles" offsetx="2" offsety="3" zorder="1" image="media_files.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1" cursor="hand" state2image="media_files_2.bmp"/>
+			<button id="mediasham" offsetx="25" offsety="0" zorder="1" image="media_sham_2.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1" cursor="hand" text="true" state2image="media_sham.bmp" textcolor="#ffffff"/>
+			<button id="mediastand" offsetx="95" offsety="0" zorder="1" image="media_sham_2.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1" cursor="hand" text="true" state2image="media_sham.bmp" textcolor="#ffffff"/>
+			<button id="mediasearch" offsetx="171" offsety="3" zorder="1" image="mediatolist.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="mediare" offsetx="201" offsety="3" zorder="1" image="mediare.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="mediainfo" offsetx="232" offsety="3" zorder="1" image="media_info.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<mywindow id="searchid" windowclass="EDIT" offsetx="268" offsety="2" zorder="1" width="100" height="18" horizontal="left" vertical="top" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="mediaeditdel" offsetx="368" offsety="2" zorder="1" image="mediaeditdel.bmp" horizontal="left" vertical="top" stretchx="-1" stretchy="-1" cursor="hand"/>			
+		</pwindow>
+		<listwindow scroll_back="scroll_back.bmp" scroll_down="scroll_down.bmp" scroll_limit="scroll_limit.bmp" scroll_up="scroll_up.bmp" scroll_back_h="scroll_back_h.bmp" scroll_left="scroll_left.bmp" scroll_limit_h="scroll_limit_h.bmp" scroll_right="scroll_right.bmp">
+			<listcolor id="border" color="#C7CABF"/>
+			<listcolor id="odd" color="#F7F7F7"/>
+			<listcolor id="even" color="#FFFFFF"/>
+			<listcolor id="selodd" color="#C3C3C3"/>
+			<listcolor id="seleven" color="#C3C3C3"/>
+			<listcolor id="text" color="#000000"/>
+			<listcolor id="seltext" color="#FF0074"/>
+			<listcolor id="grid" color="#E0E0E0"/>
+			<listcolor id="playingtext" color="#E0E0E0"/>
+			<listcolor id="listback" color="#ffffff"/>
+			<listcolor id="headborder" color="#C0C7CA"/>
+			<listcolor id="headdivider" color="#BDC8CC"/>
+			<listcolor id="headtop" color="#F9FBFA"/>
+			<listcolor id="headbottom" color="#DBE0E3"/>
+			<listcolor id="headtext" color="#000000"/>
+		</listwindow>
+	</mediacenter>
+	<playwindow id="playwindow" offsetx="6" offsety="36" horizontal="left" vertical="top" stretchx="300" stretchy="85"/>
+	<controlwindow id="controlwindow" offsetx="6" offsety="4" horizontal="left" vertical="bottom" stretchx="6" stretchy="58" fully="58">
+		<pwindow id="pwindow" rect="1" image="">
+			<subview id="back" offsetx="0" offsety="0" zorder="1" image="back.bmp" horizontal="left" vertical="bottom" stretchx="228" stretchy="-1"/>
+			<subview id="back1" offsetx="0" offsety="0" zorder="1" image="backright.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1"/>			
+			<button id="play" offsetx="8" offsety="9" zorder="2" image="play.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" state2image="pause.bmp" fullshow="1"/>
+			<button id="stop" offsetx="68" offsety="20" zorder="2" image="stop.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="pre" offsetx="101" offsety="20" zorder="2" image="pre.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="next" offsetx="135" offsety="20" zorder="2" image="next.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="open" offsetx="171" offsety="20" zorder="2" image="open.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" fullnoshow="1"/>
+			<progress id="progress" offsetx="207" offsety="17" zorder="3" image="progress.bmp" horizontal="left" vertical="bottom" stretchx="235" stretchy="-1" cursor="hand" thumb="progress_thumb.bmp" progimage="processp.bmp" propoint="progress_point.bmp" movemessage="1" fullnoshow="1" progdown="progressd.bmp"/>
+			<button id="mute" offsetx="208" offsety="20" zorder="1" image="mute.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" state2image="mute2.bmp"/>
+			<progress id="volume" offsetx="134" offsety="20" zorder="3" image="volume.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" thumb="volumeb.bmp" progimage="volumep.bmp" movemessage="1"/>
+			<button id="full" offsetx="11" offsety="20" zorder="2" image="full.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="listbutton" offsetx="43" offsety="20" zorder="1" image="listbutton.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" text="true" textleft="15" textcolor="#FF0075" state2image="listbutton2.bmp" texttop="5"/>
+			<progress id="progressfull" offsetx="171" offsety="18" zorder="3" image="progress.bmp" horizontal="left" vertical="bottom" stretchx="495" stretchy="-1" cursor="hand" thumb="progress_thumb.bmp" progimage="processp.bmp" movemessage="1" generalnoshow="1" propoint="progress_point.bmp" progdown="progressd.bmp"/>
+			<info id="infofull" offsetx="235" offsety="16" zorder="1" image="infofull.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" generalnoshow="1">
+				<text id="state" horizontal="left" offsetx="0" width="110" textcolor="#FF0075" font="SimSun" font_size="12"/>
+				<text id="time" horizontal="right" offsetx="0" width="135" textcolor="#FF0075" font="SimSun" font_size="12"/>
+			</info>
+		</pwindow>
+	</controlwindow>
+	<ieplaywindow id="playwindow" offsetx="0" offsety="0" horizontal="left" vertical="top" stretchx="0" stretchy="81"/>
+	<iewindow id="iewindow" offsetx="0" offsety="0" horizontal="left" vertical="bottom" stretchx="0" stretchy="81" fully="58">
+		<pwindow id="pwindow" rect="1" image="">
+			<subview id="back" offsetx="0" offsety="0" zorder="1" image="back.bmp" horizontal="left" vertical="bottom" stretchx="140" stretchy="-1"/>
+			<subview id="back1" offsetx="0" offsety="0" zorder="1" image="backright_ie.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1"/>			
+			<button id="play" offsetx="8" offsety="9" zorder="2" image="play.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" state2image="pause.bmp" fullshow="1"/>
+			<button id="stop" offsetx="68" offsety="20" zorder="2" image="stop.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="pre" offsetx="101" offsety="20" zorder="2" image="pre.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="next" offsetx="135" offsety="20" zorder="2" image="next.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<progress id="progress" offsetx="171" offsety="17" zorder="3" image="progress.bmp" horizontal="left" vertical="bottom" stretchx="147" stretchy="-1" cursor="hand" thumb="progress_thumb.bmp" progimage="processp.bmp" propoint="progress_point.bmp" movemessage="1" fullnoshow="1" progdown="progressd.bmp"/>
+			<button id="mute" offsetx="120" offsety="20" zorder="1" image="mute.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" state2image="mute2.bmp"/>
+			<progress id="volume" offsetx="46" offsety="20" zorder="3" image="volume.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" thumb="volumeb.bmp" progimage="volumep.bmp" movemessage="1"/>
+			<button id="full" offsetx="11" offsety="20" zorder="2" image="full.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<progress id="progressfull" offsetx="171" offsety="18" zorder="3" image="progress.bmp" horizontal="left" vertical="bottom" stretchx="407" stretchy="-1" cursor="hand" thumb="progress_thumb.bmp" progimage="processp.bmp" movemessage="1" generalnoshow="1" propoint="progress_point.bmp" progdown="progressd.bmp"/>
+			<info id="infofull" offsetx="147" offsety="16" zorder="1" image="infofull.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" generalnoshow="1">
+				<text id="state" horizontal="left" offsetx="0" width="110" textcolor="#FF0075" font="SimSun" font_size="12"/>
+				<text id="time" horizontal="right" offsetx="0" width="135" textcolor="#FF0075" font="SimSun" font_size="12"/>
+			</info>
+			<info id="info" offsetx="0" offsety="0" zorder="1" image="info.bmp" horizontal="left" vertical="top" stretchx="0" stretchy="-1" fullnoshow="1">
+				<text id="state" horizontal="left" offsetx="20" width="150" textcolor="#ffffff" font="SimSun" font_size="12"/>
+				<text id="filename" horizontal="left" offsetx="2" width="180" textcolor="#ffffff" font="SimSun" font_size="12"/>
+				<text id="time" horizontal="right" offsetx="10" width="180" textcolor="#ffffff" font="SimSun" font_size="12"/>
+			</info>
+		</pwindow>
+	</iewindow>
+</skin>

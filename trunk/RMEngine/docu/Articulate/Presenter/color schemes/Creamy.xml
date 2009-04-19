@@ -1,0 +1,43 @@
+
+<colorscheme subversion="J (generated)">
+    <enabled>true</enabled>
+    <schemename>creamy</schemename>
+	<notesBgColor>0xffffff</notesBgColor>
+    <backgroundColorMaster>0xc0c0b1</backgroundColorMaster>
+    <backgroundColor1>0xede6d4</backgroundColor1>
+    <backgroundColor1accent>0xd9cebf</backgroundColor1accent>
+    <textColor1>0x363636</textColor1>
+    <slideEnableShadow>false</slideEnableShadow>
+    <seekbarBarColor>0xd06c54</seekbarBarColor>
+    <seekbarTextColor>0xeaeaea</seekbarTextColor>
+    <seekbarBackgroundColor>0x87423d</seekbarBackgroundColor>
+    <waitforuserHighlightColor>0xe5f450</waitforuserHighlightColor>
+    <buttonTextColor>0x363636</buttonTextColor>
+    <buttonFaceColor>0xedc48e</buttonFaceColor>
+    <buttonRolloverColor>0xf5f5f5</buttonRolloverColor>
+    <sidebarEnableShade>true</sidebarEnableShade>
+    <outlineEnableShade>true</outlineEnableShade>
+    <outlineHighlightColor>0xe5afa2</outlineHighlightColor>
+    <outlineRolloverColor>0xedc48e</outlineRolloverColor>
+    <outlineTouchColor>0xb7751d</outlineTouchColor>
+    <outlineSeperatorColor>0xd9cebf</outlineSeperatorColor>
+    <outlineIconColor>0x363636</outlineIconColor>
+    <scrollbarColor1>0x87423d</scrollbarColor1>
+    <scrollbarBackgroundColor>0xbfb1a7</scrollbarBackgroundColor>
+    <scrollbarArrowColor>0xedc48e</scrollbarArrowColor>
+    <tabLineColor>0xd9cebf</tabLineColor>
+    <tabTextColor>0x3f3f3f</tabTextColor>
+    <tabRolloverColor>0xf5f5f5</tabRolloverColor>
+    <tabActiveColor1>0xedc48e</tabActiveColor1>
+    <tabActiveColor2>0xede6d4</tabActiveColor2>
+    <gradColor1a>0xede6d4</gradColor1a>
+    <gradColor1b>0xf9f6f0</gradColor1b>
+    <gradColor2a>0xede6d4</gradColor2a>
+    <gradColor2b>0xf8f6f0</gradColor2b>
+    <gradColor3a>0xf8f6f0</gradColor3a>
+    <gradColor3b>0xefeadd</gradColor3b>
+    <ttBgColor>0xd06c54</ttBgColor>
+    <ttTextColor>0xeaeaea</ttTextColor>
+    <ttBorderColor>0xd9cebf</ttBorderColor>
+    <htmlBgColor>0x6c6c6c</htmlBgColor>
+</colorscheme>

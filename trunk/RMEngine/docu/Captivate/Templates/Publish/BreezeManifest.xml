@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<breeze-manifest version="1.0" xmlns="http://breeze.macromedia.com/ns/breeze-manifest" generator="Adobe Captivate 3">
+	<document type="captivate" icon="captivate" />
+	<assets>
+		<asset type="document-view">
+			@BRZ_MQZ_MANIFEST_HTM_NAME_ENTRY
+			<entry href="@BRZ_MQZ_MANIFEST_SWF_NAME" width="@BRZ_MQZ_MOVIEWIDTH" height="@BRZ_MQZ_MOVIEHEIGHT" />
+			<file href="@BRZ_MQZ_MANIFEST_SWF_NAME"/>
+			@BRZ_MQZ_MANIFEST_SKIN_SWF_FILE
+			@BRZ_MQZ_MANIFEST_ADD_FILE
+			@BRZ_MQZ_MANIFEST_HTM_NAME_FILE
+		</asset>
+		@BRZ_MQZ_MANIFEST_CP_NAME_FILE
+		@BRZ_MQZ_MANIFEST_DOC_METADATA_NAME_FILE
+		@BRZ_MQZ_MANIFEST_TRANS_METADATA_NAME_FILE
+	</assets>
+</breeze-manifest>

@@ -1,0 +1,10 @@
+Left Margin=8
+Right Margin=6
+Top Margin=6
+Bottom Margin=21
+
+[Hotspot]
+Enabled=true
+Corner=left,bottom
+MarginX=17
+MarginY=0

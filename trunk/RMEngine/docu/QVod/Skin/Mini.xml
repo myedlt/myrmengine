@@ -1,0 +1,17 @@
+<skin version="2" name="Mini" author="kavin" url="http://www.qvod.com" email="kavin@qvod.com" transparent_color="#ff00ff" image="" path="Mini" inbackcolor="#000000" width="800" height="504">
+	<controlwindow id="miniwindow" offsetx="0" offsety="0" horizontal="left" vertical="bottom" stretchx="0" stretchy="30">
+		<pwindow id="pwindow" rect="1" image="">
+			<subview id="back" offsetx="0" offsety="0" zorder="1" image="back.bmp" horizontal="left" vertical="bottom" stretchx="0" stretchy="-1"/>
+			<button id="play" offsetx="0" offsety="0" zorder="2" image="play.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" state2image="pause.bmp"/>
+			<button id="pre" offsetx="23" offsety="0" zorder="2" image="pre.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="next" offsetx="46" offsety="0" zorder="2" image="next.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand"/>
+			<button id="mute" offsetx="69" offsety="0" zorder="1" image="mute.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" state2image="mute2.bmp"/>
+			<progress id="volume" offsetx="92" offsety="8" zorder="3" image="volume.bmp" horizontal="left" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" thumb="volumeb.bmp" progimage="volumep.bmp" movemessage="1"/>
+			<button id="open" offsetx="1" offsety="0" zorder="2" image="open.bmp" horizontal="right" vertical="bottom" stretchx="-1" stretchy="-1" cursor="hand" />
+			<info id="infomini" offsetx="140" offsety="0" zorder="1" image="info.bmp" horizontal="left" vertical="bottom" stretchx="26" stretchy="-1" >
+				<text id="time" horizontal="center" offsetx="0" width="130" textcolor="#CAC9C9" font="SimSun" font_size="12"/>
+			</info>	
+<progress id="progress" offsetx="1" offsety="0" zorder="2" image="progress.bmp" horizontal="left" vertical="top" stretchx="1" stretchy="-1" cursor="hand" thumb="progress_thumb.bmp" progimage="processp.bmp" propoint="progress_point.bmp" movemessage="1" progdown="progressd.bmp"/>	
+		</pwindow>
+	</controlwindow>
+</skin>

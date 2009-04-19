@@ -1,0 +1,14 @@
+[Course]
+Course_Creator=_AICC_COURSE_CREATOR_ 
+Course_ID=_AICC_COURSE_ID_
+Course_System=_AUTHORING_TOOL_
+Course_Title=_AICC_COURSE_TITLE_
+Level=1
+Max_Fields_CST=2
+Total_AUs=1
+Total_Blocks=0
+Version=3.0
+[Course_Behavior]
+Max_Normal=99
+[Course_Description]
+_AICC_COURSE_DESCRIPTION_
