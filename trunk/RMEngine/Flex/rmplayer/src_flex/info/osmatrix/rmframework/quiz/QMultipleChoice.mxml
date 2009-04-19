@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="224" 
+	creationComplete="initQuestion()" 
+	implements="info.osmatrix.rmframework.quiz.IQuestionView">
+	<mx:Label x="10" y="10" text="1、" id="qNumLabel"/>
+	<mx:TextArea x="40" y="13" width="276" height="69" text="题干" id="qTitleTextArea"/>
+
+	<mx:CheckBox id="qAnswer01" x="76" y="103" label="答案一" />
+	<mx:CheckBox id="qAnswer02" x="76" y="150" label="答案三"/>
+	<mx:CheckBox id="qAnswer03" x="242" y="103" label="答案二" />
+	<mx:CheckBox id="qAnswer04" x="242" y="150" label="答案四" />
+
+	<mx:Label x="338" y="14" text="多选题" height="68" fontSize="15"/>
+	<mx:Script>
+		<![CDATA[
+			public static const QUESTIONTYPE:String = "多选题";
+			
+			private function initQuestion():void
+			{
+				//
+				qAnswer01.addEventListener(MouseEvent.CLICK, handleAnswer);
+				qAnswer02.addEventListener(MouseEvent.CLICK, handleAnswer);
+				qAnswer03.addEventListener(MouseEvent.CLICK, handleAnswer);
+				qAnswer04.addEventListener(MouseEvent.CLICK, handleAnswer);
+			}
+			private function handleAnswer(evt:Event):void
+			{
+				// 以XML方式组织答案，在question中提供比对答案的接口方法
+				this.dispatchEvent(new Event("answer",true));
+			}
+			
+			public function loadQuestion(xml:XML):void
+			{
+				// 
+				qTitleTextArea.text = xml.question.toString();
+				
+				qAnswer01.label = xml.answer[0].toString();
+				qAnswer02.label = xml.answer[1].toString();
+				qAnswer03.label = xml.answer[2].toString();
+				qAnswer04.label = xml.answer[3].toString();
+				
+				qAnswer01.selected = false;
+				qAnswer02.selected = false;
+				qAnswer03.selected = false;
+				qAnswer04.selected = false;								
+			}
+			
+			public function getAnswer():XML
+			{
+				//
+				var answer:XML = <answers></answers>;
+				
+				return answer;
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

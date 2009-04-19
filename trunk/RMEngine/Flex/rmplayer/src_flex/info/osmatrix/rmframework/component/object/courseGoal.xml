@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<states>
+  <title name="学习目标">
+    <state label="1. 公司背景及发展状况介绍" />
+    <state label="2. 掌握公司的组织结构及工作流程" />
+    <state label="3. 熟悉公司的办公室平面图或区域介绍" />
+    <state label="4. 各部门的位置" />
+  </title>
+</states>

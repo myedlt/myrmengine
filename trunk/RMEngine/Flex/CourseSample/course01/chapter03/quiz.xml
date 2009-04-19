@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE quiz [
+	<!ELEMENT quiz (title, items)>
+	<!ELEMENT title (#PCDATA)>
+	<!ELEMENT items (item)+>	
+	<!ELEMENT item (question, answer, answer+)>
+	<!ELEMENT question (#PCDATA)>
+	<!ELEMENT answer (#PCDATA)>
+	<!ATTLIST answer correct (y) #IMPLIED>
+]>
+<quiz>
+	<title>The Quiz</title>
+	<items>
+		<item type="singlechoice">
+			<question>In which continent is the country Japan located?</question>
+			<answer correct="y">Asia</answer>
+			<answer>Europe</answer>
+			<answer>Africa</answer>
+			<answer>America</answer>
+		</item>
+		<item type="multiplechoice">
+			<question>Which one cannot swim?</question>
+			<answer correct="y">Tuna</answer>
+			<answer correct="y">Cow</answer>
+			<answer>Whale</answer>
+			<answer>Lobster</answer>
+		</item>		
+		<item type="singlechoice">
+			<question>How many points are on a hexagon?</question>
+			<answer>5</answer>
+			<answer correct="y">6</answer>
+			<answer>7</answer>
+			<answer>8</answer>
+		</item>		
+		<item type="singlechoice">
+			<question>What is 2x(3x10+10)</question>
+			<answer>60</answer>
+			<answer>30</answer>
+			<answer>50</answer>
+			<answer correct="y">80</answer>
+		</item>		
+		<item type="singlechoice">
+			<question>What does "html" stands for</question>
+			<answer  correct="y">Hypertext Markup Language</answer>
+			<answer>Hyper Tool Marker Language</answer>
+			<answer>Homepage Text Mini Language</answer>
+			<answer>Hypertranslation Micro Language</answer>
+		</item>		
+		<item type="singlechoice">
+			<question>Which one is incorrect?</question>
+			<answer  correct="y">2 is larger than 3</answer>
+			<answer>Fish can swim</answer>
+			<answer>Human can breathe and eat and sleep and walk</answer>
+			<answer>The first letter on the English alphabet is the letter "A"</answer>
+		</item>		
+		<item type="singlechoice">
+			<question>Which one is not a primary color?</question>
+			<answer>Gray</answer>
+			<answer>Rose</answer>
+			<answer>Pink</answer>
+			<answer correct="y">All of the above</answer>
+		</item>		
+		<item type="singlechoice">
+			<question>Consider this.  If a number is divided by a number which is equal to that number, what will the result be?</question>
+			<answer  correct="y">1</answer>
+			<answer>0</answer>
+			<answer>The same number</answer>
+			<answer>-1</answer>
+		</item>				
+		<item type="singlechoice">
+			<question>Which color has the longest name?</question>
+			<answer>Red</answer>
+			<answer>Yellow</answer>
+			<answer correct="y">Magenta</answer>
+			<answer>Cyan</answer>
+		</item>				
+		<item type="singlechoice">
+			<question>Which country is located in the European continent?</question>
+			<answer>Australia</answer>
+			<answer>Japan</answer>
+			<answer correct="y">Great Britain</answer>
+			<answer>Brunai</answer>
+		</item>						
+	</items>
+</quiz>

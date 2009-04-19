@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="initApp()">
+
+	<mx:SWFLoader id="contentSWFLoader" x="9.1" y="129.3" width="903.40906" height="606.9697" scaleContent="true"/>
+	<mx:Button x="833.45" y="99.75" label="LoadPlayer" click="loadSwf()"/>
+    <mx:DataGrid id="player" color="0x323232" width="755.90906" height="121.74242" x="9.1">
+        <mx:columns>
+            <mx:DataGridColumn dataField="name" headerText="名称" width="60" />
+            <mx:DataGridColumn dataField="url" headerText="SWF" width="80" />
+            <mx:DataGridColumn dataField="xml" headerText="配置文件" />
+        </mx:columns>
+    </mx:DataGrid>	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.managers.SystemManager;
+			import flash.net.*;
+			
+			import mx.collections.ArrayCollection;
+	
+			private var playerUrl:String;
+			private var playerXml:String;
+			
+        	//
+        	private function initApp():void
+        	{
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE,onDataPrepared);
+				//loader.addEventListener(IOErrorEvent.IO_ERROR,fault);
+	
+				loader.load(new URLRequest("PlayerDemo.xml"));	        		
+        	}
+        	
+        	private function onDataPrepared(evt:Event):void
+        	{
+        		var playerlist:XMLList = XML(evt.target.data).player;
+        		player.dataProvider = playerlist;
+        	}
+        	            
+            // 					
+			private function loadSwf():void
+			{
+				var item:XML = player.selectedItem as XML;
+				playerUrl = item.url.toString();
+				playerXml = item.xml.toString();
+				contentSWFLoader.addEventListener(Event.COMPLETE ,onPlayer);
+				contentSWFLoader.load(playerUrl);
+			}
+			
+			private function onPlayer(evt:Event):void
+			{
+				contentSWFLoader.removeEventListener(Event.COMPLETE, onPlayer);
+				var sysMgr:SystemManager = contentSWFLoader.content as SystemManager;
+				sysMgr.addEventListener(FlexEvent.APPLICATION_COMPLETE, onAppComplete);
+			}
+			
+			private function onAppComplete(evt:FlexEvent):void
+			{
+				//
+				var sysMgr:SystemManager = contentSWFLoader.content as SystemManager;
+
+				Object(sysMgr.application).loadXML(playerXml);				
+			}
+			
+		]]>
+	</mx:Script>	
+</mx:Application>

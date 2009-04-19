@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<player>
+	 <name>相册</name>
+	 <url>ImagePlayer.swf</url>
+	 <xml>assets/courses/course01/chapter01/unit03.xml</xml>
+	</player>
+	<player>
+	 <name>相册</name>
+	 <url>ImagePlayer.swf</url>
+	 <xml>assets/courses/course01/chapter01/unit04.xml</xml>
+	</player>
+	<player>
+	 <name>SWF</name>
+	 <url>SWFPlayer.swf</url>
+	 <xml>assets/courses/course01/chapter01/unit01.swf</xml>
+	</player>
+	<player>
+	 <name>FLV</name>
+	 <url>FLVPlayer.swf</url>
+	 <xml>assets/courses/course01/chapter02/001.flv</xml>
+	</player>
+	<player>
+	 <name>XMLEditor</name>
+	 <url>XMLEditor.swf</url>
+	 <xml>assets/courses/course01/chapter01/unit03.xml</xml>
+	</player>
+</config>

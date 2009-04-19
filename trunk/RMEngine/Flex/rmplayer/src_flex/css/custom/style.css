@@ -1,0 +1,23 @@
+Application {
+	fontFamily: "宋体";
+	fontSize: 12;
+}
+
+Tree {
+   backgroundAlpha: 0.7;
+   backgroundColor: #cc00cc;
+   alternatingItemColors: #ff00ff, #ffffff;
+   depthColors: #ffffff, #ffffff, #ffffff, #ffffff;
+   useRollOver: true;
+   rollOverColor: #0033ff;
+   textRollOverColor: #ff0000;
+   borderStyle: inset;
+   selectionColor: #33ff00;
+   textIndent: 0;
+   letterSpacing: 0;
+   indentation: 19;
+   openDuration: 362;
+   fontFamily: Times New Roman;
+   fontSize: 12;
+   fontWeight: normal;
+}

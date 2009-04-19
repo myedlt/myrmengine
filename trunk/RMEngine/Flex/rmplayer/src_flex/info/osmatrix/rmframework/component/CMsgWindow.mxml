@@ -1,0 +1,29 @@
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"  
+    layout="vertical"  
+    width="461" height="203"  
+    showCloseButton="true"  
+    close="handleClose(event)"  title="信息">   
+
+    <mx:TextArea width="430" height="154" text="{message}"/>   
+     
+  	<mx:Script>   
+        <![CDATA[
+        
+            import mx.managers.PopUpManager;   
+            import mx.events.CloseEvent;
+             
+            [Bindable]   
+            public var message:String;   
+  
+            private function handleClose(evt:CloseEvent):void 
+            {   
+                PopUpManager.removePopUp(this);   
+            }
+            
+            public function setMsg(msg:String):void
+            {
+            	this.message = msg;
+            }
+        ]]>   
+    </mx:Script>
+</mx:TitleWindow>  

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" title="笔记本" layout="absolute" width="598" height="472" showCloseButton="true" close="close()" horizontalAlign="left" verticalAlign="top" borderAlpha="1" fontWeight="normal" cornerRadius="0" borderColor="#94ACD1">
+	<mx:ViewStack id="noteViewStack" width="558" height="363" x="10" y="10" creationPolicy="all">
+		<mx:Canvas label="update" width="100%" height="100%">
+			<mx:Button label="导出" id="btnExport" click="exportNote()" width="48" x="500" y="316"/>
+			<mx:Button label="清空" id="btnClear" click="clearAll()" width="48" x="500" y="286"/>
+			<mx:DataGrid width="538" height="167" id="noteList" dataProvider="{noteArray}" visible="true" rowCount="7" rollOverColor="#E6EEEE" selectionColor="#E6EEEE" itemClick="displayItem()" x="10" y="10" editable="true" enabled="true">
+				<mx:columns>
+					<mx:DataGridColumn headerText="标题" dataField="title" width="260" fontSize="12"/>
+					<mx:DataGridColumn headerText="日期" dataField="date" width="150" fontSize="12"/>
+					<mx:DataGridColumn headerText="章节" dataField="location" width="60" fontSize="12"/>
+					<mx:DataGridColumn headerText="操作" fontSize="12" width="60">
+						<mx:itemRenderer>
+							<mx:Component>
+								<mx:HBox horizontalAlign="center">
+									<mx:Script>
+										<![CDATA[
+											private function deleteHandler():void
+											{
+												parentDocument.deleteItem();
+											}									
+										]]>
+									</mx:Script>							
+									<mx:LinkButton label="删除" click="deleteHandler()"/>
+								</mx:HBox>	
+							</mx:Component>
+						</mx:itemRenderer>
+					</mx:DataGridColumn>			
+				</mx:columns>	
+			</mx:DataGrid>
+			<mx:Label x="10" y="187" text="内容：" textAlign="center" id="lblContent"/>
+			<mx:TextArea x="10" y="213" height="125" width="455" id="txtDisplay" editable="true" borderStyle="solid" enabled="true"/>
+			<mx:Button x="500" y="212" label="保存" id="btnSave"/>
+			<mx:Button x="500" y="242" label="取消" id="btnCancel"/>
+		</mx:Canvas>
+		<mx:Canvas label="addNote" width="100%" height="100%">
+			<mx:Form width="494" height="260" id="noteForm" label="新增笔记条目">
+				<mx:FormItem label="标题：" width="453" required="true">
+					<mx:TextInput id="txtTitle" maxChars="30" width="100%"/>
+				</mx:FormItem>
+				<mx:FormItem label="内容：" width="447" height="179">
+					<mx:TextArea width="100%" height="156" maxChars="300" id="txtContent"/>
+				</mx:FormItem>
+			</mx:Form>
+			<mx:Button x="478" y="309" label="添加" id="btnAddNote" click="addNote(event)"/>
+		</mx:Canvas>
+	</mx:ViewStack>
+	
+	<mx:StringValidator id="title_stringValidator" source="{txtTitle}" property="text" required="true" requiredFieldError="标题不能为空"/>
+	<mx:ArrayCollection id="noteArray"/>
+	<mx:ControlBar verticalAlign="middle" horizontalAlign="right">
+		<mx:Label text="状态信息！" width="418" height="35" id="msg"/>
+		<mx:Button label="新增笔记" click="switchView(1)"/>
+		<mx:Button label="修改笔记" click="switchView(0)"/>
+	</mx:ControlBar>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ValidationResultEvent;
+			import mx.events.CloseEvent;
+			import mx.events.ListEvent;
+			import mx.formatters.DateFormatter;
+			import mx.collections.ArrayCollection;			
+			import mx.managers.PopUpManager;
+			import mx.controls.Alert;
+			
+			private var lso:SharedObject;			
+			private var modifyFlag:Boolean;
+			
+			public function init(id:String):void
+			{
+				//this.isPopUp=false;//使窗口不可拖动
+				lso = SharedObject.getLocal(id +"/noteInfo","/");
+				if(lso == null)
+				{
+					Alert.show("无法获取本地共享对象!","Error");
+				}
+				else
+				{
+					if(lso.data.noteList == null)
+					{
+						lso.data.noteList=noteArray;
+					}
+					else
+					{
+						noteArray=lso.data.noteList;
+					}				
+				}
+			}
+
+			private function switchView(index:int):void
+			{
+				noteViewStack.selectedIndex = index;
+			}
+							
+			private function addNote(evt:Event):void
+			{
+				var now:Date=new Date();
+				var formatter:DateFormatter=new DateFormatter();
+				formatter.formatString="     YYYY-MM-DD   JJ:NN:SS";
+				noteArray.addItem({title:txtTitle.text,content:txtContent.text,date:formatter.format(now)});
+				lso.flush();										
+				msg.text = "信息：新增笔记保存成功！";			
+			}
+			
+			private function clearAll():void
+			{
+				var alert3:Alert=Alert.show("你确定要全部清空?","提示",
+					Alert.YES|Alert.NO|Alert..NONMODAL,this, alertClearHandler);
+				PopUpManager.centerPopUp(alert3);
+			}
+			
+			private function alertClearHandler(evt:CloseEvent):void
+			{
+				if(evt.detail==Alert.YES)
+				{					
+					noteArray.removeAll();
+					txtDisplay.text=null;
+				}				
+			}	
+
+			public function deleteItem():void
+			{
+				noteArray.removeItemAt(noteArray.getItemIndex(noteList.selectedItem));
+				txtDisplay.text="";
+			}
+
+			public function displayItem():void
+			{
+				txtDisplay.text=noteList.selectedItem.content;
+			}
+
+			// 导出为文件，用户可下载
+			private function exportNote():void
+			{
+				var noteStr:String="";
+				for(var i:int=0;i<noteArray.length;i++)
+				{
+					noteStr+=noteArray[i].title+"&nbsp;"+noteArray[i].date+"<br/>"+noteArray[i].content+"<br/><br/>";
+				}
+				ExternalInterface.call("saveNote",noteStr);
+			}
+
+			private function close():void
+			{
+				PopUpManager.removePopUp(this);	
+			}
+		]]>
+	</mx:Script>	
+</mx:TitleWindow>

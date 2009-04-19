@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CMI 2004 数据映射:name=>cmi值关键字，value为对应值，label为中文显示名 -->
+<sco id="sco01" version="scorm 1.2">
+	<cmi _version="3.4" 
+		suspend_data="" 
+		launch_data="">
+		<core _children="" 
+			student_id="" 
+			student_name="" 
+			lesson_location="" 
+			credit="" 
+			lesson_status="not attempted" 
+			entry=""
+			total_time="0000:00:00:00" 
+			lesson_mode="nnormal"
+			exit=""
+			session_time="00:00:00">
+			<score _children="raw,min,max">
+				<raw label="" name="" value=""/>
+				<min name="" value=""/>
+				<max name="" value=""/>
+			</score>
+		</core>
+		<comments_from_learner _count="0">
+		
+		</comments_from_learner>
+		<comments_from_lms _count="0">
+		
+		</comments_from_lms>
+		
+		<objectives _children="id,score,status" _count="2">
+			<object id="01" score="" status=""/>
+			<object id="02" score="" status=""/>
+			
+		</objectives>
+		<student_data _children="mastery_score,maxt_time_allowed,time_limit_action">
+			<mastery_score/>
+			<max_time_allowed/>
+			<time_limit_action/>
+		</student_data>
+		<student_preference _children="">
+			<audio/>
+			<language/>
+			<speed/>
+			<text/>
+		</student_preference>
+		<interactions _children="" _count="0">
+		
+		</interactions>
+	</cmi>
+</sco>

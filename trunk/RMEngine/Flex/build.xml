@@ -1,0 +1,82 @@
+<project name="rmframework" default="package">
+	<dirname property="base.dir" file="${ant.file.rmframework}" />
+	<tstamp />
+	
+	<property file="${base.dir}/local.properties" />
+	<property file="${base.dir}/defaults.properties" />
+	
+	<property name="product.version" value="${product.version.base} ${product.build.version}" />
+	
+	<property name="dist.dir" value="${base.dir}/dist" />
+	<property name="packages.dir" value="${base.dir}/packages" />
+	
+	<property name="doc.dir" value="${base.dir}/doc" />
+	<property name="editor.dir" value="${base.dir}/rmeditor.net" />
+	<property name="editor.air.dir" value="${base.dir}/rmeditor.air" />
+	
+	<available property="editor.online.available" file="${editor.dir}" />
+	<available property="editor.air.available" file="${editor.air.dir}" />
+	
+	<target name="dist" depends="dist.editor.online, dist.editor.air">
+	</target>
+	
+	<target name="dist.editor.online" if="editor.online.available">
+		<ant antfile="${editor.dir}/build.xml" inheritAll="false" inheritRefs="false">
+			<propertyset>
+  				<propertyref prefix="FLEX_HOME" />
+  				<propertyref prefix="src.revision" />
+			</propertyset>
+			<property name="product.version" value="${product.version}" />
+		</ant>
+		
+		<mkdir dir="${dist.dir}/editor.online" />
+		<copy todir="${dist.dir}/editor.online">
+			<fileset dir="${editor.dir}/bin.net">
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="package.editor.online" depends="dist.editor.online" if="editor.online.available">
+		<mkdir dir="${packages.dir}"/>
+		<zip destfile="${packages.dir}/rmEditor${packages.postfix}.zip" >
+			<zipfileset dir="${dist.dir}/editor.online" prefix="dist/editor.online">
+				<include name="**/*"/>
+			</zipfileset>
+			<zipfileset dir="${base.dir}" prefix="src">
+				<exclude name="nexl*/**"/>
+				<exclude name="miniPublisher*/**"/>
+				<exclude name="miniPublisher/**"/>
+				<exclude name="ext_*/**"/>
+				<exclude name="**/dist/**"/>
+				<exclude name="**/bin/**"/>
+				<exclude name="**/swf/**"/>
+				<exclude name="**/bin-debug/**"/>
+				<exclude name="**/bin.local/**"/>
+				<exclude name="**/version_gen/**"/>
+				<exclude name="svnTasks/**"/>
+				<exclude name="dist/**"/>
+				<exclude name="packages/**"/>
+				<exclude name=".metadata/**"/>
+				<exclude name="**/.*" />
+				<exclude name="**/.*/**" />
+				<exclude name="**/build.properties" />
+				<exclude name="**/local.properties" />
+				<exclude name="**/*.mxp" />
+			</zipfileset>
+		</zip>
+	</target>
+	
+	<target name="package" depends="package.editor.online">
+	</target>
+	
+	<target name="clean.editor.online" if="editor.online.available">
+		<ant antfile="${editor.dir}/build.xml" target="clean" inheritAll="false" inheritRefs="false" />
+	</target>
+	
+	<target name="install.rmEditor" if="rmEditor.install.dir">
+		<copy file="${packages.dir}/utEditor${packages.postfix}.zip" todir="${utEditor.install.dir}"/>
+	</target>
+	
+	<target name="install.packages" depends="install.utEditor, install.yCat">
+	</target>
+</project>

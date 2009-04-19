@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%" height="100%" 
+	xmlns:viewcomp="info.osmatrix.rmframework.component.*" 
+	creationComplete="init()">
+	<mx:VideoDisplay id="videoDisplay" width="100%" height="90%" x="0" y="0" ready="loadComplete(event)" playheadUpdate="progressUpdate(event)"
+		 complete="playComplete(event)" playheadUpdateInterval="10" autoPlay="true"/>
+	<viewcomp:ProgressBoard id="progressBoard" x="0" bottom="0" width="100%" height="10%"/>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.VideoEvent;
+			import mx.core.Application;
+			import mx.events.SliderEvent;
+				
+			private var templateXmlUrl:String;
+			private var rootUrl:String;
+			private var templateXml:XML;
+			
+			private var stoped:Boolean;
+			
+			public function init():void
+			{
+				progressBoard.btnPlayOrPause.addEventListener("play",play);	
+				progressBoard.btnPlayOrPause.addEventListener("pause",pause);
+				progressBoard.btnStop.addEventListener(MouseEvent.CLICK,stop);
+				progressBoard.sldCtrlProgress.dataTipFormatFunction=formatProgressToolTip;
+				progressBoard.sldCtrlProgress.allowTrackClick=false;
+				progressBoard.sldCtrlProgress.getThumbAt(0).buttonMode=true;
+				//progressBoard.sldCtrlProgress.addEventListener(SliderEvent.CHANGE,progressChange);
+				progressBoard.sldCtrlProgress.addEventListener(SliderEvent.THUMB_PRESS,thumbPress);
+				progressBoard.sldCtrlProgress.addEventListener(SliderEvent.THUMB_RELEASE,thumbRelease);				
+			}
+			
+			// 外部通信接口
+			public function loadXML(url:String, root:String):void
+			{
+				// 接受参数
+				rootUrl = root;
+				templateXmlUrl = root + url;
+				
+				// 加载xml文件
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, handleXmlLoaded);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, handleXmlFault);
+	
+				loader.load(new URLRequest(templateXmlUrl + "?rtp=" + String(Math.random() * 65535)));
+				
+			}
+			
+			private function handleXmlLoaded(evt:Event):void
+			{
+				templateXml = XML(evt.target.data);
+
+				// player 本地加载	
+				load(rootUrl + templateXml.flv[0].@url);
+			}
+			
+			private function handleXmlFault(evt:Event):void
+			{
+				// 
+			}
+						
+			public function load(url:String):void
+			{				
+				videoDisplay.source=url;
+				//videoDisplay.load();						
+			}
+			
+			public function play(evt:MouseEvent):void
+			{			
+				videoDisplay.play();							
+			}
+			
+			public function pause(evt:MouseEvent):void
+			{
+				videoDisplay.pause();							
+			}
+			
+			public function stop(evt:MouseEvent):void
+			{				
+				progressBoard.sldCtrlProgress.value=progressBoard.sldCtrlProgress.minimum;
+				videoDisplay.stop();
+				progressBoard.pauseState();				
+			}			
+			
+			private function progressUpdate(evt:VideoEvent):void
+			{
+				progressBoard.sldCtrlProgress.value=evt.playheadTime;			
+			}		
+			
+			private function progressChange(evt:SliderEvent):void
+			{ 			
+				videoDisplay.playheadTime=evt.value;
+			}
+			
+			private function thumbPress(evt:SliderEvent):void
+			{
+				if(videoDisplay.playing)
+				{					
+					videoDisplay.pause();
+					stoped=false;
+				}
+				else
+				{
+					stoped=true;
+				}				
+			}
+			
+			private function thumbRelease(evt:SliderEvent):void
+			{
+				videoDisplay.playheadTime=evt.target.value;
+				if(!stoped)
+				{					
+					videoDisplay.play();
+				}					
+			}	
+			
+			private function loadComplete(evt:VideoEvent):void
+			{
+				progressBoard.sldCtrlProgress.maximum=videoDisplay.totalTime;									
+				progressBoard.playState();
+				//解决缓存问题	 autoPlay="true"可快速加载
+				videoDisplay.pause();
+				videoDisplay.playheadTime=0;
+				videoDisplay.play();									
+			}			
+			
+			public function playComplete(evt:VideoEvent):void
+			{
+				progressBoard.pauseState();
+			}	
+			
+			//进度条 播放时间提示格式化
+			public function formatProgressToolTip(value:int):String
+	    	{	    				
+	    		var result:String = (value % 60).toString();
+	      	    if (result.length == 1)
+	      	    {
+	         		result = Math.floor(value / 60).toString() + ":0" + result;
+	       	 	}
+	      		else
+			  	{
+	       	    	result = Math.floor(value / 60).toString() + ":" + result;
+	       	  	}      			      			 
+	      	    return result;
+	  		}				
+		]]>
+	</mx:Script>
+</mx:Application>

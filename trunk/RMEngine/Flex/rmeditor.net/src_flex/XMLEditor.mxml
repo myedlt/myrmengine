@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Canvas label="XML编辑" width="100%" height="100%">
+		<mx:Label x="10" y="10" text="XML文件："/>
+		<mx:TextArea id="xmlTextArea" x="10" y="27" width="516" height="344"/>
+	</mx:Canvas>
+
+	<mx:Script>
+	
+		<![CDATA[
+			// 播放器 AS代码		
+			import mx.controls.Alert;
+			import flash.net.URLLoader;
+			import flash.net.URLRequest;
+	
+			import mx.rpc.events.*;
+			
+			private var templateXmlUrl:String;
+			private var templateXml:XML;		
+			
+			// 对外接口
+			public function loadXML(url:String, rootUrl:String):void
+			{
+				templateXmlUrl = rootUrl + url;
+				
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, onXmlResult);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, onXmlFault);
+	
+				loader.load(new URLRequest(templateXmlUrl));	
+			}			
+			
+			private function onXmlResult(evt:Event):void
+			{
+				templateXml = XML(evt.target.data);
+				xmlTextArea.text = evt.target.data;
+	
+			}
+			
+			private function onXmlFault(evt:Event):void
+			{
+				// 
+			}
+			
+			// 对外接口
+			public function getData():XML
+			{
+				templateXml = XML(xmlTextArea.text);
+				
+				return templateXml;
+			}
+		]]>
+	</mx:Script>	
+</mx:Application>	

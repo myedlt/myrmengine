@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties mainApplicationPath="Index.mxml" version="3">
+<compiler additionalCompilerArguments="-locale en_US" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderLocation="D:/xampplite/htdocs/rmplayer" outputFolderPath="bin-debug" sourceFolderPath="src_flex" strict="true" useApolloConfig="false" verifyDigests="true" warn="true">
+<compilerSourcePath>
+<compilerSourcePathEntry kind="1" linkType="1" path="src_as3"/>
+</compilerSourcePath>
+<libraryPath defaultLinkType="1">
+<libraryPathEntry kind="4" path=""/>
+<libraryPathEntry kind="1" linkType="1" path="libs"/>
+</libraryPath>
+<sourceAttachmentPath/>
+</compiler>
+<applications>
+<application path="MainFlex.mxml"/>
+<application path="Index.mxml"/>
+<application path="SkinDemoApp.mxml"/>
+<application path="FLVPlayer.mxml"/>
+<application path="ImagePlayer.mxml"/>
+<application path="SWFPlayer.mxml"/>
+<application path="QTIPlayer.mxml"/>
+</applications>
+<modules/>
+<buildCSSFiles>
+<buildCSSFileEntry destPath="bin-debug" sourcePath="src_flex/css/OSX/style.css"/>
+<buildCSSFileEntry destPath="bin-debug" sourcePath="src_flex/css/DarkRoom/style.css"/>
+<buildCSSFileEntry destPath="bin-debug" sourcePath="src_flex/css/AeonGraphical/style.css"/>
+<buildCSSFileEntry destPath="bin-debug" sourcePath="src_flex/css/OSX/OSX.css"/>
+<buildCSSFileEntry destPath="bin-debug" sourcePath="src_flex/css/yahoo/style.css"/>
+<buildCSSFileEntry destPath="bin-debug" sourcePath="src_flex/css/custom/style.css"/>
+<buildCSSFileEntry destPath="bin-debug" sourcePath="src_flex/css/winskin/winskin.css"/>
+</buildCSSFiles>
+</actionScriptProperties>

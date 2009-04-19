@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application width="100%" height="100%" xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute" creationComplete="initApp()">
+	<mx:MenuBar y="10" width="156" height="28" right="773">
+		<mx:dataProvider>
+			<mx:String>文件</mx:String>
+			<mx:String>编辑</mx:String>
+			<mx:String>视图</mx:String>
+		</mx:dataProvider>
+	</mx:MenuBar>
+	<mx:ComboBox id="skinComboBox" x="614" y="16" width="313">
+		<mx:dataProvider>
+			<mx:String>css/AeonGraphical/style.swf</mx:String>
+			<mx:String>css/custom/style.swf</mx:String>
+			<mx:String>css/DarkRoom/style.swf</mx:String>
+			<mx:String>css/OSX/style.swf</mx:String>
+			<mx:String>css/yahoo/style.swf</mx:String>
+		</mx:dataProvider>
+	</mx:ComboBox>
+
+	<!-- body -->
+	<mx:HDividedBox horizontalGap="5" top="70" left="12" right="12" bottom="12">
+
+		<!-- 1st -->
+		<mx:Panel width="264" height="100%" layout="absolute" title="欢迎">
+			<mx:NumericStepper x="40" y="218" width="90"/>
+			<mx:RadioButtonGroup id="radioGroup"/>
+			<mx:RadioButton label="单选按钮 1" x="40" y="280" selected="true" group="{radioGroup}"/>
+			<mx:RadioButton label="Radio Button 2" x="40" y="306" group="{radioGroup}"/>
+			<mx:CheckBox label="Check Box" x="40" y="332"/>
+			<mx:ComboBox x="40" y="154" width="90" editable="true">
+				<mx:dataProvider>
+					<mx:String>Editable</mx:String>
+				</mx:dataProvider>
+			</mx:ComboBox>
+			<mx:DateField x="40" y="248"/>
+			<mx:ColorPicker x="40" y="364"/>
+			<mx:Image source="nonexistent.jpg" x="80" y="368" alpha="1.0"/>
+			<mx:Button label="Cancel" x="40" y="21" width="79" height="22"/>
+			<mx:Button label="OK" x="127" y="21" width="79" styleName="primaryButton"/>
+			<mx:Button label="Disabled" x="40" y="54" width="79" enabled="false"/>
+			<mx:PopUpButton label="PopUp Button" x="40" y="121" width="144"/>
+			<mx:ToggleButtonBar x="40" y="88" width="144" selectedIndex="1">
+				<mx:dataProvider>
+					<mx:String>1st</mx:String>
+					<mx:String>2nd</mx:String>
+					<mx:String>3rd</mx:String>
+				</mx:dataProvider>
+			</mx:ToggleButtonBar>
+			<mx:HSlider x="40" y="394" width="160" minimum="0" maximum="100" thumbCount="2" values="[20,60]" showTrackHighlight="true"/>
+			<mx:VSlider x="215" y="248"/>
+			<mx:ComboBox x="40" y="186" width="144">
+				<mx:dataProvider>
+					<mx:String>Lorem</mx:String>
+					<mx:String>Ipsum</mx:String>
+					<mx:String>Dolor</mx:String>
+				</mx:dataProvider>
+			</mx:ComboBox>
+<mx:filters> 
+    <flash.filters:BevelFilter id='bevelFilter' xmlns:flash.filters='flash.filters.*' 
+      angle='45'
+          blurX='10' blurY='10'
+          distance='4'
+          highlightAlpha='0.5' highlightColor='#ffffff' 
+          knockout='false' quality='1'
+          shadowAlpha='0.3' shadowColor='#000000' strength='1' type='inner'/>
+</mx:filters>			
+		</mx:Panel>
+
+		<!-- 2nd -->
+		<mx:VDividedBox width="33%" height="100%">
+			<mx:TabNavigator x="316" y="64" width="100%" height="150">
+				<mx:Canvas label="Lorem" width="100%" height="100%">
+					<mx:ProgressBar id="progress" indeterminate="true" minimum="0" maximum="100" mode="manual" enabled="true" left="20" right="20" top="16"/>
+					<mx:Button x="21" y="62" width="35" height="35" styleName="MyButton"/>
+					<mx:Button x="64" y="62" width="35" height="35" styleName="MyButton" enabled="false"/>
+					<mx:HSlider x="138" y="62" minimum="0" maximum="100" liveDragging="true"/>
+				</mx:Canvas>
+				<mx:Canvas label="Ipsum" width="100%" height="100%">
+					<mx:Form x="20" y="20">
+					</mx:Form>
+				</mx:Canvas>
+			</mx:TabNavigator>
+			<mx:Accordion x="316" y="386" width="100%" height="100%">
+				<mx:Canvas label="Lorem" width="100%" height="100%">
+					<mx:TextInput text="enter text..." x="10" y="10"/>
+					<mx:LinkBar x="10" y="51" width="180">
+						<mx:dataProvider>
+							<mx:String>Link Bar</mx:String>
+							<mx:String>Lorem Ipsum</mx:String>
+						</mx:dataProvider>
+					</mx:LinkBar>
+				</mx:Canvas>
+				<mx:Canvas label="Ipsum" width="100%" height="100%">
+				</mx:Canvas>
+				<mx:Canvas label="Dolor" width="100%" height="100%">
+				</mx:Canvas>
+			</mx:Accordion>
+			<mx:DataGrid x="316" y="282" width="100%" height="100">
+				<mx:columns>
+					<mx:DataGridColumn headerText="Column 1" dataField="col1"/>
+					<mx:DataGridColumn headerText="Column 2" dataField="col2"/>
+					<mx:DataGridColumn headerText="Column 3" dataField="col3"/>
+				</mx:columns>
+			</mx:DataGrid>
+		</mx:VDividedBox>
+
+		<!-- 3rd -->
+		<mx:VDividedBox x="599" y="64" height="100%">
+			<mx:Panel width="220" height="250" title="Panel">
+				<mx:DateChooser x="0" y="0" width="100%" height="100%"/>
+				<mx:ControlBar>
+					<mx:Label text="ControlBar"/>
+				</mx:ControlBar>
+			</mx:Panel>
+			<mx:TitleWindow width="220" height="90%" layout="absolute" title="标题窗口">
+				<mx:Tree x="0" y="0" width="100%" height="100%" showRoot="false" labelField="@label">
+					<mx:dataProvider>
+						<mx:XML xmlns="">
+							<nodes>
+								<node label="课件引擎">
+									<node label="课件播放器"/>
+									<node label="课件编辑器"/>
+								</node>
+								<node label="Quisque eget lorem">
+									<node label="Ac sapien rutrum vehicula"/>
+									<node label="Etiam euismod"/>
+									<node label="Vestibulum erat"/>
+								</node>
+								<node label="Aenean arcu">
+									<node label="Phasellus condimentum"/>
+									<node label="Augue ac orci"/>
+									<node label="Ut sapien felis"/>
+								</node>
+								<node label="Rhoncus non"/>
+								<node label="Gravida vestibulum"/>
+								<node label="Vehicula non massa"/>
+								<node label="Etiam eget lorem"/>
+								<node label="Congue massa aliquet semper"/>
+								<node label="Cras at arcu"/>
+								<node label="Sed magna porttitor nonummy"/>
+								<node label="Aliquam quis ipsum"/>
+								<node label="In blandit"/>
+								<node label="Venenatis justo"/>
+								<node label="Vestibulum varius"/>
+								<node label="Interdum libero"/>
+								<node label="Nullam lorem nisl"/>
+								<node label="Vulputate nec"/>
+							</nodes>
+						</mx:XML>
+					</mx:dataProvider>
+				</mx:Tree>
+			</mx:TitleWindow>
+		</mx:VDividedBox>
+	</mx:HDividedBox>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ListEvent;
+			import mx.styles.StyleManager;
+			import mx.events.StyleEvent;
+			import mx.events.FlexEvent;
+			import mx.collections.ArrayCollection;
+
+			private var curStyleUrl:String="css/custom/style.swf";
+
+			private function initApp():void
+			{
+				 skinComboBox.addEventListener(ListEvent.CHANGE, switchStyle);
+			}
+			
+			private function switchStyle(event:ListEvent):void
+			{
+				StyleManager.unloadStyleDeclarations(curStyleUrl, true);
+				curStyleUrl = ComboBox(event.target).selectedItem.toString();
+				
+				StyleManager.loadStyleDeclarations(curStyleUrl, true);
+			}
+		]]>
+	</mx:Script>
+
+</mx:Application>

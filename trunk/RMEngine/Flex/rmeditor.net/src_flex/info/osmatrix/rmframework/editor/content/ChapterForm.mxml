@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300">
+	<mx:FormHeading label="编辑：章" textAlign="left" width="360"/>
+	<mx:FormItem label="ID">
+		<mx:TextInput id="ch_id"/>
+	</mx:FormItem>
+	<mx:FormItem label="名称">
+		<mx:TextInput id="ch_name"/>
+	</mx:FormItem>
+	<mx:FormItem label="标题">
+		<mx:TextInput id="ch_title"/>
+	</mx:FormItem>
+	<mx:Script>
+		<![CDATA[
+			public function setData(chapter:XML):void
+			{
+				ch_id.text = chapter.@id;
+				ch_name.text = chapter.@name;
+				ch_title.text = chapter.@title;
+			}
+			
+			public function getData(chapter:XML):void
+			{
+				chapter.@id = ch_id.text;
+				chapter.@name = ch_name.text;
+				chapter.@title = ch_title.text;				
+			}
+		]]>
+	</mx:Script>
+</mx:Form>

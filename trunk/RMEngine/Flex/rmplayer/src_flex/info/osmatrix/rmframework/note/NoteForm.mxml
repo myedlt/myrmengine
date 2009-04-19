@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300">
+	<mx:FormHeading label="笔记"/>
+	<mx:FormItem label="标题：" width="370" required="true">
+		<mx:TextInput id="txtTitle" maxChars="30" width="100%"/>
+	</mx:FormItem>
+	<mx:FormItem label="内容：" width="370" height="179">
+		<mx:TextArea width="320" height="156" maxChars="300" id="txtContent"/>
+	</mx:FormItem>
+</mx:Form>

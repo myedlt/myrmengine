@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" initialize="zoom.play()" layout="absolute" backgroundColor="#FFFFFF" borderColor="#DB6136">	
+	<mx:Style>
+		global
+		{
+			font-size:12;
+		}		
+	</mx:Style>
+	<mx:Model id="data" source="courseGoal.xml"/>   
+    <mx:Zoom id="zoom" target="{panel}" duration="1500" zoomHeightFrom="0.50" zoomHeightTo="1.0" zoomWidthFrom="0.30" zoomWidthTo="1.0" originX="0" originY="0"/>
+	<mx:Panel id="panel" x="73" y="78" width="291" height="205" layout="absolute" title="{data.title.name}" cornerRadius="12" borderColor="#F59E08">
+		<mx:List dataProvider="{data.title.state}" bottom="5" right="5" top="5" left="5" borderStyle="none"/>
+	</mx:Panel>	
+</mx:Application>
