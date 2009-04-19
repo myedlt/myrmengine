@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tracking-metadata version="1.0" xmlns="http://breeze.macromedia.com/ns/tracking-metadata" generator="Adobe Captivate 3">
+	<objective id="objective-id" passing-score="20" min-score="0" max-score="40">
+		<name>quiz name or title</name>
+		<interactions>
+			<interaction id="interaction-id" type="true-false" correct-response="true">
+				<title>Select true</title>
+				<responses>
+					<response id="true">True</response>
+					<response id="false">False</response>
+				</responses>
+			</interaction>
+			<interaction id="interaction-id" type="choice" correct-response="{A,C}">
+				<title>Select A and C</title>
+				<responses>
+					<response id="A">This is answer A</response>
+					<response id="B">This is answer B</response>
+					<response id="C">This is answer C</response>
+					<response id="D">This is answer D</response>
+				</responses>
+			</interaction>
+			<interaction id="interaction-id" type="match" correct-response="{A.1,B.2,C.3,D.4}">
+				<title>Match A with 1, B with 2, C with 3, D with 4</title>
+				<responses>
+					<match-set type="source">
+						<response id="A">A</response>
+						<response id="B">B</response>
+						<response id="C">C</response>
+						<response id="D">D</response>
+					</match-set>
+					<match-set type="target">
+						<response id="1">1</response>
+						<response id="2">2</response>
+						<response id="3">3</response>
+						<response id="4">4</response>
+					</match-set>
+				</responses>
+			</interaction>
+			<interaction id="interaction-id" type="match" correct-response="{A.1,B.2,C.3,D.4};{A.4,B.3,C.2,D.1}">
+				<title>Two possible sets: 1) A with 1, B with 2, C with 3, D with 4 2) A with 4, B with 3, C with 2, D with 1</title>
+				<responses>
+					<match-set type="source">
+						<response id="A">A</response>
+						<response id="B">B</response>
+						<response id="C">C</response>
+						<response id="D">D</response>
+					</match-set>
+					<match-set type="target">
+						<response id="1">1</response>
+						<response id="2">2</response>
+						<response id="3">3</response>
+						<response id="4">4</response>
+					</match-set>
+				</responses>
+			</interaction>
+			<interaction id="interaction-id" type="likert" correct-response="">
+				<title>I know what I am talking about?</title>
+				<responses>
+					<response id="A">Strongly Agree</response>
+					<response id="B">Agree</response>
+					<response id="C">Disagree</response>
+					<response id="D">Strongly Disagree</response>
+				</responses>
+			</interaction>
+			<interaction id="interaction-id" type="fill_in" correct-response="car,plane">
+				<title>What are the two fastest modes of transportation in North Dakota?</title>
+				<responses>
+					<response id="A">car</response>
+					<response id="B">plane</response>
+				</responses>
+			</interaction>
+		</interactions>
+	</objective>
+</tracking-metadata>

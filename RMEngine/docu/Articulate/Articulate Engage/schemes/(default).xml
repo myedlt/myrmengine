@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<scheme name="(default)" version="2">
+  <!-- #1 -->
+  <bg displayname="Background" category="Backgrounds and Text">0x99CCFF</bg>
+  <!-- #2 -->
+  <topbuttons displayname="Header Normal" pairid="topbuttons" category="Buttons">0x7AA2DF</topbuttons>
+  <!-- #2 -->
+  <topbuttonsb pairid="topbuttons" category="Buttons">0x4C67A2</topbuttonsb>
+  <!-- #2 -->
+  <tophover pairid="tophover" displayname="Header Hover" category="Buttons">0xAFC1EB</tophover>
+  <!-- #2 -->
+  <tophoverb pairid="tophover" category="Buttons">0x686DB0</tophoverb>
+  <!-- #3 -->
+  <navbutton pairid="navbutton" displayname="Navigation Normal" category="Buttons">0x7AA2DF</navbutton>
+  <!-- #3 -->
+  <navbuttonb pairid="navbutton" category="Buttons">0x4C67A2</navbuttonb>
+  <!-- #3 -->
+  <navhover pairid="navhover" displayname="Navigation Hover" category="Buttons">0xAFC1EB</navhover>
+  <!-- #3 -->
+  <navhoverb pairid="navhover" category="Buttons">0x686DB0</navhoverb>
+  <!-- #4 -->
+  <activenavbutton pairid="activenavbutton" displayname="Navigation Active" category="Buttons">0x006600</activenavbutton>
+  <!-- #4 -->
+  <activenavbuttonb pairid="activenavbutton" category="Buttons">0x99CC00</activenavbuttonb>
+  <!-- Changing the items above will have the most impact. Usually there's no need to change the following colors. -->
+  <!-- #5 -->
+  <headerbar displayname="Header Background" category="Backgrounds and Text">0x000000</headerbar>
+  <!-- #6 -->
+  <contentbg displayname="Slide Background" category="Backgrounds and Text">0xF4F4F4</contentbg>
+  <!-- #7 -->
+  <footerbar displayname="Footer Bar" category="Backgrounds and Text">0xF4F4F4</footerbar>
+  <!-- #8 -->
+  <fonta displayname="Header Text" category="Backgrounds and Text">0xFFFFFF</fonta>
+  <!-- #9 -->
+  <fontb displayname="Slide Text" category="Backgrounds and Text">0x000000</fontb>
+  <!-- #10 -->
+  <tt_bg displayname="Background" category="Tooltips">0xffffe1</tt_bg>
+  <!-- #10 -->
+  <tt_border displayname="Border" category="Tooltips">0x676767</tt_border>
+  <!-- #10 -->
+  <tt_text displayname="Text" category="Tooltips">0x000000</tt_text>
+  <!-- #11 -->
+  <calloutbg displayname="Background" category="Callouts">0xFFFFFF</calloutbg>
+  <!-- #12 -->
+  <callouttext displayname="Text" category="Callouts">0x000000</callouttext>
+  <!-- #13 -->
+  <listselect displayname="Item Selected" category="Glossary">0x64A800</listselect>
+  <!-- #14 -->
+  <listhover displayname="Item Hover" category="Glossary">0x98CCFC</listhover>
+  <!-- #15 -->
+  <timeline_tooltip_hover displayname="Tooltip Hover" category="Timeline">0xE7F7FF</timeline_tooltip_hover>
+  <!-- #16 -->
+  <timeline_period_text displayname="Period Text" category="Timeline">0x000000</timeline_period_text>
+  <!-- #17 -->
+  <timeline_selected_period_text displayname="Selected Period Text" category="Timeline">0xffffff</timeline_selected_period_text>
+  <!-- #18 -->
+  <lblgrf_calloutbg displayname="Callout Background" category="Labeled Graphic">0xE4E4E4</lblgrf_calloutbg>
+  <!-- #19 -->
+  <tab_contentbg displayname="Background" category="Tabs">0xCCCCCC</tab_contentbg>
+  <!-- #20 -->
+  <tab_textbg displayname="Tab Text Backgound" category="Tabs">0xffffff</tab_textbg>
+  <!-- #21 -->
+  <faq_button_text displayname="FAQ Button Text" category="FAQ">0xffffff</faq_button_text>
+</scheme>

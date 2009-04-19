@@ -1,0 +1,35 @@
+//****************************************************************************
+//Copyright © 2005-2006. Adobe Macromedia Software LLC. All rights reserved.
+//The following Code is subject to all restrictions 
+//contained in the End User License Agreement accompanying
+//this product.
+//****************************************************************************
+//
+/*
+	This file is a bottleneck for allowing us to change the "base" classes used
+	for UI, etc in the Quiz classes between the "standard" mx components and
+	custom ones (as in Serrano).
+	
+	You should import ONLY individual classes, and never use a wildcard (e.g., mx.controls.*).
+	
+	You should import ONLY the classes you actually need. 
+	If no one references mx.controls.Button, don't import it.
+*/
+import mx.accessibility.ButtonAccImpl;
+import mx.accessibility.CheckBoxAccImpl;
+import mx.accessibility.ComboBoxAccImpl;
+import mx.accessibility.RadioButtonAccImpl;
+import mx.controls.Button; 
+import mx.controls.CheckBox;
+import mx.controls.ComboBox;
+import mx.controls.Label;
+import mx.controls.Loader;
+import mx.controls.RadioButton;
+import mx.controls.RadioButtonGroup;
+import mx.controls.TextArea;
+import mx.controls.TextInput;
+import mx.core.UIComponent;
+import mx.core.UIObject;
+import mx.managers.DepthManager;
+import mx.managers.PopUpManager;
+import mx.managers.FocusManager;

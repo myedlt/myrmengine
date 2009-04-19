@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--W3C Schema 由 XMLSpy v2006 U 创建 (http://www.altova.com)-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="button">
+		<xs:complexType>
+			<xs:attribute name="name" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="认知地图"/>
+						<xs:enumeration value="退出"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="label" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="帮助"/>
+						<xs:enumeration value="认知地图"/>
+						<xs:enumeration value="退出"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="url" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string"/>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="chapter">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="section" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="name" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="测试题(flex)"/>
+						<xs:enumeration value="第一章 课件框架测试"/>
+						<xs:enumeration value="第二章 视频课程"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="title">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Chapter 1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="content">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="navigator">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="button" maxOccurs="unbounded"/>
+						</xs:sequence>
+						<xs:attribute name="name" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="导航按钮"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="courseList">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="course">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="lecture">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="introduction">
+														<xs:complexType mixed="true">
+															<xs:attribute name="name" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="讲师介绍"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="name" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="讲师名"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="sex" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="男"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="age" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:byte">
+															<xs:enumeration value="55"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="position" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="教授"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element ref="chapter" maxOccurs="unbounded"/>
+									</xs:sequence>
+									<xs:attribute name="name" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="演示课程"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="name" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="课程列表"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="copyright">
+					<xs:complexType mixed="true">
+						<xs:attribute name="name" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="版权"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="text" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="技术支持:北京东方创远教育科技有限公司"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="section">
+		<xs:complexType>
+			<xs:attribute name="id" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="0101"/>
+						<xs:enumeration value="0102"/>
+						<xs:enumeration value="0103"/>
+						<xs:enumeration value="0104"/>
+						<xs:enumeration value="0201"/>
+						<xs:enumeration value="0202"/>
+						<xs:enumeration value="0301"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="name" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="测验一"/>
+						<xs:enumeration value="第一节"/>
+						<xs:enumeration value="第一节 Flash"/>
+						<xs:enumeration value="第三节 图片"/>
+						<xs:enumeration value="第二节"/>
+						<xs:enumeration value="第二节 Flash"/>
+						<xs:enumeration value="第四节 相册"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="FLVPlayer"/>
+						<xs:enumeration value="ImagePlayer"/>
+						<xs:enumeration value="QTIPlayer"/>
+						<xs:enumeration value="SWFPlayer"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="path" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="courses/course01/chapter01/unit01.swf"/>
+						<xs:enumeration value="courses/course01/chapter01/unit02.swf"/>
+						<xs:enumeration value="courses/course01/chapter01/unit03/unit03.xml"/>
+						<xs:enumeration value="courses/course01/chapter01/unit04/unit04.xml"/>
+						<xs:enumeration value="courses/course01/chapter02/intro.flv"/>
+						<xs:enumeration value="courses/course01/chapter02/tiaosan.flv"/>
+						<xs:enumeration value="courses/course01/chapter03/quiz.xml"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

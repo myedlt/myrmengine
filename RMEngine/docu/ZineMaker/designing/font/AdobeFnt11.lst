@@ -1,0 +1,79 @@
+%!Adobe-FontList 1.11
+%Locale:0x804
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:04b08
+FamilyName:04b_08
+StyleName:Regular
+FullName:04b_08
+MenuName:04b_08
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Program Files\ZineMaker\designing\Font\04B_08__.TTF
+DataFormat:sfntData
+FileLength:18968
+FileModTime:1209018708
+WeightClass:400
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:04b09
+FamilyName:04b_09
+StyleName:Regular
+FullName:04b_09
+MenuName:04b_09
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Program Files\ZineMaker\designing\Font\04B_09__.TTF
+DataFormat:sfntData
+FileLength:18196
+FileModTime:1209018708
+WeightClass:400
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:AvantGardeITCbyBT-Medium
+FamilyName:AvantGarde Md BT
+StyleName:Medium
+FullName:Avant Garde Medium BT
+MenuName:AvantGarde Md BT
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Program Files\ZineMaker\designing\Font\Avgardm.ttf
+DataFormat:sfntData
+FileLength:37432
+FileModTime:1209018708
+WeightClass:400
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:KabelITCbyBT-Book
+FamilyName:Kabel Bk BT
+StyleName:Book
+FullName:Kabel Book BT
+MenuName:Kabel Bk BT
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Program Files\ZineMaker\designing\Font\KABELN.TTF
+DataFormat:sfntData
+FileLength:37956
+FileModTime:1209018708
+WeightClass:400
+WidthClass:5
+AngleClass:0
+%EndFont
+

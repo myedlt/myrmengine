@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<document-metadata version="1.0" xmlns="http://breeze.macromedia.com/ns/document-metadata" generator="Adobe Captivate 3">
+	<!-- 
+   | Document info:
+   | - document type : slide-presentation, meeting-archive, captivate, flashpaper, etc.
+   | - document title
+   | - document summary
+   | - author name
+   | - keywords
+   |
+   | - thumbnail : thumbnail image for the document (i.e. title slide)
+   | - view-link : URL to access the content at a specific "position" (use {position} as placeholder)
+   |               (could this be just the query string ?)
+   
+
+  -->
+	<document-info>
+		<title />
+		<summary />
+		<author />
+		<keywords />
+		<thumbnail href="slide1.jpg" />
+		<view-link href="/main.swf?slide={position}" />
+	</document-info>
+	<!-- 
+   | Section (slide, page, etc.)
+   | - type: slide, chat, poll, etc.
+   |
+   | - position : slide number, frame number, etc.
+   |  (do we need to support two-level position ? slide+timestamp)
+   |
+   | - Main searchable fields (Breeze will automatically search in all 3 of them)
+   |   title : chapter title 
+   |   content : slide content, char, etc. (one element only. If you want to separate the content into
+   |     lines, wrap them in a <line> or <text> tag).
+   |   related-content : slide notes, keywords, etc. (one element only, same as content)
+   |
+   | - Additional fields (they can be seached only by explicitally naming them
+   |   (i.e. query='presenter:"Kevin Lynch"')
+   |   field/@name
+   |
+   | - thumbnail : image for thumbnail view (i.e. slide image)
+   
+
+  -->
+	<section type="slide" position="1">
+		<title>slide 1</title>
+		<content>slide content</content>
+		<related-content>slide notes</related-content>
+		<field name="name">additional searchable field</field>
+		<thumbnail href="slide1.jpg" />
+	</section>
+	<section type="slide" position="2">
+		<title>slide 2</title>
+		<content>slide content</content>
+		<related-content>slide notes</related-content>
+		<thumbnail href="slide2.jpg" />
+	</section>
+	<!-- 
+   | This section links to the section of a different document.
+   | Get the metadata info from the linked document at the specified section position.
+   
+
+  -->
+	<section type="linked-section" position="3">
+		<link document-id="sco-id" position="1" />
+	</section>
+</document-metadata>

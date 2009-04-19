@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest identifier="_LMS_IDENTIFIER_" version="1.0" xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+	<metadata>
+		<schema>ADL SCORM</schema>
+		<schemaversion>1.2</schemaversion>
+		<lom xmlns="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd">
+			<general>
+				<title>
+					<langstring xml:lang="x-none">_LMS_TITLE_</langstring>
+				</title>
+				<description>
+					<langstring xml:lang="x-none">_LMS_DESCRIPTION_</langstring>
+				</description>
+				<keyword>
+				  	<langstring xml:lang="x-none">_LMS_KEYWORDS_</langstring>
+        			</keyword>
+			</general>
+			<lifecycle>
+				<version>
+					<langstring xml:lang="x-none">_LMS_VERSION_</langstring>
+				</version>
+				<status>
+					<source>
+						<langstring xml:lang="x-none">LOMv1.0</langstring>
+					</source>
+					<value>
+						<langstring xml:lang="x-none">Final</langstring>
+					</value>
+				</status>
+			</lifecycle>
+			<metametadata>
+				<metadatascheme>ADL SCORM 1.2</metadatascheme>
+			</metametadata>
+			<educational>
+				<typicallearningtime>
+					<datetime>_LMS_TYPICAL_TIME_</datetime>
+				</typicallearningtime>
+			</educational>
+			<rights>
+				<cost>
+					<source>
+						<langstring xml:lang="x-none">LOMv1.0</langstring>
+					</source>
+					<value>
+						<langstring xml:lang="x-none">yes</langstring>
+					</value>
+				</cost>
+				<copyrightandotherrestrictions>
+					<source>
+						<langstring xml:lang="x-none">LOMv1.0</langstring>
+					</source>
+					<value>
+						<langstring xml:lang="x-none">yes</langstring>
+					</value>
+				</copyrightandotherrestrictions>
+			</rights>
+		</lom>
+	</metadata>
+	<organizations default="_LMS_ORG_IDENTIFIER_">
+		<organization identifier="_LMS_ORG_IDENTIFIER_">
+			<title>_LMS_ORG_TITLE_</title>
+			<item identifier="_LMS_SCO_IDENTIFIER_" isvisible="true" identifierref="_OUTPUT_TYPE_RES_">
+				<title>_LMS_SCO_TITLE_</title>
+				<adlcp:masteryscore>_LMS_PASS_SCORE_</adlcp:masteryscore>
+			</item>
+		</organization>
+	</organizations>
+	<resources>
+	    <resource identifier="_OUTPUT_TYPE_RES_" type="webcontent" href="index_lms.html" adlcp:scormtype="sco">
+		_LMS_FILELIST_
+	    </resource>
+	</resources>
+</manifest>
