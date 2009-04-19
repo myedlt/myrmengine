@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Style source="css/OSX/OSX.css"/>
+	<mx:TabNavigator x="10" y="26" width="687" height="520">
+		<mx:Canvas label="content.xml" width="100%" height="100%">
+			<mx:TextArea id="xml0" x="10" y="205" width="492" height="132" editable="true" enabled="true"/>
+			<mx:TextArea id="xml" x="10" y="38" width="492" height="133"/>
+			<mx:Button x="397" y="9" label="Load Content.xml" height="22" width="105" click="loadXML()"/>
+			<mx:Button x="10" y="345" label="XMLList(contentXml..section)" click="xml0.text = XMLList(contentXml..section);" width="492"/>
+			<mx:Button x="10" y="377" label="XML(contentXml..section.(@id == '0101'))" click="testXPath()" width="492"/>
+			<mx:Button x="10" y="409" label="XMLList(contentXml..section)" click="xml0.text = XMLList(contentXml..section);" width="492"/>
+			<mx:Label x="10" y="10" text="content.xml" width="118"/>
+			<mx:Label x="10" y="179" text="E4X 测试结果" width="118"/>
+		</mx:Canvas>
+		<mx:Canvas label="主界面" width="100%" height="100%">
+			<mx:SWFLoader id="mainSWFLoader" x="10" y="10" width="517" height="459"/>
+			<mx:Button x="599" y="62" label="Load" click="loadMainView()" width="63"/>
+			<mx:Button x="535" y="310" label="InitContent" width="127"/>
+			<mx:Button x="535" y="342" label="RefreshUI" width="127"/>
+			<mx:Button x="535" y="374" label="RefreshUI" width="127"/>
+			<mx:TextInput x="535" y="30" width="127" text="MainFlex.swf" id="viewerTextInput"/>
+			<mx:Label x="535" y="11" text="界面："/>
+			<mx:Label x="535" y="103" text="事件日志："/>
+			<mx:List x="535" y="122" width="127" id="logList"></mx:List>
+		</mx:Canvas>
+	</mx:TabNavigator>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.managers.SystemManager;
+			import flash.net.*;
+			
+			private var contentXml:XML;
+		
+			private function loadXML():void
+			{
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE,loadComplete);
+				loader.load(new URLRequest("content.xml"));	
+			}
+			
+			private function loadComplete(evt:Event):void
+			{
+				xml.text = evt.target.data;
+				contentXml = XML(evt.target.data);
+			}
+			
+			private function testXPath():void
+			{
+				var sections:XMLList = contentXml..section;
+				xml0.text = sections;
+				
+				xml0.text = XML(contentXml..section.(@id == "0101"));
+			}
+			
+			private function loadMainView():void
+			{
+				mainSWFLoader.addEventListener(Event.COMPLETE ,onPlayer);
+				mainSWFLoader.load(viewerTextInput.text);
+			}
+			
+			private function onPlayer(evt:Event):void
+			{
+				mainSWFLoader.removeEventListener(Event.COMPLETE, onPlayer);
+				var sysMgr:SystemManager = mainSWFLoader.content as SystemManager;
+				sysMgr.addEventListener(FlexEvent.APPLICATION_COMPLETE, onAppComplete);
+			}
+			
+			private function onAppComplete(evt:FlexEvent):void
+			{
+				// 加载congtent.xml, 通过DataUtil转换为CourseVO，然后调用initContent
+				var sysMgr:SystemManager = mainSWFLoader.content as SystemManager;
+
+				//Object(sysMgr.application).viewHelper.initContent ......				
+			}
+			
+		]]>
+	</mx:Script>	
+</mx:Application>

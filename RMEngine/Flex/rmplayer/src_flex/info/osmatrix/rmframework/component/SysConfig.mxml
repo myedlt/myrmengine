@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" title="系统配置" layout="absolute" width="800" height="500" showCloseButton="true" close="close()" creationComplete="init()" borderAlpha="1.0">
+	<mx:Model id="skinList">
+		<skins>
+			<skin name="系统默认" path="css/default/defaultSkin.swf"/>		
+			<skin name="OSX" path="css/OSX/OSX.swf"/>
+			<skin name="Yahoo" path="css/Yahoo/SkinYahoo.swf"/>
+			<skin name="Darkroom" path="css/DarkRoom/SkinDarkRoom.swf"/>
+		</skins>
+	</mx:Model>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ListEvent;
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+			
+			private var lso:SharedObject;
+			private var app:Object;	
+			[Bindable]
+			private var currentSkinIndex:int;		
+			
+			public function setApp(app:Object):void
+			{
+				this.app=app;
+			}
+			private function close():void
+			{
+				PopUpManager.removePopUp(this);
+				if(lso!=null&&lso.data.currentSkin!=null)
+				{
+					if(lso.data.currentSkin!=skinComb.selectedItem.path)
+					{
+						this.app.skinChange(lso.data.currentSkin);
+					}					
+				}
+				else
+				{
+					app.skinChange(app.DEFAULT_SKIN);
+				}
+			}
+			private function init():void
+			{
+				lso=SharedObject.getLocal("logInfo","/");
+				if(lso==null)
+				{
+					Alert.show("无法获取本地共享对象!","Error");
+				}
+				else
+				{
+					if(lso.data.markReaded!=null)
+					{
+						markReaded.selected=lso.data.markReaded;
+					}
+					if(lso.data.hideReaded!=null)
+					{
+						hideReaded.selected=lso.data.hideReaded;
+					}
+					if(lso.data.showMenuItemTip!=null)
+					{
+						showMenuItemTip.selected=lso.data.showMenuItemTip;
+					}
+					if(lso.data.playOption!=null)
+					{
+						playOption.selectedValue=lso.data.playOption;
+					}
+					if(lso.data.shortcutPS!=null)
+					{
+						shortcutPS.selected=lso.data.shortcutPS;
+					}
+					if(lso.data.currentSkin!=null)
+					{
+						for(var i:int=0;i<skinList.skin.length;i++)
+						{
+							if(lso.data.currentSkin==skinList.skin[i].path)
+							{
+								currentSkinIndex=i;
+								break;
+							}
+						}
+					}
+					if(lso.data.bgMusic!=null)
+					{
+						bgMusic.selected=lso.data.bgMusic;
+					}
+				}
+								
+			}			
+			private function onChange(evt:ListEvent):void
+			{
+				this.app.skinChange(ComboBox(evt.currentTarget).selectedItem.path);
+			}
+			private function save():void
+			{
+				var skinUrl:String=skinComb.selectedItem.path;
+				lso.data.currentSkin=skinUrl;
+				lso.data.markReaded=markReaded.selected;
+				lso.data.hideReaded=hideReaded.selected;
+				lso.data.showMenuItemTip=showMenuItemTip.selected;
+				lso.data.playOption=playOption.selectedValue;
+				lso.data.shortcutPS=shortcutPS.selected;
+				lso.data.bgMusic=bgMusic.selected;
+				
+				lso.flush();
+				PopUpManager.removePopUp(this);
+				//this.app.currentState="header";
+				this.callLater(app.main);
+			}
+			private function restore():void
+			{
+				markReaded.selected=true;
+				hideReaded.selected=false;
+				showMenuItemTip.selected=true;
+				playOption.selectedValue=0;
+				shortcutPS.selected=true;				
+				bgMusic.selected=false;
+				if(skinComb.selectedIndex!=0)
+				{
+					skinComb.selectedIndex=0;
+					skinComb.dispatchEvent(new ListEvent(ListEvent.CHANGE));
+				}				
+			}			
+		]]>
+	</mx:Script>
+	
+	
+	<mx:Form width="48%" label="课件选项" borderStyle="solid" cornerRadius="5" top="10" bottom="10" left="10">
+		<mx:FormItem label="课件目录展示">
+			<mx:CheckBox id="markReaded" label="标示已学课程" selected="true"/>
+			<mx:CheckBox id="hideReaded" label="隐藏已学课程"/>
+			<mx:CheckBox id="showMenuItemTip" label="目录项提示" selected="true"/>
+		</mx:FormItem>
+		<mx:FormItem label="课件播放模式">
+			<mx:RadioButtonGroup id="playOption"/>
+			<mx:RadioButton label="播放完继续" groupName="playOption" selected="true" value="0"/>
+			<mx:RadioButton label="播放完停止" groupName="playOption" value="1"/>
+		</mx:FormItem>
+		<mx:FormItem label="快捷键设置">
+			<mx:CheckBox id="shortcutPS" label="播放/暂停--空格键【space】" selected="true"/>
+		</mx:FormItem>
+	</mx:Form>
+		
+	<mx:Form width="48%" label="个性化配置选项" borderStyle="solid" cornerRadius="5" top="10" bottom="10" right="10">
+		<mx:FormItem label="皮肤选择">
+			<mx:ComboBox id="skinComb" dataProvider="{skinList.skin}" labelField="name" change="onChange(event)" selectedIndex="{currentSkinIndex}"/>
+		</mx:FormItem>
+		<mx:FormItem label="背景音乐">
+			<mx:CheckBox id="bgMusic"/>
+		</mx:FormItem>
+	</mx:Form>
+		
+	<mx:ControlBar horizontalAlign="center" verticalAlign="middle">
+		<mx:Button label="保存设置" click="save()"/>
+		<mx:Button label="恢复默认" click="restore()"/>
+	</mx:ControlBar>
+</mx:TitleWindow>

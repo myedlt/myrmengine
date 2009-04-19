@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:viewcomp="info.osmatrix.rmframework.component.*" 
+	creationComplete="initPlayer()" layout="absolute"
+	implements="info.osmatrix.rmframework.player.IPlayer">
+	
+	<mx:SWFLoader id="swfLoader" width="100%" height="90%" horizontalAlign="center" verticalAlign="middle" x="0" y="0" complete="loadComplete(event)" unload="swfUnload(event)" scaleContent="true"/>
+	<viewcomp:ProgressBoard id="progressBoard" x="0" horizontalAlign="center" verticalAlign="middle" width="100%" height="10%" bottom="0"/>	
+	<mx:Script>
+		<![CDATA[
+
+			import info.osmatrix.rmframework.component.CMsgWindow;
+			import info.osmatrix.rmframework.player.IPlayer;
+			import mx.events.SliderEvent;
+			import mx.managers.PopUpManager;
+			
+			private var mc:MovieClip;
+			private var stoped:Boolean=true;	//记录当前播放状态是否停止
+			private var pressing:Boolean;//进度条拖拽按钮是否按下
+			public var type:String;
+			
+			// player 通用
+			private var templateXmlUrl:String;
+			private var rootUrl:String;
+			private var templateXml:XML;			
+
+			public function initPlayer():void
+			{
+				// 右键菜单
+				var myCM:ContextMenu = new ContextMenu();
+				var myCM_CMI01:ContextMenuItem = new ContextMenuItem("显示XML内容");
+				myCM_CMI01.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT , onShowXML);
+				myCM.customItems.push(myCM_CMI01);
+				myCM.hideBuiltInItems();
+				this.contextMenu = myCM;
+				
+				progressBoard.btnPlayOrPause.addEventListener("play",play);	
+				progressBoard.btnPlayOrPause.addEventListener("pause",pause);
+				progressBoard.btnStop.addEventListener(MouseEvent.CLICK,stop);
+				progressBoard.sldCtrlProgress.snapInterval=1;
+				progressBoard.sldCtrlProgress.buttonMode=true;				
+				progressBoard.sldCtrlProgress.dataTipFormatFunction=formatProgressToolTip;				
+				progressBoard.sldCtrlProgress.addEventListener(SliderEvent.CHANGE,progressChange);
+				progressBoard.sldCtrlProgress.addEventListener(SliderEvent.THUMB_PRESS,thumbPress);
+				progressBoard.sldCtrlProgress.addEventListener(SliderEvent.THUMB_RELEASE,thumbRelease);							
+			}
+			
+			// 外部通信接口
+			public function loadXML(url:String, root:String):void
+			{
+				// 接受参数
+				rootUrl = root;
+				templateXmlUrl = root + url;
+				
+				// 加载xml文件
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, handleXmlLoaded);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, handleXmlFault);
+	
+				loader.load(new URLRequest(templateXmlUrl + "?rtp=" + String(Math.random() * 65535)));
+				
+			}
+			
+			// 接口实现
+			private function onShowXML(evt:Event):void
+			{
+				showXML();
+			}
+			public function showXML():void
+			{
+	  			var show:CMsgWindow = new CMsgWindow();
+	  			
+	  			show.x = 50; show.y = 50;
+	  			show.setMsg(this.templateXml);
+	  			 
+	  			PopUpManager.addPopUp(show, this, false); 					
+			}
+			
+			private function handleXmlLoaded(evt:Event):void
+			{
+				templateXml = XML(evt.target.data);
+
+				// player 本地加载	
+				load(rootUrl + templateXml.swf[0].@url, templateXml.swf[0].@type);
+			}
+			
+			private function handleXmlFault(evt:Event):void
+			{
+				// 
+			}
+			
+			public function load(url:String,type:String=null):void
+			{
+				this.type=type;
+				if(type=="flex")
+				{
+					if (contains(progressBoard))                
+			 		removeChild(progressBoard); 
+				}
+				else
+				{
+					if (!contains(progressBoard))                
+			 		addChild(progressBoard); 
+				}				
+				swfLoader.load(url);
+			}
+			
+			public function play(evt:MouseEvent):void
+			{			
+				if(mc!=null && stoped)
+				{
+					mc.play();
+					stoped=false;
+				}
+			}
+			
+			private function pause(evt:MouseEvent):void
+			{
+				if(mc!=null && !stoped)
+				{
+					mc.stop();
+					stoped=true;
+				}				
+			}
+			
+			private function stop(evt:MouseEvent):void
+			{				
+				progressBoard.sldCtrlProgress.value=progressBoard.sldCtrlProgress.minimum;
+				if(mc!=null)
+				{
+					mc.gotoAndStop(1);
+					if(stoped==false)
+					{
+						stoped=true;
+						progressBoard.pauseState();
+					}	
+				}
+			}			
+			
+			private function progressUpdate(evt:Event):void
+			{
+				progressBoard.sldCtrlProgress.value=mc.currentFrame;
+				if(progressBoard.sldCtrlProgress.value==progressBoard.sldCtrlProgress.maximum)
+				{					
+					if(stoped==false)
+					{
+						progressBoard.pauseState();
+						stoped=true;
+					}				
+				}
+			}		
+			
+			private function progressChange(evt:SliderEvent):void
+			{ 			
+				if(mc!=null)
+				{
+					if(stoped || pressing)
+					{
+						mc.gotoAndStop(evt.value);
+					}
+					else
+					{
+						mc.gotoAndPlay(evt.value);
+					}
+				}	
+			}
+			
+			private function thumbPress(evt:SliderEvent):void
+			{
+				mc.stop();
+				pressing=true;
+			}
+			
+			private function thumbRelease(evt:SliderEvent):void
+			{
+				if(!stoped)mc.play();
+				pressing=false;
+			}	
+			
+			private function loadComplete(evt:Event):void
+			{
+				try
+				{
+					mc=MovieClip(swfLoader.content);	
+					progressBoard.sldCtrlProgress.maximum=mc.totalFrames;			
+					mc.addEventListener(Event.ENTER_FRAME,progressUpdate);					
+					if(stoped==true)
+					{
+						progressBoard.playState();
+						stoped=false;
+					}									
+				}
+				catch(e:Error)
+				{		
+					mc=null;									
+					trace("SWF文件转换成MovieClip对象时出错,可能与flash发布版本有关.");				
+				}				
+			}		
+			
+			public function swfUnload(evt:Event):void
+			{
+				if(mc!=null)
+				{
+					mc.stop();
+					mc.removeEventListener(Event.ENTER_FRAME,progressUpdate);
+					mc=null;
+				}
+			}
+			
+			//进度条 播放时间提示格式化
+			public function formatProgressToolTip(value:int):String
+	    	{
+	    		value=Math.ceil(value / 12);  //flash 12frames/s  			
+	    		var result:String = (value % 60).toString();
+	      	    if (result.length == 1)
+	      	    {
+	         		result = Math.floor(value / 60).toString() + ":0" + result;
+	       	 	}
+	      		else
+			  	{
+	       	    	result = Math.floor(value / 60).toString() + ":" + result;
+	       	  	}      			      			 
+	      	    return result;
+	  		} 				
+		]]>
+	</mx:Script>	
+</mx:Application>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>demo</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.project.flexnature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>bin-debug</name>
+			<type>2</type>
+			<location>D:/xampp/htdocs/plugin</location>
+		</link>
+		<link>
+			<name>src_pbank</name>
+			<type>2</type>
+			<location>D:/GoogleHosting/myflash/RMEngine/Flash/FrameworkSkin/pbank/src</location>
+		</link>
+		<link>
+			<name>src_picc</name>
+			<type>2</type>
+			<location>D:/GoogleHosting/myflash/RMEngine/Flash/FrameworkSkin/picc/src</location>
+		</link>
+	</linkedResources>
+</projectDescription>

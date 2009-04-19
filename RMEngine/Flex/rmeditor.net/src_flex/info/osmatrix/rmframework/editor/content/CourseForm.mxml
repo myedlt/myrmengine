@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300">
+	<mx:FormHeading label="编辑：课程" textAlign="left"/>
+	<mx:FormItem label="ID">
+		<mx:TextInput id="course_id"/>
+	</mx:FormItem>
+	<mx:FormItem label="名称">
+		<mx:TextInput id="course_name"/>
+	</mx:FormItem>
+	<mx:Script>
+		<![CDATA[
+			public function setData(course:XML):void
+			{
+				course_id.text 		= course.@id;
+				course_name.text 	= course.@name;
+			}
+			
+			public function getData(course:XML):void
+			{
+				course.@id 		= course_id.text;
+				course.@name 	= course_name.text;
+			}
+		]]>
+	</mx:Script>
+</mx:Form>

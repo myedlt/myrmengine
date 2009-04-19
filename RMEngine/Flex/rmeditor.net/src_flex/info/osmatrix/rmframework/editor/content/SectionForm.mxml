@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300">
+	<mx:FormHeading label="编辑：节" width="365" textAlign="left"/>
+	<mx:FormItem label="ID">
+		<mx:TextInput id="sect_id"/>
+	</mx:FormItem>
+	<mx:FormItem label="名称">
+		<mx:TextInput id="sect_name"/>
+	</mx:FormItem>
+	<mx:FormItem label="类型">
+		<mx:TextInput id="sect_type"/>
+	</mx:FormItem>
+	<mx:FormItem label="路径" width="345">
+		<mx:TextInput id="sect_path" width="303"/>
+	</mx:FormItem>
+	<mx:Script>
+		<![CDATA[
+			public function setData(section:XML):void
+			{
+				sect_id.text 	= section.@id;
+				sect_name.text 	= section.@name;
+				sect_type.text 	= section.@type;
+				sect_path.text 	= section.@path;
+			}
+			
+			public function getData(section:XML):void
+			{
+				section.@id 	= sect_id.text;
+				section.@name 	= sect_name.text;
+				section.@type 	= sect_type.text;
+				section.@path 	= sect_path.text;		
+			}
+		]]>
+	</mx:Script>
+</mx:Form>

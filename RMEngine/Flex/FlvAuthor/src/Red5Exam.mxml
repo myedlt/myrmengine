@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="init()">
+	<mx:Label x="29" y="12" text="服务器地址：" width="78" fontSize="12"/>
+	<mx:TextInput id="rtmpURI" x="106" y="10" width="274"/>
+	<mx:Button x="417" y="10" label="连接" id="btnConnect" width="89"/>
+
+	<mx:TabNavigator x="27" y="54" width="884" height="492" creationPolicy="all">
+		<mx:Canvas label="录制" width="100%" height="100%">
+			<mx:VideoDisplay x="25" y="10" width="385" height="315" id="vdLocal" creationComplete="onLocalVDCreationComplete()"/>
+			<mx:Button x="433" y="10" label="录制" id="btnRecord" width="69"/>
+			<mx:ProgressBar x="25" y="333" width="385" id="micLevel" label="声音" labelPlacement="left"/>
+			<mx:Button x="433" y="50" label="回放" width="69" id="btnPlayback"/>
+		</mx:Canvas>
+		<mx:Canvas label="点播" width="100%" height="100%">
+			<mx:DataGrid id="flvDataGrid" x="27" y="10" width="433" dataProvider="{flvDataProvider}" editable="false" enabled="true" height="162">
+				<mx:columns>
+					<mx:DataGridColumn headerText="名称" dataField="name" width="200"/>
+					<mx:DataGridColumn headerText="大小" dataField="size" width="80"/>
+					<mx:DataGridColumn headerText="时长" dataField="length" width="40"/>
+					<mx:DataGridColumn headerText="最后修改" dataField="lastModified"/>
+				</mx:columns>
+			</mx:DataGrid>
+		    <mx:DataGrid id="metaDataGrid" width="222" height="423"  x="499" y="10"> 
+		        <mx:columns> 
+		            <mx:DataGridColumn dataField="name" headerText="名" sortable="false" /> 
+		            <mx:DataGridColumn dataField="value" headerText="值" sortable="false" /> 
+		        </mx:columns> 
+		    </mx:DataGrid> 			
+			<mx:VideoDisplay id="vdRemote" x="27" y="180" width="354" height="253" autoPlay="false" autoBandWidthDetection="true" metadataReceived="onMetadataReceived(event)"/>
+		
+			<mx:Button x="399" y="351" label="Play" click="ns.resume()" width="61"/>
+			<mx:Button x="399" y="381" label="Pause" click="ns.pause()"/>
+			<mx:Button x="399" y="411" label="Stop" click="ns.close()" width="61"/>
+			<mx:Button x="399" y="180" label="加载列表" id="btnRefreshList" width="61"/>
+		</mx:Canvas>
+	</mx:TabNavigator>
+	
+	<mx:ArrayCollection id="flvDataProvider" >	</mx:ArrayCollection>
+	
+	<mx:Script>
+		<![CDATA[
+		import mx.events.ListEvent;
+		import mx.controls.Alert;
+		import mx.events.MetadataEvent; 
+			
+		// FCS connections and shared Object
+		private var nc:NetConnection = null ;
+		private var ns:NetStream = null ;
+		private var video:Video = null ;
+    	private var camera:Camera = Camera.getCamera() ;
+		private var mic:Microphone = Microphone.getMicrophone() ;		
+		
+		private var serverUrl:String = "rtmp://localhost/oflaDemo" ;
+
+		private function init():void
+		{
+			btnConnect.addEventListener(MouseEvent.CLICK, onToggleConnect);
+			flvDataGrid.addEventListener(ListEvent.ITEM_CLICK, onPlayVideo);
+			btnRecord.addEventListener(MouseEvent.CLICK, onToggleRecord);
+			btnPlayback.addEventListener(MouseEvent.CLICK, onPlayBack);
+			btnRefreshList.addEventListener(MouseEvent.CLICK, onRefreshList);
+			
+			rtmpURI.text = serverUrl;
+		}	
+						
+		private function onToggleConnect(evt:Event):void
+		{
+			if (btnConnect.label == '连接'){
+				btnConnect.label = '断开';
+				connect();
+			} 
+			else {
+				btnConnect.label = '连接';
+				disconnect();
+			}
+						
+		}
+
+		private function connect():void
+		{
+			serverUrl = rtmpURI.text;
+			
+			nc = new NetConnection();
+			nc.client = this;	// this.onBWDone 回调函数
+			nc.addEventListener(NetStatusEvent.NET_STATUS, onNcStatus);
+		
+			nc.connect(serverUrl);
+		}
+
+		private function disconnect():void
+		{
+			nc.close();
+		}		
+				
+		private function onNcStatus(evt:NetStatusEvent):void
+		{
+			switch (evt.info.code) 
+			{
+				case "NetConnection.Connect.Failed":
+					Alert.show("ERROR:Could not connect to: " + rtmpURI.text);
+					break;	
+			    case "NetConnection.Connect.Success":
+			    	catchVideos();
+
+					ns = new NetStream(nc);
+					ns.client = this; // 回调函数 onMetaData
+					ns.addEventListener(NetStatusEvent.NET_STATUS, onNSnetStatusHandler);
+					ns.addEventListener(AsyncErrorEvent.ASYNC_ERROR, onAsyncErrorHandler);
+
+					video = new Video();
+					video.width 	= vdRemote.width;
+					video.height 	= vdRemote.height;
+					video.attachNetStream(ns);
+					
+					vdRemote.addChild(video);			    	
+			    	break;
+				default:
+					nc.close();
+					break;
+		    }
+		}
+		
+		public function onBWDone():void
+		{
+			//var a:Object = evt;
+		}
+		
+		private function catchVideos():void
+		{
+			var callbackObject:Responder = new Responder(onNCGetListOfAvailableFLVsResult);
+			nc.call("demoService.getListOfAvailableFLVs", callbackObject);
+		}
+		
+        //定义回调函数  
+         private function onNCGetListOfAvailableFLVsResult(serverBackResult:*):void
+         {  
+             //Debug.log("Server return msg:"+serverBackResult,Debug.BLUE);  
+             for each(var o:Object in serverBackResult)
+             {
+             	var flvObject:Object = new Object();
+             	flvObject.name 			= o["name"];
+             	flvObject.size 			= o["size"];
+             	flvObject.length 		= o["length"];
+             	flvObject.lastModified 	= o["lastModified"];
+             	flvDataProvider.addItem(flvObject);
+             }
+         } 
+         
+         private function onPlayVideo(evt:ListEvent):void
+         {
+			ns.play(flvDataGrid.selectedItem.name);
+         }
+
+   		private function onNSnetStatusHandler(evt:NetStatusEvent):void
+   		{
+			switch (evt.info.code) 
+			{
+				case "NetConnection.Connect.Failed":
+					Alert.show("ERROR:Could not connect to: " + serverUrl);
+					break;	
+			    case "NetConnection.Connect.Success":
+			    	break;
+				default:
+					break;
+		    }   			
+   		}
+   		
+   		private function onAsyncErrorHandler(evt:AsyncErrorEvent):void
+   		{
+			switch (evt.text) 
+			{
+				case "NetConnection.Connect.Failed":
+					Alert.show("ERROR:Could not connect to: " + serverUrl);
+					break;	
+			    case "NetConnection.Connect.Success":
+			    	break;
+				default:
+					break;
+		    }   			
+   		}
+   		
+	    private function onLocalVDCreationComplete():void {
+	        if (camera) {
+	        	camera.setMode(320,240, 30);
+	        	camera.setQuality(0, 80);
+	            vdLocal.attachCamera(camera);
+	        } 
+	        else {
+	            //Alert.show("You don't seem to have a camera.");
+	        }
+	
+	     }
+	
+		private function startRecord():void
+		{
+			try
+			{
+				//Alert.show('publishing');
+	        	ns.attachCamera(camera);
+	        	mic.rate = 44;
+	        	ns.attachAudio(mic);
+	        	
+				var timer:Timer=new Timer(50);
+				timer.addEventListener(TimerEvent.TIMER, drawMicLevel);
+				timer.start();
+				ns.publish("red5test", 'record');	// live
+			} 
+			catch(err:Error)
+			{ 
+				Alert.show( err.toString() ); 
+			}
+	
+		}
+	
+		private function stopRecord():void
+		{
+			ns.close();
+		}
+	
+		private function onToggleRecord(evt:Event):void
+		{
+			if (btnRecord.label == '录制'){
+				btnRecord.label = '停止';
+				startRecord();
+				
+			} 
+			else {
+				btnRecord.label = '录制';
+				stopRecord();
+			}	
+		}
+		
+		public function onMetaData(info:Object):void
+		{
+			trace(info);
+            var arr:Array = []; 
+            var item:String; 
+            var meta:Object = info; // videoDisplay.metadata; 
+            var value:*; 
+            for (item in meta) 
+            { 
+                if (typeof(meta[item]) == "object") 
+                { 
+                    value = "[object]"; 
+                } 
+                else 
+                { 
+                    value = meta[item];
+                } 
+                arr.push({name:item, value:value}); 
+            } 
+            arr.sortOn("name", Array.CASEINSENSITIVE); 
+            metaDataGrid.dataProvider = arr; 
+		}
+		
+		public function onCuePoint(info:Object):void {
+            trace("cuepoint: time=" + info.time + " name=" + info.name + " type=" + info.type);
+        }
+		
+		private function drawMicLevel(evt:TimerEvent):void {
+			var ac:int=mic.activityLevel;
+			micLevel.setProgress(ac,100);
+		}
+		
+		private function onMetadataReceived(evt:MetadataEvent):void 
+		{
+            var arr:Array = []; 
+            var item:String; 
+            var meta:Object = evt.info; // videoDisplay.metadata; 
+            var value:*; 
+            for (item in meta) { 
+                 if (typeof(meta[item]) == "object") { 
+                    if (meta[item] is Array) { 
+                        value = "[object]"; 
+                    } else { 
+                        value = meta[item];
+                    } 
+                    arr.push({name:item, value:value}); 
+                }  
+            } 
+            arr.sortOn("name", Array.CASEINSENSITIVE); 
+            metaDataGrid.dataProvider = arr; 
+  		}
+  		
+  		private function onRefreshList(evt:MouseEvent):void
+  		{
+  			flvDataProvider.removeAll();
+  			
+  			catchVideos();
+  		}
+  		
+  		private function onPlayBack(evt:MouseEvent):void
+  		{
+			video = new Video();
+			video.width 	= vdLocal.width;
+			video.height 	= vdLocal.height;
+			video.attachNetStream(ns);
+			
+			vdLocal.addChild(video);
+			ns.play("red5test.flv");			   			
+  		}				      
+		]]>
+	</mx:Script>
+</mx:Application>

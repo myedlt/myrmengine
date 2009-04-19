@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<mainviews default="flex">
+		<view id="flex"  type="flex" url="MainFlex.swf" skin="css/OSX/OSX.swf" />
+		<view id="flash" type="flash" url="MainFlash.swf" skin="" />
+		<view id="pbank" type="flash" url="PBank.swf" skin="" />	
+	</mainviews>
+	<players>
+		<player name="SWFPlayer" 	url="SWFPlayer.swf" 		editorurl="XMLEditor.swf" />
+		<player name="ImagePlayer" 	url="ImagePlayer.swf" 	editorurl="XMLEditor.swf" />
+		<player name="FLVPlayer" 	url="FLVPlayer.swf" 		editorurl="XMLEditor.swf" />
+		<player name="QTIPlayer" 	url="QTIPlayer.swf" 		editorurl="XMLEditor.swf" />
+	</players>
+	<editors>
+		<editor name="XMLEditor" url="editor/XMLEditor.swf"/>
+	</editors>
+	
+</config>

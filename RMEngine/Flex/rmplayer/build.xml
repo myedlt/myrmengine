@@ -1,0 +1,167 @@
+<project name="rmengine.rmplayer" default="all">
+	<property file="build.properties" />
+	<property name="flex.xml" value="../flex.xml"/>
+	<import file="${flex.xml}"/>
+	
+	<property name="product.version" value="${product.version}" />
+	
+	<dirname property="base.dir" file="${rmengine.rmplayer}" />
+	<property name="src.dir" value="${base.dir}/src_as3" />
+	<property name="html.dir" value="${base.dir}/html-template" />
+	<property name="src.mxml.dir" value="${base.dir}/src_flex" />
+	<property name="libs.dir" value="${base.dir}/libs" />
+	<property name="bin.dir" value="${base.dir}/bin.net" />
+	<property name="bin.local.dir" value="${base.dir}/bin.local" />
+	<property name="build.dir" value="${base.dir}/build" />
+	<property name="build.src.dir" value="${base.dir}/build/src" />
+	<property name="version.src.dir" value="${base.dir}/src_version_template" />
+	
+	<property name="dist.dir" value="${base.dir}/dist" />
+	
+	<property name="html.application" value="Index" />
+	<property name="html.bgcolor" value="#869ca7" />
+	<property name="html.height" value="100%" />
+	<property name="html.swf" value="Index" />
+	<property name="html.title" value="RM Framework 播放器" />
+	<property name="html.version_major" value="9" />
+	<property name="html.version_minor" value="0" />
+	<property name="html.version_revision" value="28" />
+	<property name="html.width" value="100%" />
+	
+	<patternset id="flex.libs">
+        <include name="libs/playerglobal.swc" />
+        <include name="libs/flex.swc" />
+        <include name="libs/framework.swc" />
+        <include name="locale/{locale}" />
+	</patternset>
+	
+	<target name="time">
+		<tstamp>
+			<format property="rmengine.timestamp" pattern="yyyyMMddHHmmss" />
+		</tstamp>
+		<copy preservelastmodified="true" todir="${src.dir}" overwrite="true">
+			<fileset dir="${version.src.dir}">
+				<include name="**/*.as" />
+			</fileset>
+			<filterchain>
+				<filterreader classname="org.apache.tools.ant.filters.ReplaceTokens">
+			      <param type="token" name="rmPlayerVersion" value="${product.version}(${rmengine.timestamp})"/>
+			    </filterreader>
+			</filterchain>
+		</copy>		
+	</target>
+	
+	<target name="swf.local" depends="time">
+		<mkdir dir="${bin.local.dir}"/>
+		<mxmlc-rm srcfile="${src.mxml.dir}/Index.mxml" destfile="${bin.local.dir}/Index.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/MainFlex.mxml" destfile="${bin.local.dir}/plugin/skin/MainFlex.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/SWFPlayer.mxml" destfile="${bin.local.dir}/plugin/player/SWFPlayer.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/FLVPlayer.mxml" destfile="${bin.local.dir}/plugin/player/FLVPlayer.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/ImagePlayer.mxml" destfile="${bin.local.dir}/plugin/player/ImagePlayer.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/QTIPlayer.mxml" destfile="${bin.local.dir}/plugin/player/QTIPlayer.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/css/AeonGraphical/style.css" destfile="${bin.local.dir}/css/AeonGraphical/style.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/css/DarkRoom/style.css" destfile="${bin.local.dir}/css/DarkRoom/style.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/css/OSX/style.css" destfile="${bin.local.dir}/css/OSX/style.swf" use-network="false" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/css/yahoo/style.css" destfile="${bin.local.dir}/css/yahoo/style.swf" use-network="false" />
+				
+		<copy todir="${bin.local.dir}/courses" preservelastmodified="true" overwrite="true">
+			<fileset dir="${src.mxml.dir}/courses"></fileset>
+		</copy>
+		<copy todir="${bin.local.dir}/css" preservelastmodified="true" overwrite="true">
+			<fileset dir="${src.mxml.dir}/css"></fileset>
+		</copy>
+		<copy todir="${bin.local.dir}" preservelastmodified="true" overwrite="true">
+			<fileset dir="${src.mxml.dir}/">
+				<include name="config.xml"/>
+				<include name="content.xml"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="swf.net" depends="time">
+		<mkdir dir="${bin.dir}"/>
+		<mxmlc-rm srcfile="${src.mxml.dir}/Index.mxml" destfile="${bin.dir}/Index.swf" use-network="true" services="${src.mxml.dir}/services-config.xml"/>
+		<mxmlc-rm srcfile="${src.mxml.dir}/MainFlex.mxml" destfile="${bin.dir}/plugin/skin/MainFlex.swf" use-network="true" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/SWFPlayer.mxml" destfile="${bin.dir}/plugin/player/SWFPlayer.swf" use-network="true" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/FLVPlayer.mxml" destfile="${bin.dir}/plugin/player/FLVPlayer.swf" use-network="true" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/ImagePlayer.mxml" destfile="${bin.dir}/plugin/player/ImagePlayer.swf" use-network="true" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/QTIPlayer.mxml" destfile="${bin.dir}/plugin/player/QTIPlayer.swf" use-network="true" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/css/AeonGraphical/style.css" destfile="${bin.dir}/css/AeonGraphical/style.swf" use-network="true" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/css/DarkRoom/style.css" destfile="${bin.dir}/css/DarkRoom/style.swf" use-network="true" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/css/OSX/style.css" destfile="${bin.dir}/css/OSX/style.swf" use-network="true" />
+		<mxmlc-rm srcfile="${src.mxml.dir}/css/yahoo/style.css" destfile="${bin.dir}/css/yahoo/style.swf" use-network="true" />
+		
+		<copy todir="${bin.dir}/courses" preservelastmodified="true" overwrite="true">
+			<fileset dir="${src.mxml.dir}/courses"> </fileset>
+		</copy>
+		<copy todir="${bin.dir}/css" preservelastmodified="true" overwrite="true">
+			<fileset dir="${src.mxml.dir}/css"></fileset>
+		</copy>
+		<copy todir="${bin.dir}" preservelastmodified="true" overwrite="true">
+			<fileset dir="${src.mxml.dir}/">
+				<include name="config.xml"/>
+				<include name="content.xml"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="wrappers">
+		<copy todir="${bin.dir}" preservelastmodified="true">
+			<fileset dir="${html.dir}/">
+				<exclude name="index.template.html"/>
+			</fileset>
+		</copy>
+		<copy tofile="${bin.dir}/${html.application}.html" preservelastmodified="true" overwrite="true">
+			<fileset dir="${html.dir}/">
+				<include name="index.template.html"/>
+			</fileset>
+			<filterchain>
+				<tokenfilter>
+			    	<filetokenizer/>
+					<replaceregex pattern="\$\{application\}" flags="g" replace="${html.application}"/>
+					<replaceregex pattern="\$\{bgcolor\}"     flags="g" replace="${html.bgcolor}"/>
+					<replaceregex pattern="\$\{height\}"      flags="g" replace="${html.height}"/>
+					<replaceregex pattern="\$\{swf\}"         flags="g" replace="${html.swf}"/>
+					<replaceregex pattern="\$\{title}"        flags="g" replace="${html.title}"/>
+					<replaceregex pattern="\$\{version_major}" flags="g" replace="${html.version_major}"/>
+					<replaceregex pattern="\$\{version_minor}" flags="g" replace="${html.version_minor}"/>
+					<replaceregex pattern="\$\{version_revision}" flags="g" replace="${html.version_revision}"/>
+					<replaceregex pattern="\$\{width}" flags="g" replace="${html.width}"/>
+				</tokenfilter>
+			</filterchain>
+		</copy>
+	</target>
+
+	<target name="dist">
+		<mkdir dir="${dist.dir}"/>
+		<zip destfile="${dist.dir}/rmplayer-net.zip" compress="true">
+			<zipfileset dir="${bin.dir}" prefix="">
+				<include name="**/*"/>
+			</zipfileset>
+		</zip>
+		<zip destfile="${dist.dir}/rmplayer-local.zip" compress="true">
+			<zipfileset dir="${bin.local.dir}" prefix="">
+				<include name="**/*"/>
+			</zipfileset>
+		</zip>		
+	</target>
+	
+	<target name="all" depends="swf.local, swf.net, wrappers, dist" />
+	
+	<target name="deploy">
+		<copy todir="${install.dir}" preservelastmodified="true" overwrite="true">
+			<fileset dir="${bin.dir}"> </fileset>
+		</copy>		
+	</target>
+	
+	<target name="clean">
+		<delete dir="${bin.dir}" />
+		<delete dir="${bin.local.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete>
+			<fileset dir=".">
+        		<include name="*.cache" />
+        	</fileset>
+		</delete>
+	</target>
+</project>

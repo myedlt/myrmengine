@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 编辑使用 XMLSpy v2006 U (http://www.altova.com) 由 any (any) -->
+
+<config description="rmplayer/rmeditor共用配置文件" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="D:\GoogleHosting\myflash\branches\RMEngine\docu\xsd\rmconfig.xsd">
+	<mainviews name="主界面皮肤" default="flex">
+		<view name="系统默认" id="flex"  type="flex" 	url="plugin/skin/Flex/MainFlex.swf" skin="css/OSX/style.swf" />
+		<view name="人保财险" id="picc" type="flash" 	url="plugin/skin/Flash/picc.swf" skin="" />
+		<view name="人民银行" id="pbank" type="flash" 	url="plugin/skin/PBank.swf" skin="" />	
+	</mainviews>
+	<players name="插件-播放器" description="rmplayer用于加载播放器,rmeditor用于加载编辑器">
+		<player name="SWFPlayer" url="plugin/player/SWFPlayer.swf" editorurl="plugin/editor/XMLEditor.swf"/>
+		<player name="ImagePlayer" url="plugin/player/ImagePlayer.swf" editorurl="plugin/editor/XMLEditor.swf"/>
+		<player name="FLVPlayer" url="plugin/player/FLVPlayer.swf" editorurl="plugin/editor/XMLEditor.swf"/>
+		<player name="QTIPlayer" url="plugin/player/QTIPlayer.swf" editorurl="plugin/editor/XMLEditor.swf"/>
+	</players>
+	<editors name="插件-编辑器" description="编辑器列表,用于player配置中editorurl的参考">
+		<editor name="XMLEditor" url="plugin/editor/XMLEditor.swf"/>
+	</editors>
+	<skins name="Flex皮肤样式" description="用于皮肤选择css的参考">
+		<skin name="AeonGraphical" id="" url="css/AeonGraphical/style.swf"/>
+		<skin name="DarkRoom" id="" url="css/DarkRoom/style.swf"/>
+		<skin name="OSX" id="" url="css/OSX/style.swf"/>
+		<skin name="Yahoo" id="" url="css/yahoo/style.swf"/>
+		<skin name="custom" id="" url="css/custom/style.swf"/>
+	</skins>
+</config>

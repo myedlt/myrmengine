@@ -1,0 +1,19 @@
+/* CSS file */
+global
+{
+	font-size:12;	
+}
+
+Application
+{
+	background-color:#ffffff;
+}
+
+Alert 
+{
+     background-alpha: 0.3;
+     background-color: red;
+     border-alpha: 0.3;
+     border-color: red;
+     drop-shadow-enabled: false;
+}

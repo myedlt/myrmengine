@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	creationComplete="initPlayer()" >
+	<mx:Image id="image" verticalAlign="middle" horizontalAlign="center" scaleContent="true" autoLoad="true" y="60" x="10" width="562" height="359"/>
+	<mx:HBox id="boxImgCtrl" width="201" horizontalAlign="center" verticalAlign="middle" right="10" height="42" top="10">
+		<mx:Button label="&lt;" id="btnPre" click="previous()"/>
+		<mx:Button label="&gt;" id="btnNext" click="next()"/>
+	</mx:HBox>
+
+	<mx:Script>
+		<![CDATA[
+			// 播放器 AS代码		
+			import mx.controls.Alert;
+			import flash.net.URLLoader;
+			import flash.net.URLRequest;
+
+			private var urlXml:String;
+			private var rootUrl:String = "";
+			private var dataXml:XML;
+						
+			private var images:XMLList;
+			private var index:int;
+			
+			private function initPlayer():void
+			{
+				//测试：assets/courses/course01/chapter01/unit04.xml
+				var para:Object = this.parameters;
+				if(para.url != undefined ) 
+				{	
+					loadXML(para.url, "");
+				}
+				
+			}
+			
+			public function loadXML(url:String, root:String):void
+			{
+				rootUrl = root;
+				urlXml = rootUrl + url;
+				
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE,result);
+				loader.addEventListener(IOErrorEvent.IO_ERROR,fault);
+	
+				loader.load(new URLRequest(urlXml + "?rtp=" + String(Math.random() * 65535)));	
+			
+				boxImgCtrl.visible=true;
+
+			}			
+			
+			public function result(evt:Event):void
+			{
+				try 
+				{
+					dataXml = XML(evt.target.data);
+	            	images = dataXml.Image;	            	
+	            	if(images.length()==1)
+	            	{
+	            		boxImgCtrl.visible=false;
+	            		image.source = rootUrl + images.toString();
+	            	}
+	            	else
+	            	{
+	            		index=0;
+	            		image.source= rootUrl + images[index].toString();
+	            	}
+	            }
+	            catch (e:TypeError) 
+	            {
+	            	trace("Could not parse the XML file.");
+	            }				         				
+			}
+			
+			public function fault(evt:IOErrorEvent):void
+			{		
+				//msg.text="加载文件失败!\n"+evt.text;			
+			}
+			
+			public function next():void
+			{				
+				if(index<images.length()-1)
+				{
+					index++;
+					image.source= rootUrl + images[index].toString();
+				}
+			}
+			
+			public function previous():void
+			{
+				if(index>0)
+				{
+					index--;
+					image.source= rootUrl + images[index].toString();
+				}
+			}
+		]]>
+	</mx:Script>
+</mx:Application>

@@ -1,0 +1,50 @@
+<project name="global">
+	<dirname property="rmflex.dir" file="${ant.file.global}" />
+	
+	<property file="${rmflex.dir}/local.properties" />
+	
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	
+	<macrodef name="mxmlc-rmservice">
+		<attribute name="srcfile" default="NOT SET"/>
+		<attribute name="destfile" default="NOT SET"/>
+		<attribute name="services" default=""/>		
+		<sequential>
+			<mxmlc 
+					file="@{srcfile}"  		output="@{destfile}" 
+					actionscript-file-encoding="UTF-8" 	   	default-background-color="#ffffff"
+					keep-all-type-selectors="true"	      	locale="en_US" services="@{services}">
+				<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+				<source-path path-element="${src.dir}"/>
+				<compiler.library-path dir="${libs.dir}" append="true">
+					<include name="*.swc" />
+				</compiler.library-path>
+				<compiler.include-libraries dir="${FLEX_HOME}/frameworks/libs/" append="true">
+					<include name="framework.swc" />
+				</compiler.include-libraries>
+			</mxmlc>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="mxmlc-rm">
+		<attribute name="srcfile" default="NOT SET"/>
+		<attribute name="destfile" default="NOT SET"/>
+		<attribute name="use-network" default="true"/>
+		<attribute name="services" default=""/>		
+		<sequential>
+			<mxmlc 
+					file="@{srcfile}"  		output="@{destfile}" 
+					actionscript-file-encoding="UTF-8" 	   	default-background-color="#ffffff"
+					keep-all-type-selectors="true"	      	locale="en_US" use-network="@{use-network}">
+				<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+				<source-path path-element="${src.dir}"/>
+				<compiler.library-path dir="${libs.dir}" append="true">
+					<include name="*.swc" />
+				</compiler.library-path>
+				<compiler.include-libraries dir="${FLEX_HOME}/frameworks/libs/" append="true">
+					<include name="framework.swc" />
+				</compiler.include-libraries>
+			</mxmlc>
+		</sequential>
+	</macrodef>	
+</project>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application width="800" height="621" xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="initApp()" xmlns:ns1="info.osmatrix.rmframework.component.*">
+	<mx:MenuBar id="indexMenuBar" x="0" y="0" width="100%" labelField="@label" change="onMenuItemClick(event)">
+		<mx:XMLList id="menuBarDP" xmlns="">
+			<menuitem label="文件">
+				<menuitem label="打开"/>
+				<menuitem label="关闭"/>
+			</menuitem>
+			<menuitem label="视图">
+				<menuitem label="正常播放" type="radio" groupName="viewmode" toggled="true"/>
+				<menuitem label="全屏播放" type="radio" groupName="viewmode"/>
+				<menuitem label="配置" type="radio" groupName="viewmode"/>
+				<menuitem label="调试" type="radio" groupName="viewmode"/>
+				<menuitem label="皮肤"/>
+				<menuitem label="样式"/>
+			</menuitem>
+
+			<menuitem label="帮助">
+				<menuitem label="FlexSpy"/>
+				<menuitem label="在线帮助"/>
+				<menuitem label="关于..."/>
+			</menuitem>
+			<menuitem label="退出"/>
+		</mx:XMLList>
+	</mx:MenuBar>
+
+	<mx:ViewStack id="mainViewStack" y="21" width="100%" height="100%" creationPolicy="all" selectedIndex="0">
+		<mx:Canvas x="0" y="0" width="100%" height="100%">
+			<mx:SWFLoader id="mainSWFLoader" source="MainFlex.swf" x="0" y="0" width="800" height="600"/>
+			<mx:SWFLoader id="contentSWFLoader" x="132.15" y="97.85" width="619.3939" height="389.09088" scaleContent="true" cachePolicy="off"/>
+		</mx:Canvas>
+		<mx:Canvas>
+			<mx:TabNavigator id="indexTabNavigator" x="23.65" y="23.15" width="753.48486" height="534.24243" creationPolicy="all">
+				<mx:Canvas label="系统配置" width="100%" height="100%">
+					<mx:Tree id="configTree" dataProvider="{configTreeDP}" x="10" y="10" width="219.5" height="480.2"/>
+					<mx:TextArea id="configTextArea" x="253" y="10" width="479.9" height="480.19998"/>
+				</mx:Canvas>
+				<mx:Canvas label="运行环境" width="100%" height="100%">
+					<mx:DataGrid dataProvider="{info.osmatrix.rmframework.util.CapabilitiesUtil.getCapabilities()}" x="22" y="10" width="710" height="471">
+						<mx:columns>
+							<mx:DataGridColumn width="200" headerText="中文名称" dataField="label"/>
+							<mx:DataGridColumn width="100" headerText="属性" dataField="name"/>
+							<mx:DataGridColumn width="100" headerText="值" dataField="value"/>
+						</mx:columns>
+					</mx:DataGrid>
+				</mx:Canvas>
+				<mx:Canvas label="笔记" width="100%" height="100%">
+				</mx:Canvas>
+				<mx:Canvas label="FAQ" width="100%" height="100%">
+				</mx:Canvas>
+				<mx:Canvas label="学习记录" width="100%" height="100%">
+				</mx:Canvas>
+				<mx:Canvas label="关于..." width="100%" height="100%">
+					<mx:TextArea text="富媒体引擎之播放器 " x="291" y="33" width="430" height="86"/>
+					<mx:Label text="版本：" x="291" y="151" fontSize="25"/>
+					<mx:Label id="versionLabel" text="{info.osmatrix.rmframework.app.RMPlayerVersion.RMPLAYER_VERSION}" x="379" y="151" width="342" fontSize="25"/>
+				</mx:Canvas>
+			</mx:TabNavigator>
+		</mx:Canvas>
+		<mx:Canvas>
+			<mx:Label text="运行日志：" x="23.35" y="14"/>
+			<mx:DataGrid id="logDataGrid" dataProvider="{logDP}" x="23.35" y="40" width="753.3334" height="454.62122" editable="false">
+				<mx:columns>
+					<mx:DataGridColumn width="30" headerText="序号" dataField="id"/>
+					<mx:DataGridColumn width="80" headerText="时间" dataField="time"/>
+					<mx:DataGridColumn width="50" headerText="类型" dataField="type"/>
+					<mx:DataGridColumn headerText="消息" dataField="msg"/>
+				</mx:columns>
+			</mx:DataGrid>
+		</mx:Canvas>
+	</mx:ViewStack>
+
+	<mx:ArrayCollection id="logDP"/>
+	<mx:XMLListCollection id="configTreeDP"/>
+	<mx:Script>
+		<![CDATA[
+			import info.osmatrix.rmframework.util.CapabilitiesUtil;
+			import info.osmatrix.rmframework.app.RMPlayerVersion;
+			import mx.controls.menuClasses.MenuBarItem;
+			import mx.events.MenuEvent;
+			import info.osmatrix.rmframework.app.view.IndexHelper;
+			import info.osmatrix.rmframework.app.view.IMainView;
+			import info.osmatrix.rmframework.app.ApplicationFacade;
+
+			import mx.managers.SystemManager;
+			import mx.events.FlexEvent;
+
+			import com.flexspy.*;
+			/*
+			 *	contentSWFLoader	-	用于播放内容
+			 * 	mainSWFLoader 		-	用于人机交互界面
+			 *
+			 */
+
+			// 监听continue、exit事件，加载mainFlex并激活AppliationFacade
+			// 监听main.swf的exit事件
+			// exit事件后加载播放end.swf
+
+			private var facade:ApplicationFacade;
+			private var curMainView:Object=new Object();
+			private var refMainView:Object;
+
+			public var viewHelper:IndexHelper;
+			public var configXML:XML;
+			public var myCM:ContextMenu=new ContextMenu();
+
+			private function initApp():void
+			{
+				log("info", "initApp");
+				// FlexSpy
+				FlexSpy.registerKey(new KeySequence(123, true, false, false));
+				FlexSpy.registerJS();
+
+				// 右键菜单
+				var myCM_CMI01:ContextMenuItem=new ContextMenuItem("回首页");
+				myCM_CMI01.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, goHome);
+				myCM.customItems.push(myCM_CMI01);
+				myCM.hideBuiltInItems();
+				this.contextMenu=myCM;
+
+				// 显示对象辅助类
+				viewHelper=new IndexHelper(this);
+
+				// 读配置文件config.xml
+				var loader:URLLoader=new URLLoader();
+				loader.addEventListener(Event.COMPLETE, onConfigLoaded);
+				loader.load(new URLRequest("config.xml?rtp=" + String(Math.random() * 65535)));
+			}
+
+			// 异步：onConfigLoaded=>onMainViewLoaded=>onMainAppComplete
+			private function onConfigLoaded(evt:Event):void
+			{
+				log("info", "onConfigLoaded");
+
+				configXML=XML(evt.target.data);
+
+				configTreeDP.source=configXML.children();
+				configTree.labelField="@name";
+				configTextArea.text=configXML;
+
+				// 读取配置文件设置菜单 - 皮肤、样式
+				var styleXml:XML=XML(indexMenuBar.dataProvider.source..menuitem.(@label == "样式")[0]);
+				var stylelist:XMLList=XMLList(configXML..skin);
+				for each (var style:XML in stylelist)
+				{
+					var styleMenuItemXml:XML= <menuitem label="label" type="radio" groupName="style" toggled="false" action="style" url="url" />;
+					styleMenuItemXml.@label=style.@name;
+					styleMenuItemXml.@url=style.@url;
+
+					styleXml.appendChild(styleMenuItemXml);
+				}
+
+				var skinXml:XML=XML(indexMenuBar.dataProvider.source..menuitem.(@label == "皮肤")[0]);
+				var skinlist:XMLList=XMLList(configXML..view);
+				for each (var skin:XML in skinlist)
+				{
+					var skinMenuItemXml:XML= <menuitem label="label" type="radio" groupName="skin" toggled="false" action="skin" url="url" />;
+					skinMenuItemXml.@label=skin.@name;
+					skinMenuItemXml.@url=skin.@url;
+
+					skinXml.appendChild(skinMenuItemXml);
+				}
+
+				// 读取配置文件获得默认主视图配置
+				var curView:String=configXML.mainviews.@default;
+
+				var i:int=0;
+				var selectview:XML;
+				var views:XMLList=XMLList(configXML..view);
+				for each (var view:XML in views)
+				{
+					if (view.@id == curView)
+					{
+						selectview=view;
+						break;
+					}
+				}
+
+				loadMainView(selectview);
+			}
+
+			// 加载主视图
+			private function loadMainView(view:XML):void
+			{
+				mainSWFLoader.addEventListener(Event.COMPLETE, onMainViewLoaded);
+
+				curMainView.type=view.@type;
+				curMainView.url=view.@url;
+				curMainView.skin=view.@skin;
+
+				mainSWFLoader.load(curMainView.url)
+
+			}
+
+			private function onMainViewLoaded(evt:Event):void
+			{
+
+				if (curMainView.type == "flex")
+				{
+					mainSWFLoader.removeEventListener(Event.COMPLETE, onMainViewLoaded);
+					var sysMgr:SystemManager=mainSWFLoader.content as SystemManager;
+					sysMgr.addEventListener(FlexEvent.APPLICATION_COMPLETE, onMainAppComplete);
+				}
+				else if (curMainView.type == "flash")
+				{
+					onMainAppComplete(new Event(""));
+				}
+
+			}
+
+			private function onMainAppComplete(evt:Event):void
+			{
+				if (curMainView.type == "flex")
+				{
+					var sysMgr:SystemManager=mainSWFLoader.content as SystemManager;
+					refMainView=sysMgr.application;
+				}
+				else if (curMainView.type == "flash")
+				{
+					refMainView=MovieClip(mainSWFLoader.content);
+				}
+
+				// 加载样式
+				refMainView.viewHelper.setStyle(curMainView.skin);
+
+				initPureMVC();
+			}
+
+			private function initPureMVC():void
+			{
+				// PureMVC 加载	
+				facade=ApplicationFacade.getInstance();
+				facade.startup(this);
+			}
+
+			private function onMenuItemClick(evt:MenuEvent):void
+			{
+				var menuAction:String=evt.item.@action;
+				var menuLabel:String=evt.label;
+
+				switch (menuAction)
+				{
+					case "style":
+						refMainView.viewHelper.setStyle(evt.item.@url);
+						break;
+					case "skin":
+						var i:int=0;
+						var selectview:XML;
+						var views:XMLList=XMLList(configXML..view);
+						for each (var view:XML in views)
+						{
+							if (view.@name == evt.item.@label)
+							{
+								selectview=view;
+								break;
+							}
+						}
+
+						loadMainView(selectview);
+						break;
+					default:
+						break;
+				}
+
+				switch (evt.label)
+				{
+					case "打开...":
+						viewHelper.switchMode(0);
+						break;
+					case "关闭":
+						viewHelper.switchMode(0);
+						break;
+					case "正常播放":
+						viewHelper.switchMode(0);
+						break;
+					case "全屏播放":
+						viewHelper.switchMode(0);
+						break;
+					case "配置":
+						viewHelper.switchMode(1);
+						break;
+					case "调试":
+						viewHelper.switchMode(2);
+						break;
+					case "FlexSpy":
+						FlexSpy.show();
+						break;
+						indexTabNavigator
+					case "在线帮助":
+						//navigateUrl("");
+						break;
+					case "关于...":
+						mainViewStack.selectedIndex=1;
+						indexTabNavigator.selectedIndex=5;
+						break;
+					default:
+						break;
+				}
+			}
+
+			private function goHome(evt:ContextMenuEvent):void
+			{
+				viewHelper.switchMode(0);
+			}
+
+			public function log(type:String, str:String):void
+			{
+				//type: error, warn, info
+				logDP.addItem({"id":"01", "time":"", "type":type, "msg":str});
+			}
+		]]>
+	</mx:Script>
+</mx:Application>

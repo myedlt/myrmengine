@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="697" height="394">
+	<mx:PieChart x="31" y="21.35" id="piechart1" height="283.55" width="321" showDataTips="true">
+		<mx:series>
+			<mx:PieSeries displayName="Series 1" field=""/>
+		</mx:series>
+	</mx:PieChart>
+	<mx:Legend dataProvider="{piechart1}" x="245" y="312.9" height="55.550003" width="107"/>
+	<mx:Text x="384.55" y="21.3" text="&#x9;八年来，嘉实凭借规范、稳健、务实的管理风格、&#xa;科学理性的投资运作以及投资者利益至上的经营理&#xa;念，为广大投资者创造了丰厚的投资回报，并逐渐&#xa;脱颖而出，成为国内最优秀的基金管理公司之一。&#xa;&#xa;&#x9;强烈的使命感和对理想的不懈追求是我们前进的动&#xa;力。嘉实人的使命和理想是：创造财富增值，服务&#xa;小康中国。&#xa;&#x9;&#xa;&#x9;我们帮助更多人群启动自己的事业梦想、供养子&#xa;女读书深造、享受恬静、富足的晚年生活 ……&#xa;&#x9;&#xa;&#x9;今天，我们发现，我们的事业已关乎那么多人的福&#xa;祉，我们的工作正直接服务于中国人的小康生活。" width="281.45" height="347.15" fontFamily="Times New Roman" fontSize="12" textAlign="left" fontWeight="bold"/>
+	
+</mx:Application>

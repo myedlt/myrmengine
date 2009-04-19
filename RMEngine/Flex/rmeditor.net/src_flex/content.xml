@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content>
+	<!--
+		页面头部导航区 "label"属性是按钮在页面的显示名称,"url"是点击按钮后跳转的页面路径;
+		"退出"按钮的显示名如果不叫"退出",那么其位置一定要位于最后即Navigator标签的最后一个元素;
+	-->
+	<navigator name="导航按钮">
+		<button name="帮助" label="帮助" url="navigator/help/index.html" />
+		<button name="认知地图" label="认知地图" url="navigator/help/index.html" />		
+		<button name="退出" label="退出" url="javascript:window.close();" />
+	</navigator>
+	<!--
+		课程列表 CourseList标签下可有多个Course(课程)；
+		Course标签下有0或1个Lecture(讲师)和多个Chapter（章,Course下最少有一个章节点）；Course标签的属性有：name、title、startSWF（开篇动画即片头）、endSWF。
+		Chapter标签下有0个或多个Section（节）,当Chapter无子节点时为单章动画；Chapter标签的属性有：name（必填）、title、path(单章动画路径)、type（"flash"/"flex"/"image"/"flv"默认为"flash"）、xml(对应的xml配置文件)。
+		Section标签的属性有:name（必填）、title、path(必填)、type（"flash"/"flex"/"image"/"flv"默认为"flash"）、xml(对应的xml配置文件)。
+		Lecture标签没有属性,只有子节点:name、sex、age、position、introduction。其值以标签对形式出现，如：<name>讲师名</name>
+	-->
+	<courseList name="课程列表">
+		<course name="演示课程">
+			<lecture name="讲师名" sex="男" age="55" position="教授">
+				<introduction name="讲师介绍">
+				</introduction>
+			</lecture>
+			<chapter id="01" name="第一章 课件框架测试" title="Chapter 1">
+				<section id="0101" name="第一节 Flash" type="SWFPlayer" 
+					path="courses/course01/chapter01/unit01.xml" />
+				<section id="0102" name="第二节 Flash" type="SWFPlayer" 
+					path="courses/course01/chapter01/unit02.xml" />
+				<section id="0103" name="第三节 图片" type="ImagePlayer" 
+					path="courses/course01/chapter01/unit03/unit03.xml" />
+				<section id="0104" name="第四节 相册" type="ImagePlayer" 
+					path="courses/course01/chapter01/unit04/unit04.xml" />
+				<section id="0105" name="第五节 Flex游戏" type="SWFPlayer" 
+					path="courses/course01/chapter01/unit05/unit05.xml" />
+			</chapter>
+			<chapter id="02" name="第二章 视频课程">
+				<section id="0201" name="第一节" type="FLVPlayer"
+					path="courses/course01/chapter02/unit02.xml" />
+				<section id="0202" name="第二节" type="FLVPlayer"
+					path="courses/course01/chapter02/unit03.xml" />
+			</chapter>
+			<chapter id="03" name="测试题(flex)">
+				<section id="0301" name="测验一" type="QTIPlayer" 
+				path="courses/course01/chapter03/quiz.xml" />
+			</chapter>
+		</course>
+	</courseList>
+	<!-- 版权信息 -->
+	<copyright name="版权" text="技术支持:北京东方创远教育科技有限公司"> </copyright>
+</content>

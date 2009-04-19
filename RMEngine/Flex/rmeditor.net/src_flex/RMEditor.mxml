@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" applicationComplete="initEditor()" height="600" xmlns:ns1="*" width="1024" xmlns:ns2="info.osmatrix.rmframework.editor.plugin.*">
+	<mx:Style source="css/yahoo/yflexskin.css" />
+	<mx:Accordion creationPolicy="all" x="9.9" y="29.1" width="242.5303" height="561.78784">
+		<mx:Canvas label="内容组装" width="100%" height="100%">
+			<mx:Tree id="contentTree" dataProvider="{contentTreeDP}" x="10" y="10" width="219.5" height="421.3"></mx:Tree>
+			<mx:Button click="onDeleteNode()" label="删除章节" id="deleteNodeButton" width="99.5" height="26" y="439.3" x="10"/>
+			<mx:Button click="onNewChapter()" label="新章" width="52" height="26" id="newChapterButton" x="117.5" y="439.3"/>
+			<mx:Button click="onNewSection()" label="新节" width="53" height="26" id="newSectionButton" x="177.5" y="439.3"/>
+			<mx:Button click="onPlayCourse(event)" x="10" y="473.3" label="播放课程" width="220.5"/>
+		</mx:Canvas>
+		<mx:Canvas label="配置管理" width="100%" height="100%">		
+			<mx:Tree id="configTree" dataProvider="{configTreeDP}"  x="10" y="10" height="409" width="219.5"></mx:Tree>
+		</mx:Canvas>
+	</mx:Accordion>
+	<mx:Canvas x="269.7" y="9.1" width="745.1515" height="581.8182">
+		<mx:LinkBar id="modeLinkBar" x="376.5" y="4.1" width="358.5606" height="30.984848" dataProvider="editModeViewstack">	</mx:LinkBar>
+		<mx:ViewStack creationPolicy="all" x="9" y="39.7" id="editModeViewstack" width="727.0455" height="485.90912">
+				<mx:Canvas label="表单编辑" width="100%" height="100%" id="formCanvas">
+					<mx:TextArea x="44.5" y="27" width="392.95" height="273.35" text="帮助信息&#xa;&#xa;1.&#xa;2.&#xa;3." id="infoHelpTextArea"/>
+				</mx:Canvas>
+				<mx:Canvas label="文本查看" width="100%" height="100%">
+					<mx:TextArea id="contentXmlTextArea" x="9" y="9" width="708" height="467" wordWrap="false" editable="false"/>
+				</mx:Canvas>
+				<mx:Canvas label="模板编辑" width="100%" height="100%">
+						<mx:SWFLoader x="9.95" y="9.95" width="707.05" height="465.95" id="templateEditorSWFLoader"/>
+				</mx:Canvas>
+				<mx:Canvas label="脚本设计" width="100%" height="100%">
+				</mx:Canvas>
+		</mx:ViewStack>
+	
+		<mx:HBox height="39.39394" y="534.45" horizontalAlign="center" x="9.1" width="726.2121" verticalAlign="middle">
+			<mx:Button label="保存" id="saveButton" width="94"/>
+			<mx:Button label="取消" id="cancelButton" width="81"/>
+		</mx:HBox>
+	</mx:Canvas>
+
+	<mx:XMLListCollection id="contentTreeDP" />
+	<mx:XMLListCollection id="configTreeDP" />
+
+	<mx:RemoteObject destination="amfphp" source="info.osmatrix.rmframework.service.XmlManager" id="xmlService">
+		<mx:method name="getXml" result="handleGetXmlResult(event)" />
+		<mx:method name="setXml" result="handleSetXmlResult(event)" />
+	</mx:RemoteObject>	
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ListEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.managers.SystemManager;
+			import mx.events.FlexEvent;
+						
+			import info.osmatrix.rmframework.editor.content.*; 
+			
+			private var contentXmlUrl:String = "content.xml";	// 
+			private var configXmlUrl:String	 = "config.xml";	// 
+			
+			private var contentXml:XML;			// content.xml 文件内容
+			private var configXml:XML;			// 
+			private var form:Object;			// content 编辑表单组件
+
+			public var selectedItem:XML;		// dataXml当前选中节点
+			
+			private function initEditor():void
+			{
+				// 初始化
+				contentTree.addEventListener(ListEvent.ITEM_CLICK, onSelectTreeNode);
+				saveButton.addEventListener(MouseEvent.CLICK, onSaveContentXML);
+
+				// 读内容组装文件 content.xml
+				
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, onContentLoaded);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, onXmlFault);
+				loader.load(new URLRequest(contentXmlUrl + "?rtp=" + String(Math.random() * 65535)));
+								
+				// 读播放器配置文件 config.xml
+				var loaderConfig:URLLoader = new URLLoader();
+				loaderConfig.addEventListener(Event.COMPLETE,	onConfigLoaded);
+				loaderConfig.addEventListener(IOErrorEvent.IO_ERROR, onXmlFault);
+				loaderConfig.load(new URLRequest(configXmlUrl + "?rtp=" + String(Math.random() * 65535)));					
+
+				// 过度变量，简化程序逻辑
+				form = infoHelpTextArea;
+			}
+			
+			private function onContentLoaded(evt:Event):void
+			{
+				contentXml = XML(evt.target.data);
+				
+				contentTreeDP.source = contentXml.children();
+				contentTree.labelField = "@name";
+			}
+			
+			private function onConfigLoaded(evt:Event):void
+			{
+				configXml = XML(evt.target.data);
+				
+				configTreeDP.source = configXml.children();
+				configTree.labelField = "@name";
+			}
+			
+			private function onXmlFault(evt:Event):void
+			{
+				// 错误处理
+			}
+
+			private function onNewChapter():void
+			{
+				// 默认在最后位置添加
+				var chapter:XML = <chapter id="99" name="待修改" title="待修改"></chapter>;
+				contentXml..course[0].appendChild(chapter);
+			}
+			
+			private function onNewSection():void
+			{
+				// 当前选中章，则添加该章最后一节，否则默认添加第一章的最后一节
+				var section:XML = <section id="9999" name="待修改" title="待修改"></section>;
+				contentXml..chapter[contentXml..chapter.length() - 1 ].appendChild(section);
+			}
+			
+			private function onPlayCourse(evt:Event)
+			{
+	            var variables:URLVariables = new URLVariables();
+	            variables.exampleSessionId = new Date().getTime();
+	            variables.exampleUserLabel = "Your Name";
+	            
+	            var request:URLRequest = new URLRequest("Index.html");
+	            request.data = variables;
+	            try {            
+	                navigateToURL(request);
+	            }
+	            catch (e:Error) {
+	                // handle error here
+	            }
+			}
+			
+			private function onSelectTreeNode(evt:ListEvent):void
+			{
+				selectedItem = XML(evt.target.selectedItem);
+				
+				// 根据节点类型加载不同的编辑界面
+				// 切换之前先保存Form中的修改内容,Form必须是支持getData方法的类型
+				// form.getData(selectedItem);
+				switch (selectedItem.name().toString())
+				{
+					case "button":
+						break;
+					case "lecture":
+						break;					
+					case "course":
+						formCanvas.removeChild(form as DisplayObject);
+						form = new CourseForm();
+						formCanvas.addChild(form as DisplayObject);
+						contentXmlTextArea.text = selectedItem;
+						break;
+					case "chapter":
+						formCanvas.removeChild(form as DisplayObject);
+						form = new ChapterForm();
+						formCanvas.addChild(form as DisplayObject);
+						contentXmlTextArea.text = selectedItem;
+						break;
+					case "section":
+						formCanvas.removeChild(form as DisplayObject);
+						// 装载节编辑界面和显示文本
+						form = new SectionForm();					
+						formCanvas.addChild(form as DisplayObject);
+						contentXmlTextArea.text = selectedItem.toXMLString();
+						// 根据配置文件，装载模板编辑组件
+						editSectionTemplateXml();
+						break;
+					default:
+						contentXmlTextArea.text = selectedItem;
+						break;
+				}
+				form.setData(selectedItem);						
+			}
+			
+			private function onDeleteNode():void
+			{
+				// 只能删除章、节
+				switch (selectedItem.name().toString())
+				{
+					case "navigator":
+						break;
+					case "button":
+						break;
+					case "course":
+						break;
+					case "lecture":
+						break;
+					case "chapter":
+						delete contentXml..chapter.(@id == selectedItem.@id)[0];
+						break;
+					case "section":
+						delete contentXml..section.(@id == selectedItem.@id)[0];		
+						break;
+					default:
+						break;
+				}
+			}			
+			
+			private function onSaveContentXML(evt:MouseEvent):void
+			{
+				// 根据linkbar选项确定保存逻辑的预处理
+				
+				switch ( editModeViewstack.selectedIndex )
+				{
+					case 0:		//表单编辑
+						form.getData(selectedItem);	
+						xmlService.setXml(contentXmlUrl, contentXml.toXMLString());
+						break;
+					case 1:		//文本编辑
+						selectedItem = XML(contentXmlTextArea.text);
+						xmlService.setXml(contentXmlUrl, contentXml.toXMLString());
+						break;
+					case 2:		//模板编辑
+						saveSectionTemplateXml();
+						break;
+					case 3:		//脚本编辑
+						// 
+						break;
+					default:
+						break;
+				}
+			}
+						
+			private function handleSetXmlResult(evt:ResultEvent):void
+			{
+				//infoTextArea.text = "信息："+String(evt.result);
+			}					
+			private function handleGetXmlResult(evt:ResultEvent):void
+			{
+				//infoTextArea.text = "信息："+String(evt.result);
+			}					
+	
+			private function onCommitXML(evt:MouseEvent):void
+			{
+				// 调用AMFPHP 远程函数保存xml文件
+				xmlService.setXml(contentXmlUrl, contentXml.toXMLString());
+			}
+
+			private function saveSectionTemplateXml():void
+			{
+				var sysMgr:SystemManager = templateEditorSWFLoader.content as SystemManager;
+
+				var templateXml:XML = Object(sysMgr.application).getData();	
+				xmlService.setXml(selectedItem.@path, templateXml.toXMLString());
+			}
+			
+			private function editSectionTemplateXml():void
+			{
+				var editorUrl:String;
+				var playerUrl:String = selectedItem.@path;
+				
+				var playerlist:XMLList = XMLList(configXml..player);
+				for each(var player:XML in playerlist)
+				{
+					if(player.@name == selectedItem.@type)
+					{
+						editorUrl = player.@editorurl;		// 播放器的url
+						break;
+					}
+				}
+							
+				templateEditorSWFLoader.addEventListener(Event.COMPLETE ,onSectionTemplateXmlEditorLoaded);
+				templateEditorSWFLoader.load(editorUrl);				
+			}
+			
+			private function onSectionTemplateXmlEditorLoaded(evt:Event):void
+			{
+				templateEditorSWFLoader.removeEventListener(Event.COMPLETE, onSectionTemplateXmlEditorLoaded);
+				var sysMgr:SystemManager = templateEditorSWFLoader.content as SystemManager;
+				sysMgr.addEventListener(FlexEvent.APPLICATION_COMPLETE, onSectionTemplateXmlEditorAppComplete);
+			}
+			
+			private function onSectionTemplateXmlEditorAppComplete(evt:Event):void
+			{
+				var sysMgr:SystemManager = templateEditorSWFLoader.content as SystemManager;
+
+				Object(sysMgr.application).loadXML(selectedItem.@path,"");				
+			}
+			
+			public function expandAllNode():void
+			{
+				for each(var item:Object in contentTreeDP)
+				{					
+					contentTree.expandChildrenOf(item,true);
+				}
+			}
+						
+		]]>
+	</mx:Script>
+</mx:Application>

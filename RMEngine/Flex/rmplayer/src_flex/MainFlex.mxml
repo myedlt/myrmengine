@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:view="puremvc.view.component.*" layout="absolute" creationComplete="initApp()" width="800" height="600" horizontalAlign="left">
+
+	<mx:Label x="13" y="10" text="Rich Media Engine V0.7" width="189"/>
+	<mx:Button x="742" y="6" label="退出" height="26" id="btnExit"/>
+	<mx:HBox x="473" y="10" width="261" height="22">
+		<mx:LinkButton label="配置" id="sysConfigLinkButton"/>
+		<mx:LinkButton label="辞典" id="glossaryLinkButton"/>
+		<mx:LinkButton label="笔记" id="noteLinkButton"/>
+		<mx:LinkButton label="附件" id="attachmentLinkButton"/>
+		<mx:LinkButton label="帮助" id="helpLinkButton"/>
+	</mx:HBox>
+
+	<mx:HBox height="33" verticalAlign="middle" y="39" width="584">
+		<mx:Spacer width="6"/>
+		<mx:Label text="当前章" id="txtChapter"/>
+		<mx:Label text="&gt;" width="18" fontWeight="bold" textAlign="center" id="arrowFlag"/>
+		<mx:Label text="当前节" id="txtSection"/>
+	</mx:HBox>
+	<mx:TabNavigator x="10" y="39" width="188" height="534" selectedIndex="0">
+		<mx:Canvas label="目录" width="100%" height="100%">
+			<mx:Tree width="100%" height="100%" 
+					 id="treeContents" alternatingItemColors="[#DFDFDF,#EEEEEE]" 
+					 dataProvider="{dpcourse}" x="0" y="0">
+			</mx:Tree>
+		</mx:Canvas>
+		<mx:Canvas label="书签" width="100%" height="100%">
+		</mx:Canvas>
+	</mx:TabNavigator>
+	<mx:ArrayCollection id="dpcourse">	</mx:ArrayCollection>
+
+	<mx:SWFLoader x="206" y="84" width="584" height="429" id="contentSWFLoader"/>
+
+	<mx:HBox width="584" height="49" creationComplete="initCtrlPanel()" horizontalAlign="right" verticalAlign="middle" horizontalGap="5" y="524" x="206" borderStyle="solid">
+		<mx:Button id="btnPrevSection" label="上一节"/>
+		<mx:Button x="93" y="41" id="btnNextSection" label="下一节"/>
+		<mx:Spacer width="70%"/>
+		<mx:Button id="btnVolumeOpenOrClose" click="openOrClose()" width="34"/>
+		<mx:HSlider id="sldCtrlVolume" width="70" maximum="1" minimum="0" value="0.6" liveDragging="true"
+			dataTipFormatFunction="formatVolumeToolTip" change="volumeChange(event)"/>
+		<mx:Button label="全屏" id="btnFullScreen"/>
+			<mx:Script>
+				<![CDATA[
+					import flash.media.SoundMixer;
+					import flash.media.SoundTransform;
+					import mx.events.SliderEvent;
+					
+					private var soundTrans:SoundTransform=SoundMixer.soundTransform;
+					
+					private function initCtrlPanel():void
+					{				
+						openState();//音量开关处于打开状态
+					}
+					
+					//音量关闭或打开
+					private function openOrClose():void
+					{
+						if(btnVolumeOpenOrClose.toolTip=="关闭")
+						{
+							closeState();
+							soundTrans.volume=0;
+							SoundMixer.soundTransform=soundTrans;
+						}
+						else
+						{
+							openState();
+							soundTrans.volume=sldCtrlVolume.value;
+							SoundMixer.soundTransform=soundTrans;
+						}
+					}			
+					
+					private function volumeChange(evt:SliderEvent):void
+					{
+						if(btnVolumeOpenOrClose.toolTip=="关闭")
+						{
+							soundTrans.volume=evt.value;
+							SoundMixer.soundTransform=soundTrans;
+						}
+					}			
+					
+					private function openState():void
+					{
+						btnVolumeOpenOrClose.toolTip="关闭";
+					}
+					
+					private function closeState():void
+					{
+						btnVolumeOpenOrClose.toolTip="打开";
+					}
+					
+			  		//音量控制条 音量大小提示格式化	
+			  		private function formatVolumeToolTip(value:Number):String
+			  		{
+			  			var temp:String=value.toString();
+			  			if(temp.length==1)
+			  			{
+			  				return temp+".0";
+			  			}
+			  			else
+			  			{
+			  				return temp.substr(0,3);
+			  			}
+			  		}
+				]]>
+			</mx:Script>
+	</mx:HBox>
+	<mx:Script >
+		<![CDATA[
+			import info.osmatrix.rmframework.app.view.FlexViewHelper;
+			
+			[Embed(source="assets/doc.png")]
+			[Bindable]
+         	public var DocIcon:Class;
+         	
+			[Embed(source="assets/pdf.png")]
+			[Bindable]
+         	public var PdfIcon:Class;
+
+			public var viewHelper:FlexViewHelper;
+
+			/*
+			 * 	initApp由应用初始调用：creationComplete="initApp()"
+			 */						
+			private function initApp():void
+			{
+				viewHelper = new FlexViewHelper(this);
+			}
+			
+			public function treeIconFunc(item:Object):*
+			{
+				//var xml:XML     = item as XML;
+				var xml:Object = item;
+				
+				if(xml.attribute("mode") == "chapter")
+					return PdfIcon;
+				else if(xml.attribute("mode") == "section")
+					return DocIcon;				
+			}
+		]]>
+	</mx:Script>
+</mx:Application>

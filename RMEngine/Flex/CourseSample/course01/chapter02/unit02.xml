@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content>
+	<flv name="" title="土豆视频" url="courses/course01/chapter02/tiaosan.flv">
+		<cuepoints>
+			<cuepoint time="00:01:01.49"  name="" type="actionscript">
+				<parameters>
+					<parameter name="label" value="Mallow"/>
+					<parameter name="position" value="rb"/>
+				</parameters>
+			</cuepoint>
+		</cuepoints>
+	</flv>
+	<config/>
+</content>

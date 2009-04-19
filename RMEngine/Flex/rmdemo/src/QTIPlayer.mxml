@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	currentState="question" 
+	xmlns:ns1="info.osmatrix.rmframework.component.*" 
+	creationComplete="initApp()">
+	<mx:states>
+		<mx:State name="start"/>
+		<mx:State name="finish"/>
+		<mx:State name="quiz">
+			<mx:AddChild position="lastChild">
+				<mx:Button x="318" y="379" label="上一题" height="31" width="77" id="prevButton"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Button x="403" y="379" label="下一题" height="31" width="77" id="nextButton"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Button x="504" y="379" label="完成" height="31" width="70"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:ProgressBar x="10" y="387" width="256" label="已完成" labelPlacement="left"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:TextArea x="10" y="10" width="564" height="52" text="本次测验概要信息。" fontSize="21"/>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="question" basedOn="quiz">
+			<mx:AddChild position="lastChild">
+				<mx:RadioButtonGroup id="radiogroup1"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<ns1:QSingleChoice x="92" y="95" id="questionView">
+				</ns1:QSingleChoice>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Label x="92" y="340" text="答案：" width="48"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Text x="148" y="340" text="Text" width="344" id="answerText"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	
+	<mx:XML xmlns="" source="quiz.xml" id="quizXml" />
+	<mx:Script>
+		<![CDATA[
+			import info.osmatrix.rmframework.quiz.Quiz;
+			
+			private var curQuestionIndex:int = 0 ;
+			private var quiz:Quiz;
+			
+			private function initApp():void
+			{
+				quiz = new Quiz(quizXml);
+				loadQuestion(curQuestionIndex);
+				curQuestionIndex = curQuestionIndex + 1;
+				
+				questionView.addEventListener("answer",getAnswer);
+				//prevButton.addEventListener(MouseEvent.CLICK, onPrevQuestion);
+				nextButton.addEventListener(MouseEvent.CLICK, onNextQuestion);
+				
+			}
+			
+			public function loadXML(url:String):void
+			{
+				// 外部通信协议
+			}
+			
+			private function loadQuestion(index:int):void
+			{
+				questionView.loadQuestion(quizXml..item[index]);
+			}
+			
+			private function onNextQuestion(evt:Event):void
+			{
+				loadQuestion(curQuestionIndex);
+				curQuestionIndex = curQuestionIndex + 1;
+			}
+			
+			private function getAnswer(evt:Event):void
+			{
+				answerText.text = questionView.getAnswer();
+			}
+		]]>
+	</mx:Script>
+</mx:Application>
