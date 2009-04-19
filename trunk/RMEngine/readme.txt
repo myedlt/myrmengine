@@ -1,0 +1,1 @@
+通过svn的external实现Flash与Flex、Flex项目之间的代码共享。
