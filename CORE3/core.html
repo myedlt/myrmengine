@@ -1,0 +1,126 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script language="JavaScript" src="core/linkInchen.js"></script>
+<script language="JavaScript" src="core/linkAICC.js"></script>
+<link rel="stylesheet" type="text/css" href="core/style.css">
+<title>core</title>
+</head>
+<body oncontextmenu="return false" ondragstart="return false" style='overflow:scroll;overflow-y:hidden;overflow-x:hidden' leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="doTurnon()" onUnload="doTurnoff()" onBeforeUnload="doTurnoff()">
+<script language="JavaScript">
+var int1,pos1;
+var isToswf = 0;
+var isVideo = 0;
+var mediaWidth = 192;
+var mediaHeight = 142;
+if (navigator.appName && navigator.appName.indexOf("Microsoft") != -1 && navigator.userAgent.indexOf("Windows") != -1 && navigator.userAgent.indexOf("Windows 3.1") == -1) {
+	document.write('<script language=\"VBScript\"\>\n');
+	document.write('On Error Resume Next\n');
+	document.write('Sub main_FSCommand(ByVal command, ByVal args)\n');
+	document.write('	Call main_DoFSCommand(command, args)\n');
+	document.write('End Sub\n');
+	document.write('</script\>\n');
+}
+function runInt1(){
+	isToswf = 0;
+	clearInterval(int1);
+	var num=parseInt(window.aicc_cont.showBox.MediaPlayer.CurrentMedia.Duration);
+	if(num==0){
+		int1 = setInterval("runInt1()", 300);
+	}else{
+		window.aicc_cont.showBox.MediaPlayer.Controls.Play();
+		window.aicc_cont.showBox.MediaPlayer.Controls.currentPosition = pos1;
+		isToswf = 1;
+	}
+}
+function main_DoFSCommand(command, args) {
+	var command = String(command);
+	var args = String(args);
+	var arr = args.split(";");
+	switch(command){
+		case "0":
+			runComm(args);
+			break;
+		case "1":
+			window.aicc_cont.showBox.MediaPlayer.Controls.Stop();
+			break;
+		case "2":
+			window.aicc_cont.showBox.MediaPlayer.Controls.Pause();
+			break;
+		case "3":
+			window.aicc_cont.showBox.MediaPlayer.Controls.Play();
+			break;
+		case "4":
+			pos1 = args;
+			runInt1();
+			break;
+		case "5":
+			window.aicc_cont.showBox.MediaPlayer.settings.volume = args;
+			break;
+		case "11":
+			window.open("inchen/html/about.html","课程简介");
+			break;
+		case "22":
+			window.open("inchen/html/teacher.html","教师简介");
+			break;
+		case "33":
+			window.open("inchen/html/text.html#"+args,"详细文字");
+			break;
+		case "44":
+			window.open("inchen/html/donwload.html","资料下载");
+			break;
+		case "55":
+			window.open("inchen/html/help.html","帮助");
+			break;
+		case "66":
+			window.top.close();
+			break;
+		case "77":
+			if(confirm('您确定要退出学习吗？')) window.top.close();
+			break;
+		case "min":
+			document.getElementById("Layer2").style.left = parent.xxLayer;
+			document.getElementById("Layer2").style.top = parent.yyLayer;
+  		document.getElementById("aicc_cont").width = 200;
+  		document.getElementById("aicc_cont").height = 160;
+			document.getElementById("aicc_cont").contentWindow.document.getElementById("showBox").width = mediaWidth;
+			document.getElementById("aicc_cont").contentWindow.document.getElementById("showBox").height = mediaHeight;
+			document.getElementById("aicc_cont").contentWindow.document.getElementById("showBox").contentWindow.document.getElementById("MediaPlayer").style.width = mediaWidth;
+			document.getElementById("aicc_cont").contentWindow.document.getElementById("showBox").contentWindow.document.getElementById("MediaPlayer").style.height = mediaHeight;
+			break;
+		case "max":
+			document.getElementById("Layer2").style.left = arr[0]-9;
+			document.getElementById("Layer2").style.top = arr[1]-13;
+  		document.getElementById("aicc_cont").width = arr[2]+9;
+  		document.getElementById("aicc_cont").height = arr[3]+13;
+			document.getElementById("aicc_cont").contentWindow.document.getElementById("showBox").width = arr[2];
+			document.getElementById("aicc_cont").contentWindow.document.getElementById("showBox").height = arr[3];
+			document.getElementById("aicc_cont").contentWindow.document.getElementById("showBox").contentWindow.document.getElementById("MediaPlayer").style.width = arr[2];
+			document.getElementById("aicc_cont").contentWindow.document.getElementById("showBox").contentWindow.document.getElementById("MediaPlayer").style.height = arr[3];
+			break;
+		case "111":
+			doSetAicc(args);
+			break;
+	}
+}
+function runComm(num){
+	if(parent.type == 3){
+		isVideo = num;
+		if(isVideo == 1){
+		}else{
+			mediaHeight = 0;
+		}
+		var comm="<body bgColor=\"transparent\"><iframe id=\"showBox\" name=\"showBox\" src=\"cont.html\" frameborder=\"no\" scrolling=\"no\" noresize=\"noresize\" width=\""+mediaWidth+"\" height=\""+mediaHeight+"\" marginwidth=\"0\"></iframe></body>"
+		window.aicc_cont.document.write(comm);
+	}
+}
+window.document.writeln("<div id=Layer1 style=\"Z-INDEX: -1; LEFT:0px; TOP:0px; WIDTH: "+parent.ww+"; HEIGHT: "+parent.hh+"\">");
+runSWF("inchen/core"+parent.type+".swf","main","100%","100%");	
+window.document.writeln("</div>");
+window.document.writeln("<div id=Layer2 style=\"Z-INDEX: 1; LEFT:"+parent.xxLayer+"px; TOP:"+parent.yyLayer+"px; POSITION: absolute;\">");
+window.document.writeln("<iframe src=\"comm.html\" name=\"aicc_cont\" id=\"aicc_cont\" width=\"200\" height=\"160\" frameborder=\"no\" scrolling=\"no\" noresize=\"noresize\" allowtransparency=\"true\"></iframe>");
+window.document.writeln("</div>");
+window.document.writeln("<iframe src=\"comm.html\" name=\"aicc_comm\" id=\"aicc_comm\" width=\"0\" height=\"0\" frameborder=\"no\" scrolling=\"no\" noresize=\"noresize\" allowtransparency=\"true\"></iframe>");
+</script>
+</body>
+</html>

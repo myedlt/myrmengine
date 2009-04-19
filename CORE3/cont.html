@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link rel="stylesheet" type="text/css" href="core/style.css">
+<title>cont</title>
+<body oncontextmenu="return false" ondragstart="return false" style='overflow:scroll;overflow-y:hidden;overflow-x:hidden' leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<script language="javascript">
+var int1,int2;
+function runIni(){
+	var mediaURL = parent.parent.parent.mediaURL;
+	if(parent.parent.isVideo == 1){
+		mediaURL += "video.wmv";
+	}else{
+		mediaURL += "audio.wma";
+	}
+	MediaPlayer.URL = mediaURL;
+	MediaPlayer.Controls.Play();
+	int1 = setInterval("runPosition()", 300);
+	int2 = setInterval("runIni2()", 10000);
+}
+function runIni2(){
+	clearInterval(int2);
+	var num=parseInt(MediaPlayer.CurrentMedia.Duration);
+	if(num==0){
+		var mediaURL = "inchen/media/";
+		if(parent.parent.isVideo == 1){
+			mediaURL += "video.wmv";
+		}else{
+			mediaURL += "audio.wma";
+		}
+		//MediaPlayer.URL = mediaURL;
+		//MediaPlayer.Controls.Play();
+	}
+}
+function runPosition(){
+	parent.parent.main.SetVariable("mediaDuration",MediaPlayer.CurrentMedia.Duration);
+	parent.parent.main.SetVariable("mediaPosition",MediaPlayer.controls.CurrentPosition);
+	if(parent.parent.isToswf == 1){
+		parent.parent.main.TCallLabel("/","media");
+	}
+}
+document.writeln('<object align="right" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" id="MediaPlayer" style="LEFT:0px; POSITION: absolute; TOP: 0px; width: '+parent.parent.mediaWidth+'px; height: '+parent.parent.mediaHeight+'px" type="application/x-oleobject">');
+document.writeln('<param name="PlayCount" value="0">');
+document.writeln('<param name="ClickToPlay" value="1">');
+document.writeln('<param name="ShowGotoBar" value="0">');
+document.writeln('<param name="AutoSize" value="1" />');
+document.writeln('<param name="Volume" value="100" />');
+document.writeln('<param name="AutoStart" value="1" />');
+document.writeln('<param name="Enabled" value="false" />');
+document.writeln('<param name="ShowAudio Controls" value="0">');
+document.writeln('<param name="EnableContext Menu" value="1">');
+document.writeln('<param name="EnableFullScreen Controls" value="1">');
+document.writeln('<param name="rate" value="1" />');
+document.writeln('<param name="balance" value="0" />');
+document.writeln('<param name="uiMode" value="none" />');
+document.writeln('<param name="fullScreen" value="0" />');
+document.writeln('<param name="invokeURLs" value="0" />');
+document.writeln('<param name="EnableTracker" value="1" />');
+document.writeln('<param name="currentMarker" value="0" />');
+document.writeln('<param name="ShowStatusBar" value="0" />');
+document.writeln('<param name="EnableContextMenu" value="0" />');
+document.writeln('<param name="stretchToFit" value="1" />');
+document.writeln('<param name="enabled" value="-1" />');
+document.writeln('</object>');
+runIni();
+</script>
+<script for="MediaPlayer" event="PlayStateChange" language="javascript">
+var state=""
+switch(MediaPlayer.PlayState){
+	case 1:
+		state="停止";
+		break;
+	case 2:
+		state="暂停";
+		break;
+	case 3:
+		state="正在播放";
+		break;
+	case 6:
+		state="缓冲中 请稍候";
+		break;
+	case 9:
+		state="正在连接...";
+		break;
+}
+parent.parent.main.SetVariable("mediaState",state);
+</script>
+</body>
+</html>

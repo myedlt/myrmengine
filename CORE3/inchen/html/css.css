@@ -1,0 +1,31 @@
+.b_t {
+	font-family: "宋体";
+	font-size: 16px;
+	line-height: 150%;
+	color: #000000;
+	text-decoration: none;
+}
+.a1 {
+	font-family: "宋体";
+	font-style: normal;
+	line-height: 200%;
+	font-weight: normal;
+	color: #000000;
+	font-size: 14px;
+	text-decoration: none;
+}
+.aa {
+	font-family: "宋体";
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+.aa1 {
+	font-family: "宋体";
+	font-size: 14px;
+	font-style: normal;
+	line-height: 200%;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
