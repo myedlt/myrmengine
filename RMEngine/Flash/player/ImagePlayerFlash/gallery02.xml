@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<photos>
+	<photo filename="fireworks.jpg" thumbnail="s_fireworks.jpg"
+		description="����֧������֧��" />
+	<photo filename="bees.jpg" thumbnail="s_bees.jpg"
+		description="Bees (640x480) - here is a photo description.&lt;br /&gt;&lt;b&gt;Photos by &lt;a href=&quot;http://www.zcool.com.cn/photos&quot;&gt;flashband.net&lt;/a&gt;&lt;/b&gt;" />
+	<photo filename="bird.jpg" thumbnail="s_bird.jpg" description="Bird (640x480)" />
+	<photo filename="butterfly.jpg" thumbnail="s_butterfly.jpg"
+		description="Butterfly (640x480)" />
+	<photo filename="green_plant.jpg" thumbnail="s_green_plant.jpg"
+		description="Green Plant (480x640)" />
+	<photo filename="padaut.jpg" thumbnail="s_padaut.jpg"
+		description="Padaut (1024x768)" />
+</photos>
