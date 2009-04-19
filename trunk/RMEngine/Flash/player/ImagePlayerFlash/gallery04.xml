@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<photos>
+	<photo filename="fireworks.jpg" thumbnail="s_fireworks.jpg"
+		description="Fireworks (640x480)" />
+	<photo filename="bridge_night.jpg" thumbnail="s_bridge_night.jpg"
+		description="bridge at night time&lt;br /&gt;This is an example HTML link to &lt;a href=&quot;http://www.zcool.com.cn/&quot;&gt;flashband.net&lt;/a&gt; website." />
+	<photo filename="green_plant.jpg" thumbnail="s_green_plant.jpg"
+		description="Green Plant (480x640)" />
+	<photo filename="green_plant.jpg" thumbnail="s_green_plant.jpg"
+		description="Green Plant (480x640)" />
+
+	<photo filename="bridge_night.jpg" thumbnail="s_bridge_night.jpg"
+		description="bridge at night time&lt;br /&gt;This is an example HTML link to &lt;a href=&quot;http://www.zcool.com.cn/&quot;&gt;flashband.net&lt;/a&gt; website." />
+	<photo filename="fireworks.jpg" thumbnail="s_fireworks.jpg"
+		description="Fireworks (640x480)" />
+	<photo filename="bees.jpg" thumbnail="s_bees.jpg"
+		description="Bees (640x480)&lt;br /&gt;&lt;b&gt;Photos by &lt;a href=&quot;http://www.zcool.com.cn/photos&quot;&gt;flashband.net&lt;/a&gt;&lt;/b&gt;" />
+	<photo filename="green_plant.jpg" thumbnail="s_green_plant.jpg"
+		description="Green Plant (480x640)" />
+	<photo filename="green_plant.jpg" thumbnail="s_green_plant.jpg"
+		description="Green Plant (480x640)" />
+
+	<photo filename="bees.jpg" thumbnail="s_bees.jpg"
+		description="Bees (640x480)&lt;br /&gt;&lt;b&gt;Photos by &lt;a href=&quot;http://www.zcool.com.cn/photos&quot;&gt;flashband.net&lt;/a&gt;&lt;/b&gt;" />
+	<photo filename="bird.jpg" thumbnail="s_bird.jpg" description="Bird (640x480)" />
+	<photo filename="butterfly.jpg" thumbnail="s_butterfly.jpg"
+		description="Butterfly (640x480)" />
+
+	<photo filename="fireworks.jpg" thumbnail="s_fireworks.jpg"
+		description="Fireworks (640x480)" />
+	<photo filename="fireworks.jpg" thumbnail="s_fireworks.jpg"
+		description="Fireworks (640x480)" />
+</photos>

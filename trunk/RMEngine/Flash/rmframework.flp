@@ -1,0 +1,16 @@
+﻿<flash_project name="rmframework" version="1">
+    <project_folder name="picc" expanded="true">
+        <project_file path="./FrameworkSkin/picc/picc_sales.fla" filetype="fla" profile="" />
+        <project_file path="./FrameworkSkin/picc/src/info/osmatrix/rmframework/app/view/FlashViewHelper.as" filetype="as" />
+        <project_file path="./FrameworkSkin/picc/src/info/osmatrix/rmframework/app/view/IMainView.as" filetype="as" />
+        <project_file path="./FrameworkSkin/picc/src/info/osmatrix/rmframework/app/view/event/MainViewEvent.as" filetype="as" />
+        <project_file path="./FrameworkSkin/picc/src/Main.as" filetype="as" />
+    </project_folder>
+    <project_folder name="pbank" expanded="true">
+        <project_file path="./FrameworkSkin/pbank/PBank.fla" filetype="fla" profile="" />
+        <project_file path="./FrameworkSkin/pbank/src/Main.as" filetype="as" />
+        <project_file path="./FrameworkSkin/pbank/src/info/osmatrix/rmframework/app/view/FlashViewHelper.as" filetype="as" />
+    </project_folder>
+    <project_folder name="jsfund" expanded="false">
+    </project_folder>
+</flash_project>

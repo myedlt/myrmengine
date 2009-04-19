@@ -1,0 +1,4 @@
+﻿<flash_project name="Page" version="1">
+    <project_file path="./PageObject.as" filetype="as" />
+    <project_file path="./PageObject.fla" filetype="fla" profile="" />
+</flash_project>
