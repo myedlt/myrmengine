@@ -1,0 +1,33 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script language="JavaScript" src="core/linkStream.js"></script>
+<script language="JavaScript">
+function runStream() {
+	var serviceURL = "http://coursetest.bjce.gov.cn/elms/StreamService";
+	var http = new Ajax.CRequest(false);
+	http.post(serviceURL);
+	return http.getText();
+}
+var ww=800;
+var hh=600;
+var xxLayer=2.8;
+var yyLayer=73.2;
+var type=3;
+var mediaURL = "inchen/media/";
+if (((window.document.location+"").toUpperCase()).indexOf("HTTP://") == 0) {
+	mediaURL = "mms://61.135.238.12/zxxx/EDLT/EDLT2009006/";
+	var mms = runStream();
+	if (mms != "defineAdd") {
+		mediaURL = "mms://"+mms+"/zxxx/EDLT/EDLT2009006/";
+	}
+}
+</script>
+<title>怎样做好宣传思想工作</title>
+</head>
+<body oncontextmenu="return false" ondragstart="return false" style='overflow:scroll;overflow-y:hidden;overflow-x:hidden' leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table height="100%" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="center">
+<iframe src="core.html" name="core" scrolling="0" frameborder="0" width="800" height="600"></iframe>
+</td></tr></table>
+</body>
+</html>
