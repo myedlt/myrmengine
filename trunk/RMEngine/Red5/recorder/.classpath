@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="WEB-INF/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/red5.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-2.0.8.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
