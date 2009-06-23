@@ -2,10 +2,11 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
 	creationComplete="initPlayer()" >
 	<mx:Image id="image" verticalAlign="middle" horizontalAlign="center" scaleContent="true" autoLoad="true" y="60" x="10" width="562" height="359"/>
-	<mx:HBox id="boxImgCtrl" width="201" horizontalAlign="center" verticalAlign="middle" right="10" height="42" top="10">
+	<mx:HBox id="boxImgCtrl" width="136" horizontalAlign="center" verticalAlign="middle" right="128" height="42" top="10">
 		<mx:Button label="&lt;" id="btnPre" click="previous()"/>
 		<mx:Button label="&gt;" id="btnNext" click="next()"/>
 	</mx:HBox>
+	<mx:Label id="lblCaption" x="10" y="10" text="Label" height="42" width="280" fontWeight="bold" fontSize="20"/>
 
 	<mx:Script>
 		<![CDATA[
@@ -19,6 +20,7 @@
 			private var dataXml:XML;
 						
 			private var images:XMLList;
+			private var captions:XMLList;
 			private var index:int;
 			
 			private function initPlayer():void
@@ -52,16 +54,20 @@
 				try 
 				{
 					dataXml = XML(evt.target.data);
-	            	images = dataXml.Image;	            	
+	            	images = dataXml.Image;
+	            	captions = dataXml..@label;	            	
 	            	if(images.length()==1)
 	            	{
 	            		boxImgCtrl.visible=false;
 	            		image.source = rootUrl + images.toString();
+	            		lblCaption.text = captions;
 	            	}
 	            	else
 	            	{
 	            		index=0;
 	            		image.source= rootUrl + images[index].toString();
+	            		lblCaption.text = captions[index].toString();
+
 	            	}
 	            }
 	            catch (e:TypeError) 
@@ -81,6 +87,8 @@
 				{
 					index++;
 					image.source= rootUrl + images[index].toString();
+            		lblCaption.text = captions[index].toString();
+
 				}
 			}
 			
@@ -90,6 +98,8 @@
 				{
 					index--;
 					image.source= rootUrl + images[index].toString();
+					lblCaption.text = captions[index].toString();
+
 				}
 			}
 		]]>
