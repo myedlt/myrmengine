@@ -13,7 +13,7 @@
 		<mx:LinkButton label="帮助" id="helpLinkButton"/>
 	</mx:HBox>
 
-	<mx:HBox height="33" verticalAlign="middle" y="39" width="584">
+	<mx:HBox height="33" verticalAlign="middle" y="40" width="584" x="206">
 		<mx:Spacer width="6"/>
 		<mx:Label text="当前章" id="txtChapter"/>
 		<mx:Label text="&gt;" width="18" fontWeight="bold" textAlign="center" id="arrowFlag"/>
