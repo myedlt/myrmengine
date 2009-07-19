@@ -5,9 +5,9 @@
 @set PATH=%AD_HOME%\cvs-1.11.22;%PATH%
 
 @rem ----------- SVN SVN SVN SVN SVN SVN------------
-@set PATH=%PATH%;%AD_HOME%\Subversion-1.5
+@set PATH=%PATH%;%AD_HOME%\Subversion
 @set SVN_EDITOR=notepad.exe
-@set APR_ICONV_PATH=%AD_HOME%\Subversion-1.5\iconv
+@set APR_ICONV_PATH=%AD_HOME%\Subversion\iconv
 @rem set LANG=zh_CN.UTF8
 
 
