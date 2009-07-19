@@ -4,6 +4,8 @@ minipublisher
 	/editor
 		/branches
 		/tags
+			/ybook.1.0
+				local.properties中的packages.postfix有错，注释掉即可
 		/trunk
 			/editor.online
 				=>editor
