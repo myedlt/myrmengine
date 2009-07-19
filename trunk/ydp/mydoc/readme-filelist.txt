@@ -36,6 +36,10 @@ minipublisher
 	/player
 		/branches
 		/tags
+			/1.1.0
+			/1.2_beta3
+			/ybook.1.0
+				local.properties	设置SDK为3.2.0，ant编译成功
 		/trunk
 			build.xml
 				默认任务package=》dist+prepare.flash.extension
