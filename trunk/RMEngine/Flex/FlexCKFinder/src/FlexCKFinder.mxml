@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" applicationComplete="ckGetFiles()" >
+	<mx:Canvas x="10" y="10" width="899" height="568">
+		<mx:Tree id="rootfolder" dataProvider="connectorDP" width="230" height="548" x="10" y="10">
+			
+		</mx:Tree>
+	</mx:Canvas>
+	<mx:XMLListCollection id="connectorDP"/>
+	<mx:Script>
+		<![CDATA[
+			private var connectorXml:XML;
+			private var connectorUrl:String = "http://localhost/FlexCKFinder/core/connector/php/connector.php";
+			
+			private function ckGetFiles(type:String = "Files", currentFolder:String = "test"):void
+			{
+				
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, onHTTPLoaded);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, onHTTPFault);
+				loader.load(new URLRequest(connectorUrl + "?command=GetFiles&type=Files&currentFolder=test&rtp="+String(Math.random() * 65535)));				
+			}
+			
+			private function onHTTPLoaded(evt:Event):void
+			{
+				connectorXml = XML(evt.target.data);
+				connectorDP.source = connectorXml.children();
+			}
+			
+			private function onHTTPFault(evt:Event):void
+			{
+				
+			}
+		]]>
+	</mx:Script>
+		
+</mx:Application>
